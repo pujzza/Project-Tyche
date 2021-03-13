@@ -1,0 +1,8 @@
+Instructions to run Angular
+1. Download the zip
+2. Extract it to the folder
+3. Go inside the extracted folder and open terminal
+4. Run this command - npm install
+5. Once the node modules are downloded through the above command, close the terminal and open a new one in the same patch
+6. Run this command - ng s --o
+7. If the above command didnt open browswe, then put open the following url: http://localhost:4200
