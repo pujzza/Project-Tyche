@@ -1,0 +1,119 @@
+
+<div class="d-flex" style="min-height: 100%;">
+<div id="mySidebar" class="sidebar" #sidenav>
+  <div *ngIf="isSideNavOpen">
+    <!-- <div class="closemenu-icon closebtn" (click)="closeNav()"></div> -->
+    <div class="user-prof d-flex" style="flex-direction: column;">
+      <div class="appname">Suraj Xerox</div>
+      <div class="profile-potrait"></div>
+      <div class="username">User Name</div>
+    </div>
+   
+    <div class="main-catg" (click)="NavigatePages('Dashboard');isSelected='Dashboard'" 
+    [ngClass]="{'SelectedLabel':isSelected.includes('Dashboard')}"
+    style="cursor: pointer;">DASHBOARD</div>
+    <br>
+    <div class="main-catg">SALES</div>
+    <div class="cat-label" (click)="isSales = !isSales"
+    >
+        <div>Sales</div>
+      <div
+        class="push-left"
+        [ngClass]="{ 'down-arrow': isSales, 'right-arrow': !isSales }"
+      ></div>
+    </div>
+    <div *ngIf="isSales" class="sub-catg-content">
+        <div *ngFor="let subs of SalesSub" class="sub-catg" (click)="NavigatePages(subs.route);isSelected=subs.route"
+        [ngClass]="{'SelectedLabel':isSelected.includes(subs.route)}"
+        >
+            {{subs.title}}
+        </div>
+    </div>
+    <br>
+    <div class="main-catg">STOCK</div>
+    <div class="cat-label" (click)="isItemManager = !isItemManager">
+        <div>Item Manager</div>
+      <div
+        class="push-left"
+        [ngClass]="{ 'down-arrow': isItemManager, 'right-arrow': !isItemManager }"
+      ></div>
+    </div>
+    <div *ngIf="isItemManager" class="sub-catg-content">
+        <div *ngFor="let subs of ItemManagerSub" class="sub-catg" (click)="NavigatePages(subs.route);isSelected=subs.route"
+        [ngClass]="{'SelectedLabel':isSelected.includes(subs.route)}">
+            {{subs.title}}
+        </div>
+    </div>
+    <div class="cat-label" (click)="isPurchaseOrder = !isPurchaseOrder">
+        <div>Purchase Order</div>
+      <div
+        class="push-left"
+        [ngClass]="{ 'down-arrow': isPurchaseOrder, 'right-arrow': !isPurchaseOrder }"
+      ></div>
+    </div>
+    <div *ngIf="isPurchaseOrder" class="sub-catg-content">
+        <div *ngFor="let subs of PurchaseSub" class="sub-catg" (click)="NavigatePages(subs.route);isSelected=subs.route"
+        [ngClass]="{'SelectedLabel':isSelected.includes(subs.route)}">
+            {{subs.title}}
+        </div>
+    </div>
+    <div class="cat-label" (click)="isStockReturn = !isStockReturn">
+        <div>Stock Return</div>
+      <div
+        class="push-left"
+        [ngClass]="{ 'down-arrow': isStockReturn, 'right-arrow': !isStockReturn }"
+      ></div>
+    </div>
+    <div *ngIf="isStockReturn" class="sub-catg-content">
+        <div *ngFor="let subs of StockReturnSub" class="sub-catg" (click)="NavigatePages(subs.route);isSelected=subs.route"
+        [ngClass]="{'SelectedLabel':isSelected.includes(subs.route)}">
+            {{subs.title}}
+        </div>
+    </div>
+    <br>
+    <div class="main-catg">CRM</div>
+    <div class="cat-label" (click)="isClient = !isClient">
+      <div>Client</div>
+      <div
+        class="push-left"
+        [ngClass]="{ 'down-arrow': isClient, 'right-arrow': !isClient }"
+      ></div>
+    </div>
+    <div *ngIf="isClient" class="sub-catg-content">
+        <div *ngFor="let subs of ClientSub" class="sub-catg" (click)="NavigatePages(subs.route);isSelected=subs.route"
+        [ngClass]="{'SelectedLabel':isSelected.includes(subs.route)}">
+            {{subs.title}}
+        </div>
+    </div>
+    <div class="cat-label" (click)="isEmployee = !isEmployee">
+      <div>Employee</div>
+      <div
+        class="push-left"
+        [ngClass]="{ 'down-arrow': isEmployee, 'right-arrow': !isEmployee }"
+      ></div>
+    </div>
+    <div *ngIf="isEmployee" class="sub-catg-content">
+        <div *ngFor="let subs of EmployeeSub" class="sub-catg" (click)="NavigatePages(subs.route);isSelected=subs.route"
+        [ngClass]="{'SelectedLabel':isSelected.includes(subs.route)}">
+            {{subs.title}}
+        </div>
+    </div>
+  </div>
+  <div *ngIf="!isSideNavOpen">
+    <div class="menu-icon openbtn" (click)="openNav()"></div>
+  </div>
+</div>
+<div id="main" #main class="d-flex-col">
+  <div class="header d-flex-rev">
+    <div class="user-down-arrow" (click) = "isprofclicked = !isprofclicked"></div>
+    <div class="user-icon"></div>
+  </div>
+  <div>
+    <router-outlet></router-outlet>
+  </div>
+</div>
+</div>
+
+<div class="logout-content" *ngIf="isprofclicked">
+  <div (click)="logout()">Logout</div>
+</div>

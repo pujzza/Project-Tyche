@@ -1,0 +1,29 @@
+<div class="page-header1">Orders</div>
+<ngx-datatable
+  class="bootstrap"
+  [rows]="rows"
+  [loadingIndicator]="loadingIndicator"
+  [columnMode]="ColumnMode.force"
+  [headerHeight]="50"
+  [footerHeight]="50"
+  rowHeight="auto"
+  style="font-family: Nunito"
+>
+  <ngx-datatable-column
+    *ngFor="let col of columns"
+    name="{{ col.prop }}"
+    [width]="300"
+  >
+    <ng-template let-value="value" ngx-datatable-header-template>
+      <span class="theader1">{{ col.name }}</span>
+    </ng-template>
+    <ng-template let-value="value" ngx-datatable-cell-template>
+      <div *ngIf="!col.name.includes('Settings')">{{ value }}</div>
+      <div *ngIf="col.name.includes('Settings')"><div class="d-flex" style="height: 30px;">
+        <div class="col-2 view-icon"></div>
+        <div class="col-2 edit-icon"></div>
+        <div class="col-2 delete-icon"></div>
+      </div></div>
+    </ng-template>
+  </ngx-datatable-column>
+</ngx-datatable>

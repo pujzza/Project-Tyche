@@ -1,0 +1,69 @@
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { loginModel, loginResponse } from '../entities/LoginModel';
+import { AuthGuardService } from '../services/auth-guard.service';
+import { CommonService } from '../services/common.service';
+
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
+})
+export class LoginComponent implements OnInit {
+  empId: string;
+  password: string;
+  errorText: string;
+  requestBody: loginModel;
+  response: loginResponse;
+  constructor(
+    private authService: AuthGuardService,
+    private router: Router,
+    private service: CommonService
+  ) {
+    this.requestBody = new loginModel();
+  }
+
+  ngOnInit(): void {
+    //Dev Purpose
+    this.empId = 'raven@resol.com';
+    this.password = 'abc@123';
+  }
+
+  onLogin() {
+    if (this.validateLogin()) {
+      this.requestBody.email = this.empId;
+      this.requestBody.password = this.password;
+      this.requestBody.oauth = this.service.Oauth;
+      this.service.ToLogin(this.requestBody).subscribe((res) => {
+        this.response = res;
+        //console.log(this.response);
+        if (this.response.returncode == 200) {
+          localStorage.setItem('UserId', this.response.returndata.id);
+          this.authService.login = true;
+          this.router.navigateByUrl('Home');
+        } else {
+          this.errorText = 'Login Failed. Recheck Credentials';
+        }
+      });
+    }
+    // this.authService.login = true;
+    // this.router.navigateByUrl('Home/Customer');
+  }
+
+  validateLogin(): boolean {
+    if (!this.empId) {
+      this.errorText = 'Kindly enter the Employee ID';
+      return false;
+    } else if (!this.password) {
+      this.errorText = 'Kindly enter the password';
+      return false;
+    } else if (!this.empId && !this.password) {
+      this.errorText = 'Enter credentials';
+      return false;
+    } else {
+      this.errorText = '';
+      return true;
+    }
+  }
+
+}

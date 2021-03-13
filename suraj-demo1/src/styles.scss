@@ -1,0 +1,194 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/@swimlane/ngx-datatable/themes/bootstrap.scss";
+body {
+  margin: 0px;
+  height: 100vh;
+  transition: 300ms ease all;
+  overflow-y: scroll;
+  font-family: Nunito;
+}
+@font-face {
+  font-family: Nunito;
+  src: url(assets/font/Nunito/Nunito-Light.ttf) format("truetype");
+}
+
+.form-control {
+  box-shadow: none !important;
+}
+
+$font-color: #0b0c10;
+
+.d-flex {
+  display: flex;
+}
+
+.d-flex-rev {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.d-flex-col {
+  display: flex;
+  flex-direction: column;
+}
+.header {
+  height: 50px;
+  color: black;
+  border-bottom: 1px solid #c5c6c7;
+//  box-shadow: 3px 2px 12px #c5c6c7eb;
+ background-color: #a2add888;
+ margin-bottom: 20px;
+
+}
+.content {
+  padding: 20px;
+  height: 100%;
+}
+
+.menu-icon {
+  background: url(./assets/Icons/menu-solid.svg);
+  height: 30px;
+  width: 30px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.closemenu-icon {
+  background: url(./assets/Icons/times-solid.svg);
+  height: 20px;
+  width: 20px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+
+
+.user-prof {
+  height: 150px;
+  // background-color: #1f2833;
+}
+
+.down-arrow {
+  height: 18px;
+  width: 18px;
+  background: url(./assets/Icons/angle-down-solid.svg);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: 0.3s;
+}
+.right-arrow {
+  height: 18px;
+  width: 18px;
+  background: url(./assets/Icons/angle-right-solid.svg);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: 0.3s;
+}
+
+.push-left {
+  margin-left: auto;
+}
+
+
+
+.profile-potrait {
+  height: 100px;
+  width: 100px;
+  background: url(./assets/Icons/user-circle-solid.svg);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: 0.3s;
+  margin: 10px auto;
+}
+
+.appname {
+  font-weight: bolder;
+  color: black;
+  font-family: Nunito;
+  text-align: center;
+  border-bottom: 1px solid #c5c6c7;
+  font-size: 16px;
+  height: 50px !important;
+  padding: 12.5px 0px;
+  background-color: #a2add888;
+}
+
+.page-header1 {
+  font-size: 20px;
+  font-weight: bold;
+  padding: 10px;
+  font-family: Nunito;
+}
+
+.page-header2 {
+  font-size: 16px;
+  padding: 10px 0px;
+  font-family: Nunito;
+}
+.comingsoon {
+  font-family: Nunito;
+  font-display: swap;
+  font-size: 50px;
+  padding: 50px 0px;
+  text-align: center;
+}
+
+.m-down-10 {
+  margin-bottom: 10px;
+}
+.delete-icon {
+  height: inherit;
+  width: 15px;
+  background: url(./assets/Icons/trash-alt-regular.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 15px;
+  cursor: pointer;
+}
+
+.view-icon {
+  height: inherit;
+  width: 15px;
+  background: url(./assets/Icons/eye-regular_white.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 20px;
+  cursor: pointer;
+}
+
+.edit-icon {
+  height: inherit;
+  width: 15px;
+  background: url(./assets/Icons/pen-solid.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 15px;
+  cursor: pointer;
+}
+
+.download-icon {
+  height: inherit;
+  width: 15px;
+  background: url(./assets/Icons/download.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 15px;
+  cursor: pointer;
+}
+//ngx-table classes start
+.theader1 {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.setting-icon {
+  height: inherit;
+  width: 15px;
+}
+
+// ngx class ends
