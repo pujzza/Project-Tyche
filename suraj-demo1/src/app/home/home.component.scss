@@ -52,8 +52,17 @@
   right: 0;
   width: 75px;
   z-index: 9999;
-  height: 50px;
   box-shadow: 3px 2px 12px #c5c6c7eb;
+  margin: 0px 5px;
+}
+
+.logout-content > div{
+  padding: 10px;
+  &:hover {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+  }
 }
 
 .username {
