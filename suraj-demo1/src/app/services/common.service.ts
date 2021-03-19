@@ -63,4 +63,9 @@ export class CommonService {
         req
       );
     }
+    GetNotify(url:String) {
+      return this.http.get(
+        'http://funguysstudio.com/api/notificationapiv2.php?list='+url,
+      );
+    }
 }

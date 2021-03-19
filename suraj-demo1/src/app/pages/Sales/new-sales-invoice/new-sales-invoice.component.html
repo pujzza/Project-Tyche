@@ -5,17 +5,18 @@
       <div class="add-client-btn" (click)="isaddClient = !isaddClient">Add Client</div>
     </div>
     <div>
-      <div class="page-header2">Search Clients</div>
+      <div class="page-header2">Search Clients/Customers</div>
       <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text search-icon"></span>
-        </div>
         <input
           type="text"
           class="form-control"
-          placeholder="Search Clients"
+          placeholder="Enter Mobile Number"
           aria-placeholder="Search Clients"
+          [(ngModel)]="searchMobile"
         />
+        <div class="input-group-prepend">
+          <span class="input-group-text search-icon" (click)="getCustomer()"></span>
+        </div>
       </div>
       <div></div>
     </div>
@@ -23,10 +24,10 @@
     <div>
       <div class="page-header1">Client Details</div>
       <div *ngIf="clientSelected">
-        <div>Name</div>
+        <div>Name : {{customerDetails.firstname}}</div>
         <div>Address</div>
-        <div><span>Phone:</span> <span></span></div>
-        <div><span>Email:</span> <span></span></div>
+        <div><span>Phone:</span> <span> {{customerDetails.email}}</span></div>
+        <div><span>Email:</span> <span> {{customerDetails.phonenumber}}</span></div>
       </div>
       <div *ngIf="!clientSelected" style="font-size: 12px; text-align: center">
         No client selected
@@ -223,7 +224,7 @@
     <tr>
       <td colspan="5" style="border: none"></td>
       <td colspan="1" style="border: none">
-        <button class="btn btn-success">Generate Invoice</button>
+        <button class="btn btn-success" (click)="generateInvoice()">Generate Invoice</button>
       </td>
     </tr>
   </table>
@@ -236,5 +237,25 @@
     <app-add-client></app-add-client>
   </div>
   </div>
-  
+</div>
+
+<div #checkoutDialog *ngIf="isCheckout" class="checkoutModel">
+  <div class="checkoutModel-content">
+    <div class="d-flex">
+      <div class="col-10 text-center">
+        <div *ngIf="checkoutError">
+          {{checkOutErrorMsg}}
+        </div>
+        <div *ngIf="!checkoutError">
+          <div>Invoice Generated Successfully</div>
+        </div>
+      </div>
+      <div class="col-1">
+        <div class="float-right print-icon" *ngIf="!checkoutError" (click)="printGenerate()"></div>
+      </div>
+      <div class="col-1">
+        <div class="float-right cursor-pointer" (click)="closeCheckout()" > X </div>
+      </div>
+    </div>
+  </div>
 </div>

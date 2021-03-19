@@ -1,5 +1,13 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { CommonService } from './../../../services/common.service';
+import {
+  Component,
+  OnInit,
+  AfterViewInit,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
 import { MetaProducts } from 'src/app/entities/MetaProducts';
+import { BillModel, CustomerDetails,Products } from 'src/app/Entities/ClientsModel';
 
 @Component({
   selector: 'app-new-sales-invoice',
@@ -26,15 +34,24 @@ export class NewSalesInvoiceComponent implements OnInit, AfterViewInit {
   taxcost = 0;
   qty = 1;
   cost = 0;
-
+  searchMobile: number;
+  customerDetails: CustomerDetails = new CustomerDetails();
+  isCheckout = false;
+  checkoutError = false;
+  checkOutErrorMsg = '';
+  employeeId: any;
   isProductsError = false;
   isMaterialError = false;
   isSizeError = false;
+  currentOrderId: any;
   @ViewChild('addClient', { static: true }) addclient: ElementRef;
+  @ViewChild('checkoutDialog', { static: true }) checkoutDialog: ElementRef;
 
-  constructor() {}
-  ngAfterViewInit(): void {
+
+  constructor(public service: CommonService) {
+    this.employeeId = localStorage.getItem('UserId').toString();
   }
+  ngAfterViewInit(): void {}
 
   ngOnInit(): void {
     //this.initalPush();
@@ -52,7 +69,7 @@ export class NewSalesInvoiceComponent implements OnInit, AfterViewInit {
     } else {
       this.selectedSize = '';
     }
-    this.qty = this.qty ==0 ? 1: this.qty;
+    this.qty = this.qty == 0 ? 1 : this.qty;
     this.calcPrice(-2);
   }
 
@@ -84,23 +101,22 @@ export class NewSalesInvoiceComponent implements OnInit, AfterViewInit {
 
   onSelectSize() {
     const length = this.prodtableData.length;
-    this.qty = this.qty ==0 ? 1: this.qty;
+    this.qty = this.qty == 0 ? 1 : this.qty;
     this.isSizeError = false;
     this.calcPrice(-2);
   }
 
   onSelectMatrial() {
     const length = this.prodtableData.length;
-   this.qty = this.qty ==0 ? 1: this.qty;
-   this.isMaterialError = false;
-   this.calcPrice(-2);
+    this.qty = this.qty == 0 ? 1 : this.qty;
+    this.isMaterialError = false;
+    this.calcPrice(-2);
   }
 
   calcPrice(index = -2) {
     const length = this.prodtableData.length;
     if (index == -2) {
-     this.cost =
-        this.selectProduct.price * this.qty;
+      this.cost = this.selectProduct.price * this.qty;
     } else {
       const prodprice = this.MetaProducts.filter(
         (x) => x.name == this.prodtableData[index]['prodname']
@@ -121,7 +137,7 @@ export class NewSalesInvoiceComponent implements OnInit, AfterViewInit {
 
   getGrandTotal() {
     let taxcost = 0;
-    if(this.TaxNeed){
+    if (this.TaxNeed) {
       taxcost = (this.taxPercentage * this.productTotal) / 100;
       this.taxcost = taxcost;
     } else {
@@ -142,10 +158,10 @@ export class NewSalesInvoiceComponent implements OnInit, AfterViewInit {
     this.prodtableData[index]['qtydisabled'] = true;
   }
 
-  addItem(){
-    this.isMaterialError = this.selectedMaterial == ''? true : false;
-      this.isSizeError = this.selectedSize == ''? true : false;
-      if(this.isSizeError || this.isMaterialError ){
+  addItem() {
+    this.isMaterialError = this.selectedMaterial == '' ? true : false;
+    this.isSizeError = this.selectedSize == '' ? true : false;
+    if (this.isSizeError || this.isMaterialError) {
       return;
     } else {
       const obj = {};
@@ -155,10 +171,93 @@ export class NewSalesInvoiceComponent implements OnInit, AfterViewInit {
       obj['prodqty'] = this.qty;
       obj['prodprice'] = this.cost;
       obj['qtydisabled'] = true;
+      obj['orderid'] = `${new Date().getHours()}${new Date().getMilliseconds()}`;
       this.prodtableData.push(obj);
       this.resetSelectedVales();
-      this.qty =0;
+      this.qty = 0;
     }
-    
+  }
+
+  getCustomer() {
+    let postParamter = {};
+    postParamter['oauth'] = this.service.Oauth;
+    postParamter['phonenumber'] = this.searchMobile;
+    this.service.CustomerValidate(postParamter).subscribe((res) => {
+      if (res && res.returncode == 200) {
+        this.clientSelected = true;
+        this.customerDetails = res.returndata;
+      } else {
+        this.clientSelected = false;
+      }
+    });
+  }
+
+  generateInvoice() {
+    if(this.prodtableData.length == 0){
+      this.checkoutError = true;
+      this.checkOutErrorMsg = 'No Product Seleted';
+      this.isCheckout = true;
+      return;
+    } else if (!this.customerDetails.id){
+      this.checkoutError = true;
+      this.checkOutErrorMsg = 'No Customer Seleted';
+      this.isCheckout = true;
+      return;
+    }
+    else {
+    this.checkoutError = false;
+    let postParameter = new BillModel();
+    postParameter.cid = this.customerDetails.id.toString();
+    postParameter.eid = this.employeeId;
+    postParameter.oauth = this.service.Oauth;
+    postParameter.orderid = `${new Date().getHours()}${new Date().getMilliseconds()}`;
+    postParameter.products = this.convertClass(this.prodtableData);
+    postParameter.totalamount = this.grandTotal.toString();
+    postParameter.paidamount = '0';
+    this.service.CreateBill(postParameter).subscribe(res => {
+      if(res && res.returncode == 200){
+        this.currentOrderId = postParameter.orderid;
+        this.isCheckout = true;
+        this.checkoutError = false;
+        this.service.GetNotify(postParameter.products.length.toString()).subscribe();
+      }
+    });
+  }
+  }
+
+  convertClass(data): any {
+    var postbody: Products[] = [];
+    data.forEach((obj) => {
+      var prod = new Products();
+      prod.product = obj['prodname'];
+      prod.material = obj['prodmaterial'];
+      prod.size = obj['prodsize'];
+      prod.count = obj['prodqty'];
+      prod.totalamount = obj['prodprice'];
+      prod.paidamount = '0';
+      prod.orderid = obj['orderid'];
+      prod.price = this.MetaProducts.filter( p => p.name == prod.product)[0].price.toString();
+      prod.category_id = '2';
+      prod.description = 'testing';
+      prod.created = `${new Date().toDateString()}`;
+      prod.cid = this.customerDetails.id.toString();
+      postbody.push(prod);
+    });
+    return postbody;
+  }
+
+  printGenerate(){
+    this.isCheckout = false;
+    window.open('http://funguysstudio.com/pdf/pdf.php?eid='+this.employeeId+'&order_id='+this.currentOrderId+'&papersize=bill&m=I');
+  }
+
+  closeCheckout(){
+    this.isCheckout = false;
+    if(this.checkoutError == false){
+    this.prodtableData = [];
+    this.searchMobile = null;
+    this.clientSelected = false;
+    this.customerDetails = new CustomerDetails();
+    }
   }
 }
