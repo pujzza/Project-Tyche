@@ -13,6 +13,7 @@
           placeholder="Enter Mobile Number"
           aria-placeholder="Search Clients"
           [(ngModel)]="searchMobile"
+          (key.enter)="getCustomer()"
         />
         <div class="input-group-prepend">
           <span class="input-group-text search-icon" (click)="getCustomer()"></span>
