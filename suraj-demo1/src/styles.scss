@@ -35,10 +35,9 @@ $font-color: #0b0c10;
   height: 50px;
   color: black;
   border-bottom: 1px solid #c5c6c7;
-//  box-shadow: 3px 2px 12px #c5c6c7eb;
- background-color: #a2add888;
- margin-bottom: 20px;
-
+  //  box-shadow: 3px 2px 12px #c5c6c7eb;
+  background-color: #a2add888;
+  margin-bottom: 20px;
 }
 .content {
   padding: 20px;
@@ -62,8 +61,6 @@ $font-color: #0b0c10;
   background-position: center;
   background-repeat: no-repeat;
 }
-
-
 
 .user-prof {
   height: 150px;
@@ -92,8 +89,6 @@ $font-color: #0b0c10;
 .push-left {
   margin-left: auto;
 }
-
-
 
 .profile-potrait {
   height: 100px;
@@ -191,8 +186,18 @@ $font-color: #0b0c10;
   width: 15px;
 }
 
-.cursor-pointer{
+.cursor-pointer {
   cursor: pointer;
 }
 
 // ngx class ends
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}

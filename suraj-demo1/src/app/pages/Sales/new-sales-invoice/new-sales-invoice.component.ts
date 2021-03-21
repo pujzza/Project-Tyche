@@ -44,6 +44,8 @@ export class NewSalesInvoiceComponent implements OnInit, AfterViewInit {
   isMaterialError = false;
   isSizeError = false;
   currentOrderId: any;
+  paidAmt: number;
+  isClient = false;
   @ViewChild('addClient', { static: true }) addclient: ElementRef;
   @ViewChild('checkoutDialog', { static: true }) checkoutDialog: ElementRef;
 
@@ -213,7 +215,7 @@ export class NewSalesInvoiceComponent implements OnInit, AfterViewInit {
     postParameter.orderid = `${new Date().getHours()}${new Date().getMilliseconds()}`;
     postParameter.products = this.convertClass(this.prodtableData);
     postParameter.totalamount = this.grandTotal.toString();
-    postParameter.paidamount = '0';
+    postParameter.paidamount = this.paidAmt.toString();
     this.service.CreateBill(postParameter).subscribe(res => {
       if(res && res.returncode == 200){
         this.currentOrderId = postParameter.orderid;
@@ -248,16 +250,21 @@ export class NewSalesInvoiceComponent implements OnInit, AfterViewInit {
 
   printGenerate(){
     this.isCheckout = false;
+    this.checkoutReset();
     window.open('http://funguysstudio.com/pdf/pdf.php?eid='+this.employeeId+'&order_id='+this.currentOrderId+'&papersize=bill&m=I');
   }
 
   closeCheckout(){
     this.isCheckout = false;
+    this.checkoutReset();
+  }
+
+  checkoutReset(){
     if(this.checkoutError == false){
-    this.prodtableData = [];
-    this.searchMobile = null;
-    this.clientSelected = false;
-    this.customerDetails = new CustomerDetails();
-    }
+      this.prodtableData = [];
+      this.searchMobile = null;
+      this.clientSelected = false;
+      this.customerDetails = new CustomerDetails();
+      }
   }
 }

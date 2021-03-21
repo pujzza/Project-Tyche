@@ -2,10 +2,18 @@
   <div class="col-6">
     <div class="d-flex">
       <div class="page-header1">Bill To</div>
-      <div class="add-client-btn" (click)="isaddClient = !isaddClient">Add Client</div>
+      <div class="add-client-btn" *ngIf='isClient' (click)="isaddClient = !isaddClient">Add Client</div>
+    </div>
+    <div style="padding: 10px;" class="d-flex">
+      <label style="margin-right: 10px;align-self: center;">Client?</label>
+      <label class="switch">
+        <input type="checkbox" [(ngModel)]="isClient" />
+        <span class="slider round"></span>
+      </label>
     </div>
     <div>
-      <div class="page-header2">Search Clients/Customers</div>
+      <div class="page-header2" *ngIf='!isClient'>Search Customer</div>
+      <div class="page-header2" *ngIf='isClient'>Search Clients</div>
       <div class="input-group">
         <input
           type="text"
@@ -13,7 +21,7 @@
           placeholder="Enter Mobile Number"
           aria-placeholder="Search Clients"
           [(ngModel)]="searchMobile"
-          (key.enter)="getCustomer()"
+          (keyup.enter)="getCustomer()"
         />
         <div class="input-group-prepend">
           <span class="input-group-text search-icon" (click)="getCustomer()"></span>
@@ -23,7 +31,8 @@
     </div>
     <hr />
     <div>
-      <div class="page-header1">Client Details</div>
+      <div class="page-header1" *ngIf='isClient'>Client Details</div>
+      <div class="page-header1" *ngIf='!isClient'>Customer Details</div>
       <div *ngIf="clientSelected">
         <div>Name : {{customerDetails.firstname}}</div>
         <div>Address</div>
@@ -221,6 +230,11 @@
       <td colspan="4" style="border: none"></td>
       <td class="border-0 font-weight-bolder text-right">Grand Total</td>
       <td class="border-0">{{ getGrandTotal() | currency: "&#8377;" }}</td>
+    </tr>
+    <tr style="border: none">
+      <td colspan="4" style="border: none"></td>
+      <td class="border-0 font-weight-bolder text-right">Amount Paid</td>
+      <td class="border-0"><input type="number" id="paidAmt" [(ngModel)]='paidAmt'></td>
     </tr>
     <tr>
       <td colspan="5" style="border: none"></td>

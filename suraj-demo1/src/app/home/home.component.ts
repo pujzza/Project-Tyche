@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit,AfterViewInit {
   isprofclicked = false;
   isEmployee = false;
   isSelected = 'Dashboard';
+  appName = 'Project Tyche';
 
   //Imports constants
   SalesSub= SalesSub;
