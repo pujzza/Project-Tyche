@@ -2,8 +2,8 @@ import { Products } from './ClientsModel';
 export class BillHistory{
     returnmessage: string;
     returncode: number;
-    orderid: string[]|undefined;
-    returns: Products[]|undefined;
+    orderid: string|undefined;
+    products: Products[]|undefined;
     totalamount: string|undefined;
     paidamount: string|undefined;
 }

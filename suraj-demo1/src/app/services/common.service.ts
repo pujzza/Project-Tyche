@@ -15,57 +15,63 @@ export class CommonService {
     constructor(private http: HttpClient) {}
   
     ToLogin(req: loginModel): Observable<any> {
-      return this.http.post('http://www.funguysstudio.com/api/login.php', req);
+      return this.http.post('http://www.cyperinfotech.com/api/login.php', req);
     }
   
     CustomerValidate(req: any): Observable<any> {
       return this.http.post(
-        'http://www.funguysstudio.com/api/validate_customers.php',
+        'http://www.cyperinfotech.com/api/validate_customers.php',
         req
       );
     }
   
     CreateCustomer(req: CustomerDetails): Observable<any> {
       return this.http.post(
-        'http://www.funguysstudio.com/api/create_customers.php',
+        'http://www.cyperinfotech.com/api/create_customers.php',
         req
       );
     }
   
     CreateBill(req: BillModel): Observable<any> {
       return this.http.post(
-        'http://www.funguysstudio.com/api/product/create.php',
+        'http://www.cyperinfotech.com/api/product/create.php',
         req
       );
     }
   
     GetBills(req: any): Observable<any> {
       return this.http.post(
-        'http://www.funguysstudio.com/api/product/read_filter.php',
+        'http://www.cyperinfotech.com/api/product/read_filter.php',
         req
       );
     }
     GetOrders(req: any): Observable<any> {
       return this.http.post(
-        'http://www.funguysstudio.com/api/product/read_order.php',
+        'http://www.cyperinfotech.com/api/product/read_employ_order.php',
         req
       );
     }
     GetBillByOrderId(req: any): Observable<any> {
       return this.http.post(
-        'http://www.funguysstudio.com/api/product/read_products.php',
+        'http://www.cyperinfotech.com/api/product/read_products.php',
         req
       );
     }
     updateAmount(req: any): Observable<any> {
       return this.http.post(
-        'http://funguysstudio.com/api/product/products_update.php',
+        'http://cyperinfotech.com/api/product/products_update.php',
         req
       );
     }
     GetNotify(url:String) {
       return this.http.get(
-        'http://funguysstudio.com/api/notificationapiv2.php?list='+url,
+        'http://cyperinfotech.com/api/notificationapiv2.php?list='+url,
       );
+    }
+    PrintBill(employeeId,currentOrderId){
+      window.open('http://www.cyperinfotech.com/pdf/pdf.php?eid='+employeeId+'&order_id='+currentOrderId+'&papersize=bill&m=I');
+    }
+    DownloadBill(eid,orderid){
+      window.open('http://www.cyperinfotech.com/pdf/pdf.php?eid='+eid+'&order_id='+orderid+'&papersize=a4&m=D');
     }
 }

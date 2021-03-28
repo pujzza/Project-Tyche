@@ -236,7 +236,7 @@ export class NewSalesInvoiceComponent implements OnInit, AfterViewInit {
       prod.size = obj['prodsize'];
       prod.count = obj['prodqty'];
       prod.totalamount = obj['prodprice'];
-      prod.paidamount = '0';
+      prod.paidamount = this.paidAmt.toString();
       prod.orderid = obj['orderid'];
       prod.price = this.MetaProducts.filter( p => p.name == prod.product)[0].price.toString();
       prod.category_id = '2';
@@ -251,7 +251,7 @@ export class NewSalesInvoiceComponent implements OnInit, AfterViewInit {
   printGenerate(){
     this.isCheckout = false;
     this.checkoutReset();
-    window.open('http://funguysstudio.com/pdf/pdf.php?eid='+this.employeeId+'&order_id='+this.currentOrderId+'&papersize=bill&m=I');
+    this.service.PrintBill(this.employeeId,this.currentOrderId);
   }
 
   closeCheckout(){
