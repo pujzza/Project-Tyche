@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     //Dev Purpose
-    this.empId = 'raven@resol.com';
+    this.empId = 'raven@fgs.com';
     this.password = 'abc@123';
   }
 
