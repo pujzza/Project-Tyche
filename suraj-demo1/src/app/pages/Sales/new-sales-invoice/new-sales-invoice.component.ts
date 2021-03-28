@@ -7,7 +7,7 @@ import {
   ElementRef,
 } from '@angular/core';
 import { MetaProducts } from 'src/app/entities/MetaProducts';
-import { BillModel, CustomerDetails,Products } from 'src/app/Entities/ClientsModel';
+import { BillModel, CustomerDetails,Products } from 'src/app/entities/ClientsModel';
 
 @Component({
   selector: 'app-new-sales-invoice',
