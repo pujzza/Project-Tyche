@@ -34,18 +34,19 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
   TotalAmt;
   DueAmt;
   columns = [
-    { name: 'Sno.' },
-    { prop: 'orderid', name: 'Invoice #' },
-    { prop: 'firstname', name: 'Name' },
-    { prop: 'phonenumber', name: 'Contact #' },
-    { prop: 'paidamount', name: 'Paid Amount' },
-    { prop: 'totalamount', name: 'Total Amount' },
+    { name: 'Sno.',width: 50,headerClass:"theader1" },
+    { prop: 'orderid', name: 'Invoice #',width: 100,headerClass:"theader1" },
+    { prop: 'firstname', name: 'Name',width: 200,headerClass:"theader1" },
+    { prop: 'phonenumber', name: 'Contact #',width: 150,headerClass:"theader1" },
+    { prop: 'paidamount', name: 'Paid Amount',width: 150,headerClass:"theader1" },
+    { prop: 'totalamount', name: 'Total Amount',width: 150,headerClass:"theader1" },
     // { prop: 'dueAmt', name: 'Due Amount' },
-    { name: 'Settings' },
+    { name: 'Settings',width: 220,headerClass:"theader1 text-center" },
   ];
   @ViewChild('table', { static: true }) table: ElementRef;
   @ViewChild('showBill', { static: true }) showBill: ElementRef;
   @ViewChild(DatatableComponent) ngxTab: DatatableComponent;
+  screenH = 0;
 
   ColumnMode = ColumnMode;
   employeeId: string;
@@ -54,11 +55,11 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
     this.employeeId = localStorage.getItem('UserId').toString();
   }
   ngAfterViewInit(): void {
-    var element: HTMLElement = this.table.nativeElement;
   }
 
   ngOnInit(): void {
     this.GetOrders();
+    document.getElementById('ngxtable').style.height = `${screen.height - 170}px`;
   }
 
   GetOrders() {
@@ -140,5 +141,10 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
         else {
         }
     })
+  }
+  getDue(row){
+    if(row)
+    return Number(row['totalamount']) - Number(row['paidamount'])
+    else return 0
   }
 }
