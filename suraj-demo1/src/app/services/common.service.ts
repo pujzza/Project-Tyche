@@ -20,46 +20,46 @@ export class CommonService {
   
     CustomerValidate(req: any): Observable<any> {
       return this.http.post(
-        'http://www.cyperinfotech.com/api/validate_customers.php',
+        'http://cyperinfotech.com/api/apiV2/Customer/validate_customers.php',
         req
       );
     }
   
     CreateCustomer(req: CustomerDetails): Observable<any> {
       return this.http.post(
-        'http://www.cyperinfotech.com/api/create_customers.php',
+        'http://cyperinfotech.com/api/apiV2/Customer/create_customers.php',
         req
       );
     }
   
     CreateBill(req: BillModel): Observable<any> {
       return this.http.post(
-        'http://www.cyperinfotech.com/api/product/create.php',
+        'http://cyperinfotech.com/api/apiV2/Product/create.php',
         req
       );
     }
   
     GetBills(req: any): Observable<any> {
       return this.http.post(
-        'http://www.cyperinfotech.com/api/product/read_filter.php',
+        'http://cyperinfotech.com/api/apiV2/Product/read_filter.php',
         req
       );
     }
     GetOrders(req: any): Observable<any> {
       return this.http.post(
-        'http://www.cyperinfotech.com/api/product/read_employ_order.php',
+        'http://cyperinfotech.com/api/apiV2/Product/read_employ_order.php',
         req
       );
     }
     GetBillByOrderId(req: any): Observable<any> {
       return this.http.post(
-        'http://www.cyperinfotech.com/api/product/read_products.php',
+        'http://cyperinfotech.com/api/apiV2/Product/read_products.php',
         req
       );
     }
     updateAmount(req: any): Observable<any> {
       return this.http.post(
-        'http://cyperinfotech.com/api/product/products_update.php',
+        'http://cyperinfotech.com/api/apiV2/Product/products_update.php',
         req
       );
     }
@@ -73,5 +73,19 @@ export class CommonService {
     }
     DownloadBill(eid,orderid){
       window.open('http://www.cyperinfotech.com/pdf/pdf.php?eid='+eid+'&order_id='+orderid+'&papersize=a4&m=D');
+    }
+
+    CreateClient(req: any): Observable<any> {
+      return this.http.post(
+        'http://cyperinfotech.com/api/apiV2/Client/CreateClient.php',
+        req
+      );
+    }
+
+    UpdateClient(req: any): Observable<any> {
+      return this.http.post(
+        'http://cyperinfotech.com/api/apiV2/Client/updateclient.php',
+        req
+      );
     }
 }
