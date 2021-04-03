@@ -2,18 +2,24 @@
   <div class="col-6">
     <div class="d-flex">
       <div class="page-header1">Bill To</div>
-      <div class="add-client-btn" *ngIf='isClient' (click)="isaddClient = !isaddClient">Add Client</div>
+      <div
+        class="add-client-btn"
+        *ngIf="isClient"
+        (click)="isaddClient = !isaddClient"
+      >
+        Add Client
+      </div>
     </div>
-    <div style="padding: 10px;" class="d-flex">
-      <label style="margin-right: 10px;align-self: center;">Client?</label>
+    <div style="padding: 10px" class="d-flex">
+      <label style="margin-right: 10px; align-self: center">Client?</label>
       <label class="switch">
         <input type="checkbox" [(ngModel)]="isClient" />
         <span class="slider round"></span>
       </label>
     </div>
     <div>
-      <div class="page-header2" *ngIf='!isClient'>Search Customer</div>
-      <div class="page-header2" *ngIf='isClient'>Search Clients</div>
+      <div class="page-header2" *ngIf="!isClient">Search Customer</div>
+      <div class="page-header2" *ngIf="isClient">Search Clients</div>
       <div class="input-group">
         <input
           type="text"
@@ -21,23 +27,30 @@
           placeholder="Enter Mobile Number"
           aria-placeholder="Search Clients"
           [(ngModel)]="searchMobile"
+          maxlength="10"
           (keyup.enter)="getCustomer()"
         />
         <div class="input-group-prepend">
-          <span class="input-group-text search-icon" (click)="getCustomer()"></span>
+          <span
+            class="input-group-text search-icon"
+            (click)="getCustomer()"
+          ></span>
         </div>
       </div>
       <div></div>
     </div>
     <hr />
     <div>
-      <div class="page-header1" *ngIf='isClient'>Client Details</div>
-      <div class="page-header1" *ngIf='!isClient'>Customer Details</div>
+      <div class="page-header1" *ngIf="isClient">Client Details</div>
+      <div class="page-header1" *ngIf="!isClient">Customer Details</div>
       <div *ngIf="clientSelected">
-        <div>Name : {{customerDetails.firstname}}</div>
-        <div>Address</div>
-        <div><span>Phone:</span> <span> {{customerDetails.email}}</span></div>
-        <div><span>Email:</span> <span> {{customerDetails.phonenumber}}</span></div>
+        <div>Name : {{ customerDetails.firstname }} {{ customerDetails.lastname }}</div>
+        <div>
+          <span>Email:</span> <span> {{ customerDetails.email }}</span>
+        </div>
+        <div>
+          <span>Contact No:</span> <span> {{ customerDetails.phonenumber }}</span>
+        </div>
       </div>
       <div *ngIf="!clientSelected" style="font-size: 12px; text-align: center">
         No client selected
@@ -116,7 +129,8 @@
   <div class="col-lg-5 col-md-5">
     <div
       class="font-weight-bolder border text-center"
-      style="background-color: burlywood"    >
+      style="background-color: burlywood"
+    >
       Products
     </div>
     <div class="prod-container">
@@ -133,7 +147,11 @@
   <div class="col-lg-3 col-md-3 col-sm-1">
     <div
       class="font-weight-bolder border text-center"
-      [ngStyle]="isMaterialError?{'background-color': 'red',color: 'white'} : {'background-color': 'burlywood',color: 'black'}"
+      [ngStyle]="
+        isMaterialError
+          ? { 'background-color': 'red', color: 'white' }
+          : { 'background-color': 'burlywood', color: 'black' }
+      "
       style="background-color: burlywood"
     >
       Material
@@ -150,7 +168,11 @@
   <div class="col-lg-3 col-md-3 col-sm-1">
     <div
       class="font-weight-bolder border text-center"
-      [ngStyle]="isSizeError?{'background-color': 'red',color: 'white'} : {'background-color': 'burlywood',color: 'black'}"
+      [ngStyle]="
+        isSizeError
+          ? { 'background-color': 'red', color: 'white' }
+          : { 'background-color': 'burlywood', color: 'black' }
+      "
     >
       Size
     </div>
@@ -166,10 +188,24 @@
 </div>
 <br />
 <div class="d-flex">
-<div class="col-1" style="margin: auto 0px">Qty :</div>
-<div class="col-2"><input type="number" class="form-control" [(ngModel)]="qty" (ngModelChange)="calcPrice(-2)"></div>
-<div class="btn btn-success btn-secondary col-1 btn-m-5" (click)="addItem()">Add</div>
-<div class="btn btn-danger btn-secondary col-1 btn-m-5" (click)="resetSelectedVales()">Cancel</div>
+  <div class="col-1" style="margin: auto 0px">Qty :</div>
+  <div class="col-2">
+    <input
+      type="number"
+      class="form-control"
+      [(ngModel)]="qty"
+      (ngModelChange)="calcPrice(-2)"
+    />
+  </div>
+  <div class="btn btn-success btn-secondary col-1 btn-m-5" (click)="addItem()">
+    Add
+  </div>
+  <div
+    class="btn btn-danger btn-secondary col-1 btn-m-5"
+    (click)="resetSelectedVales()"
+  >
+    Cancel
+  </div>
 </div>
 <div class="table-container">
   <table>
@@ -181,7 +217,7 @@
       <th colspan="1">Price</th>
       <th colspan="1"></th>
     </tr>
-    <tr *ngFor="let data of prodtableData;let i = index">
+    <tr *ngFor="let data of prodtableData; let i = index">
       <td>{{ data.prodname }}</td>
       <td
         [ngClass]="{
@@ -209,12 +245,25 @@
         />
       </td>
       <td>{{ data.prodprice | currency: "&#8377;" }}</td>
-      <td class="d-flex" >
-        <div class="edit-icon" style="margin: auto"  *ngIf="data.qtydisabled" (click)="EditQty(i)"></div>
-        <div class="save-icon" style="margin: auto"  *ngIf="!data.qtydisabled" (click)="saveQty(i)"></div>
-        <div class="delete-icon" style="margin: auto" (click)="deleteProduct(i)"></div>
+      <td class="d-flex">
+        <div
+          class="edit-icon"
+          style="margin: auto"
+          *ngIf="data.qtydisabled"
+          (click)="EditQty(i)"
+        ></div>
+        <div
+          class="save-icon"
+          style="margin: auto"
+          *ngIf="!data.qtydisabled"
+          (click)="saveQty(i)"
+        ></div>
+        <div
+          class="delete-icon"
+          style="margin: auto"
+          (click)="deleteProduct(i)"
+        ></div>
       </td>
-      
     </tr>
     <tr style="border: none">
       <td colspan="4" style="border: none"></td>
@@ -224,7 +273,7 @@
     <tr style="border: none" *ngIf="TaxNeed">
       <td colspan="4" style="border: none"></td>
       <td class="border-0 font-weight-bolder text-right">Tax</td>
-      <td class="border-0">{{taxcost | currency: "&#8377;"}} (14%)</td>
+      <td class="border-0">{{ taxcost | currency: "&#8377;" }} (14%)</td>
     </tr>
     <tr style="border: none">
       <td colspan="4" style="border: none"></td>
@@ -234,12 +283,16 @@
     <tr style="border: none">
       <td colspan="4" style="border: none"></td>
       <td class="border-0 font-weight-bolder text-right">Amount Paid</td>
-      <td class="border-0"><input type="number" id="paidAmt" [(ngModel)]='paidAmt'></td>
+      <td class="border-0">
+        <input type="number" id="paidAmt" [(ngModel)]="paidAmt" />
+      </td>
     </tr>
     <tr>
       <td colspan="5" style="border: none"></td>
       <td colspan="1" style="border: none">
-        <button class="btn btn-success" (click)="generateInvoice()">Generate Invoice</button>
+        <button class="btn btn-success" (click)="generateInvoice()">
+          Generate Invoice
+        </button>
       </td>
     </tr>
   </table>
@@ -247,10 +300,10 @@
 
 <div #addClient *ngIf="isaddClient" class="clientmodal">
   <div class="clientmodal-content">
-    <div class="float-right" (click)="isaddClient=!isaddClient">X</div>
-  <div class="float-none">
-    <app-add-client></app-add-client>
-  </div>
+    <div class="float-right" (click)="isaddClient = !isaddClient">X</div>
+    <div class="float-none">
+      <app-add-client></app-add-client>
+    </div>
   </div>
 </div>
 
@@ -259,17 +312,89 @@
     <div class="d-flex">
       <div class="col-10 text-center">
         <div *ngIf="checkoutError">
-          {{checkOutErrorMsg}}
+          {{ checkOutErrorMsg }}
         </div>
         <div *ngIf="!checkoutError">
           <div>Invoice Generated Successfully</div>
         </div>
       </div>
       <div class="col-1">
-        <div class="float-right print-icon" *ngIf="!checkoutError" (click)="printGenerate()"></div>
+        <div
+          class="float-right print-icon"
+          *ngIf="!checkoutError"
+          (click)="printGenerate()"
+        ></div>
       </div>
       <div class="col-1">
-        <div class="float-right cursor-pointer" (click)="closeCheckout()" > X </div>
+        <div class="float-right cursor-pointer" (click)="closeCheckout()">
+          X
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div #newCustomer *ngIf="isNewCustomer" class="checkoutModel">
+  <div class="checkoutModel-content">
+    <div *ngIf="!createCustomerError">
+      <div>New Customer</div>
+      <div class="d-flex">
+        <div class="col-6">First Name:</div>
+        <div class="col-6">Last Name:</div>
+      </div>
+      <div class="d-flex">
+        <div class="col-6">
+          <input
+            type="text"
+            name="firstname"
+            class="form-control"
+            [(ngModel)]="NC_firstname"
+          />
+        </div>
+        <div class="col-6">
+          <input
+            type="text"
+            class="form-control"
+            name="lastname"
+            [(ngModel)]="NC_lastname"
+          />
+        </div>
+      </div>
+      <div class="d-flex">
+        <div class="col-6">Contact No:</div>
+        <div class="col-6">Email ID:</div>
+      </div>
+      <div class="d-flex">
+        <div class="col-6">
+          <input
+            type="text"
+            name="phonenumber"
+            class="form-control"
+            [(ngModel)]="NC_phonenumber"
+            disabled
+          />
+        </div>
+        <div class="col-6">
+          <input
+            type="email"
+            class="form-control"
+            name="email"
+            [(ngModel)]="NC_email"
+          />
+        </div>
+      </div>
+      <hr />
+      <div align="center">
+        <div class="btn btn-danger m-1" (click)="closeCreateCustomer()">
+          Cancel
+        </div>
+        <div class="btn btn-success m-1" (click)="AddNewCustomer()">Save</div>
+      </div>
+    </div>
+    <div *ngIf="createCustomerError">
+      <div>{{ checkOutErrorMsg }}</div>
+      <div align="center">
+        <div class="btn btn-danger" (click)="closeCreateCustomer()">Cancel</div>
       </div>
     </div>
   </div>

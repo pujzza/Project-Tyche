@@ -46,8 +46,16 @@ export class NewSalesInvoiceComponent implements OnInit, AfterViewInit {
   currentOrderId: any;
   paidAmt: number;
   isClient = false;
+  isNewCustomer = false;
+  createCustomerError: boolean = false;
+  newCustomer: CustomerDetails = new CustomerDetails();
+  NC_phonenumber;
+  NC_firstname;
+  NC_lastname;
+  NC_email;
   @ViewChild('addClient', { static: true }) addclient: ElementRef;
   @ViewChild('checkoutDialog', { static: true }) checkoutDialog: ElementRef;
+  
 
 
   constructor(public service: CommonService) {
@@ -189,7 +197,9 @@ export class NewSalesInvoiceComponent implements OnInit, AfterViewInit {
         this.clientSelected = true;
         this.customerDetails = res.returndata;
       } else {
+        this.NC_phonenumber = this.searchMobile.toString();
         this.clientSelected = false;
+        this.isNewCustomer = true;
       }
     });
   }
@@ -265,6 +275,37 @@ export class NewSalesInvoiceComponent implements OnInit, AfterViewInit {
       this.searchMobile = null;
       this.clientSelected = false;
       this.customerDetails = new CustomerDetails();
+      this.newCustomer = new CustomerDetails();
+      this.paidAmt = null;
       }
+  }
+
+  AddNewCustomer(){
+    this.newCustomer.oauth = this.service.Oauth;
+    this.newCustomer.phonenumber = this.NC_phonenumber;
+    this.newCustomer.firstname = this.NC_firstname;
+    this.newCustomer.lastname = this.NC_lastname;
+    this.newCustomer.email = this.NC_email;
+    this.service.CreateCustomer(this.newCustomer).subscribe(
+      res => {
+        if(res.returncode == 200){
+          this.customerDetails = res.returndata;
+          this.clientSelected = true;
+          this.createCustomerError = false;
+          this.checkOutErrorMsg = '';
+          this.isNewCustomer = false;
+        } else {
+          this.createCustomerError = true;
+          this.checkOutErrorMsg = res.returnmessage;
+        }
+      }
+    );
+  }
+
+  closeCreateCustomer(){
+    this.isNewCustomer = false;
+    this.newCustomer = new CustomerDetails();
+    this.createCustomerError = false;
+    this.checkOutErrorMsg = '';
   }
 }
