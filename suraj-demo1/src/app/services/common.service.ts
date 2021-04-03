@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
-import { CustomerDetails } from '../entities/ClientsModel';
+import { BillModel, CustomerDetails } from '../entities/ClientsModel';
 import { loginModel } from '../entities/LoginModel';
 
 @Injectable({
