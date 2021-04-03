@@ -23,6 +23,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AddEmployeeComponent } from './pages/CRM/Employee/add-employee/add-employee.component';
 import { ManageEmployeeComponent } from './pages/CRM/Employee/manage-employee/manage-employee.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,8 @@ import { ManageEmployeeComponent } from './pages/CRM/Employee/manage-employee/ma
     FormsModule,
     HttpClientModule,
     NgxDatatableModule,
+    BrowserAnimationsModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
