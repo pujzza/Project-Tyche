@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
-import { CustomerDetails, BillModel } from '../Entities/ClientsModel';
+import { CustomerDetails } from '../entities/ClientsModel';
 import { loginModel } from '../entities/LoginModel';
 
 @Injectable({
@@ -12,7 +13,7 @@ export class CommonService {
     // Do not edit this Oauth
     Oauth = 'RVn06PJIj36gt40zSAmLwAD742f';
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient,private _snackBar: MatSnackBar) {}
   
     ToLogin(req: loginModel): Observable<any> {
       return this.http.post('http://www.cyperinfotech.com/api/login.php', req);
@@ -87,5 +88,13 @@ export class CommonService {
         'http://cyperinfotech.com/api/apiV2/Client/updateclient.php',
         req
       );
+    }
+
+    OpenSnackBar(title,content){
+      this._snackBar.open(title,content, {
+        duration: 5000,
+        horizontalPosition: "right",
+        verticalPosition: "top",
+      });
     }
 }

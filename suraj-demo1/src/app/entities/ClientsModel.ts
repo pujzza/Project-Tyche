@@ -45,7 +45,7 @@ export class BillModel{
 }
 
 
-export interface CreateClientReq {
+export class CreateClientReq {
     OrgName:     string;
     PhoneNumber: string;
     Email:       string;
@@ -58,13 +58,13 @@ export interface CreateClientReq {
 }
 
 
-export interface CreateClientRes {
+export class CreateClientRes {
     returnmessage: string;
     returncode:    number;
     returndata:    CreateClientReturndata;
 }
 
-export interface CreateClientReturndata {
+export class CreateClientReturndata {
     oauth:          string;
     OrgName:        string;
     BillingPhone:   string;
@@ -76,7 +76,7 @@ export interface CreateClientReturndata {
     BillingTaxID:   string;
 }
 
-export interface UpdateClientReq {
+export class UpdateClientReq {
     OrgName:     string;
     PhoneNumber: string;
     ID:          string;
@@ -90,13 +90,13 @@ export interface UpdateClientReq {
 }
 
 
-export interface UpdateClientRes {
+export class UpdateClientRes {
     returnmessage: string;
     returncode:    number;
     returndata:    UpdateClientReturn;
 }
 
-export interface UpdateClientReturn {
+export class UpdateClientReturn {
     oauth:          string;
     OrgName:        null;
     ID:             string;

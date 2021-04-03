@@ -9,60 +9,60 @@
     </div>
     <div class="d-flex m-down-10">
       <div class="col-3 m-auto">Name</div>
-      <div class="col-9"><input class="form-control" /></div>
+      <div class="col-9"><input class="form-control" [(ngModel)]="client.OrgName"/></div>
     </div>
 
-    <div class="d-flex m-down-10">
+    <!-- <div class="d-flex m-down-10">
       <div class="col-3 m-auto">Company</div>
-      <div class="col-9"><input class="form-control" /></div>
-    </div>
+      <div class="col-9"><input class="form-control" [(ngModel)]="client.OrgName"/></div>
+    </div> -->
 
     <div class="d-flex m-down-10">
       <div class="col-3 m-auto">Phone</div>
-      <div class="col-9"><input class="form-control" type="tel" /></div>
+      <div class="col-9"><input class="form-control" type="tel" [(ngModel)]="client.PhoneNumber"/></div>
     </div>
 
     <div class="d-flex m-down-10">
       <div class="col-3 m-auto">Email</div>
-      <div class="col-9"><input class="form-control" type="email" /></div>
+      <div class="col-9"><input class="form-control" type="email" [(ngModel)]="client.Email"/></div>
     </div>
 
     <div class="d-flex m-down-10">
       <div class="col-3 m-auto">Address</div>
-      <div class="col-9"><input class="form-control" type="text" /></div>
+      <div class="col-9"><input class="form-control" type="text" [(ngModel)]="client.Address"/></div>
     </div>
 
     <div class="d-flex m-down-10">
       <div class="col-3 m-auto">City</div>
-      <div class="col-9"><input class="form-control" type="text" /></div>
+      <div class="col-9"><input class="form-control" type="text" [(ngModel)]="client.City"/></div>
     </div>
 
-    <div class="d-flex m-down-10">
+    <!-- <div class="d-flex m-down-10">
       <div class="col-3 m-auto">Region</div>
-      <div class="col-9"><input class="form-control" type="text" /></div>
-    </div>
+      <div class="col-9"><input class="form-control" type="text" [(ngModel)]="client.OrgName"/></div>
+    </div> -->
 
     <div class="d-flex m-down-10">
       <div class="col-3 m-auto">Country</div>
-      <div class="col-9"><input class="form-control" type="text" /></div>
+      <div class="col-9"><input class="form-control" type="text" [(ngModel)]="client.Country"/></div>
     </div>
 
     <div class="d-flex m-down-10">
       <div class="col-3 m-auto">Post Box</div>
-      <div class="col-6"><input class="form-control" type="text" /></div>
+      <div class="col-6"><input class="form-control" type="text" [(ngModel)]="client.PostBox"/></div>
       <div class="col-3"></div>
     </div>
 
     <div class="d-flex m-down-10">
       <div class="col-3 m-auto">Tax Id</div>
-      <div class="col-6"><input class="form-control" type="text" /></div>
+      <div class="col-6"><input class="form-control" type="text" [(ngModel)]="client.TaxId"/></div>
       <div class="col-3"></div>
     </div>
     <div class="text-center m-4">
-        <div class="btn btn-success">Add Client</div>
+        <div class="btn btn-success" (click)="AddClient()">Add Client</div>
     </div>
   </div>
-  <div class="col-6">
+  <!-- <div class="col-6">
     <div
       class="page-header2 text-center m-down-10 border"
       style="background-color: burlywood;font-weight: 600;"
@@ -131,5 +131,5 @@
       <div class="col-6"><input class="form-control" type="text" /></div>
       <div class="col-3"></div>
     </div>
-  </div>
+  </div> -->
 </div>
