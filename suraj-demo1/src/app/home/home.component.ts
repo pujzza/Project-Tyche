@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit,AfterViewInit {
   isEmployee = false;
   isSelected = 'Dashboard';
   appName = 'Project Tyche';
+  loggedInName = '';
 
   //Imports constants
   SalesSub= SalesSub;
@@ -35,8 +36,10 @@ export class HomeComponent implements OnInit,AfterViewInit {
   EmployeeSub= EmployeeSub;
 
   constructor(private route: Router) {
+    this.isSelected = this.route.url.split('/Home/')[1];
     this.route.events.subscribe(e => {
       this.isSelected = this.route.url.split('/Home/')[1];
+      this.loggedInName = localStorage.getItem('UserName');
       if(this.isSelected.includes('ItemManager')){
         this.isItemManager = true
       } else {

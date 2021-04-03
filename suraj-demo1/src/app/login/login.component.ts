@@ -39,6 +39,8 @@ export class LoginComponent implements OnInit {
         //console.log(this.response);
         if (this.response.returncode == 200) {
           localStorage.setItem('UserId', this.response.returndata.id);
+          var loggedInName = `${this.response.returndata.firstname} ${this.response.returndata.lastname}`;
+          localStorage.setItem('UserName', loggedInName);
           this.authService.login = true;
           this.router.navigateByUrl('Home');
         } else {
