@@ -18,7 +18,7 @@ client: CreateClientReq = new CreateClientReq();
   AddClient(){
     this.client.oauth = this.service.Oauth;
     this.service.CreateClient(this.client).subscribe(res =>{
-      if( res && res.returncode == 200){
+      if(res.returncode == 200){
         this.isclientcreated = true;
         this.service.OpenSnackBar('Client Created!','SUCCESS');
       } else {

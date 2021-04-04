@@ -46,22 +46,15 @@ export class BillModel{
 
 
 export class CreateClientReq {
-    OrgName:     string;
-    PhoneNumber: string;
-    Email:       string;
-    Address:     string;
-    City:        string;
-    Country:     string;
-    PostBox:     number;
-    TaxId:       string;
-    oauth:       string;
-}
-
-
-export class CreateClientRes {
-    returnmessage: string;
-    returncode:    number;
-    returndata:    CreateClientReturndata;
+    oauth:          string;
+    OrgName:        string;
+    BillingPhone:   string;
+    BillingAddress: string;
+    BillingCity:    string;
+    BillingCountry: string;
+    BillingEmail:   string;
+    BillingPostBox: string;
+    BillingTaxID:   string;
 }
 
 export class CreateClientReturndata {
@@ -74,38 +67,32 @@ export class CreateClientReturndata {
     BillingEmail:   string;
     BillingPostBox: string;
     BillingTaxID:   string;
+    Client_ID: string;
+}
+
+
+export class CreateClientRes {
+    returnmessage: string;
+    returncode:    number;
+    returndata:    CreateClientReturndata;
 }
 
 export class UpdateClientReq {
-    OrgName:     string;
-    PhoneNumber: string;
-    ID:          string;
-    Email:       string;
-    Address:     string;
-    City:        string;
-    Country:     string;
-    PostBox:     string;
-    TaxId:       string;
-    oauth:       string;
-}
-
-
-export class UpdateClientRes {
-    returnmessage: string;
-    returncode:    number;
-    returndata:    UpdateClientReturn;
-}
-
-export class UpdateClientReturn {
     oauth:          string;
-    OrgName:        null;
+    OrgName:        string;
     ID:             string;
     BillingPhone:   string;
     BillingAddress: string;
     BillingCity:    string;
     BillingCountry: string;
     BillingEmail:   string;
-    BillingTaxId:   null;
-    BillingPostBox: null;
+    BillingTaxId:   string;
+    BillingPostBox: string;
 }
 
+
+export class UpdateClientRes {
+    returnmessage: string;
+    returncode:    number;
+    returndata:    UpdateClientReq;
+}
