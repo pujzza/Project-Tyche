@@ -90,6 +90,11 @@ export class CommonService {
       );
     }
 
+    GetAllClients(req: any): Observable<any> {
+      return this.http.post('http://cyperinfotech.com/api/apiV2/Client/read_customer.php', req);
+    }
+  
+
     OpenSnackBar(title,content){
       this._snackBar.open(title,content, {
         duration: 5000,

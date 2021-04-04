@@ -66,7 +66,7 @@ export class CreateClientReturndata {
     BillingCountry: string;
     BillingEmail:   string;
     BillingPostBox: string;
-    BillingTaxID:   string;
+    BillingTaxId:   string;
     Client_ID: string;
     BillingContact: string;
 
@@ -100,4 +100,16 @@ export class UpdateClientRes {
     returnmessage: string;
     returncode:    number;
     returndata:    UpdateClientReq;
+}
+
+export class Clients {
+    OrgName:        string;
+    id:             string;
+    BillingPhone:   string;
+    BillingAddress: string;
+    BillingCity:    string;
+    BillingCountry: string;
+    BillingEmail:   string;
+    BillingTaxId:   string;
+    BillingPostBox: string;
 }

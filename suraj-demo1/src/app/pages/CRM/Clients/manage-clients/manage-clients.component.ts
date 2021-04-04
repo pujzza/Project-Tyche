@@ -1,5 +1,7 @@
+import { CommonService } from 'src/app/services/common.service';
 import { Component, OnInit } from '@angular/core';
 import { ColumnMode } from '@swimlane/ngx-datatable';
+import { Clients } from 'src/app/entities/ClientsModel';
 
 @Component({
   selector: 'app-manage-clients',
@@ -11,15 +13,28 @@ export class ManageClientsComponent implements OnInit {
   loadingIndicator = true;
   reorderable = true;
   data = [];
+  clientData : Clients[];
 
-  columns = [{ prop: 'sno', name:'Sno.' }, { prop: 'name', name:'Client Name' }, 
-  { prop: 'email', name: 'Email Id'},{ prop: 'phoneno', name: 'Contact No.' },{ name: 'Settings' }
+  columns = [{ prop: 'id', name:'Client ID' }, { prop: 'OrgName', name:'Client Name' }, 
+  { prop: 'BillingEmail', name: 'Email Id'},{ prop: 'BillingPhone', name: 'Contact No.' }
+  ,{ name: 'Settings' }
 ];
 
   ColumnMode = ColumnMode;
-  constructor() { }
+  constructor(public service : CommonService) { }
 
   ngOnInit(): void {
+this.getAllClients();
+  }
+
+  getAllClients(){
+  this.service.GetAllClients('').subscribe(
+    res => {
+      if(res && res.returncode == 200){
+        this.clientData = res.returndata;
+      }
+    }
+  );
   }
 
 }
