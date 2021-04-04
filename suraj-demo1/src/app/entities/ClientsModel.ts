@@ -68,6 +68,8 @@ export class CreateClientReturndata {
     BillingPostBox: string;
     BillingTaxID:   string;
     Client_ID: string;
+    BillingContact: string;
+
 }
 
 
@@ -88,6 +90,9 @@ export class UpdateClientReq {
     BillingEmail:   string;
     BillingTaxId:   string;
     BillingPostBox: string;
+    BillingContact: string;
+    Client_ID: string;
+
 }
 
 
