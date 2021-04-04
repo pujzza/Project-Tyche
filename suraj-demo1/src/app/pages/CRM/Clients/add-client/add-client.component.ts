@@ -21,6 +21,7 @@ client: CreateClientReq = new CreateClientReq();
       if(res.returncode == 200){
         this.isclientcreated = true;
         this.service.OpenSnackBar('Client Created!','SUCCESS');
+        this.client = new CreateClientReq();
       } else {
         this.isclientcreated = false;
         this.service.OpenSnackBar('Client Not Created!','FAILED');
