@@ -16,6 +16,8 @@ export class ManageClientsComponent implements OnInit {
   reorderable = true;
   data = [];
   clientData: Clients[];
+  isviewClient = false;
+  viewClient = new Clients();
 
   columns = [
     { prop: 'id', name: 'Client ID',width: 50 },
@@ -41,5 +43,10 @@ export class ManageClientsComponent implements OnInit {
         this.clientData = res.returndata;
       }
     });
+  }
+
+  toViewClient(row){
+    this.isviewClient = true;
+    this.viewClient = row;
   }
 }
