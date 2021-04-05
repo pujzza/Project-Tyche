@@ -24,10 +24,11 @@ export class ManageProductComponent implements OnInit {
     { prop: 'ProductWholesalePrice', name: 'Wholesale Price',width: 70 },
     { name: 'Settings',width: 100 },
   ];
-  constructor(public service: CommonService) {}
+  constructor(public service: CommonService) {
+    document.getElementById('ngxtable').style.height = `${screen.height - 170}px`;
+  }
 
   ngOnInit(): void {
-    document.getElementById('ngxtable').style.height = `${screen.height - 170}px`;
     this.getAllProducts();
   }
 
