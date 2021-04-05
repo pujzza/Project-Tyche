@@ -91,9 +91,21 @@ export class CommonService {
     }
 
     GetAllClients(req: any): Observable<any> {
-      return this.http.post('http://cyperinfotech.com/api/apiV2/Client/read_customer.php', req);
+      return this.http.post('http://cyperinfotech.com/api/apiV2/Client/getclient.php', req);
+    }
+
+    AddProduct(req: any): Observable<any> {
+      return this.http.post(
+        'http://cyperinfotech.com/api/apiV2/Stock/CreateProducts.php',
+        req
+      );
     }
   
+    GetAllProducts(): Observable<any> {
+      return this.http.post(
+        'http://cyperinfotech.com/api/apiV2/Stock/getstockproducts.php',''
+      );
+    }
 
     OpenSnackBar(title,content){
       this._snackBar.open(title,content, {
