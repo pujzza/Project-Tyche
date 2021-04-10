@@ -1,6 +1,6 @@
 import { NavigationEnd, Router } from '@angular/router';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ClientSub, EmployeeSub, ItemManagerSub, PurchaseSub, SalesSub, StockReturnSub } from './home-constants';
+import { ClientSub, EmployeeSub, InventorySub, ItemManagerSub, PurchaseSub, SalesSub, StockReturnSub } from './home-constants';
 
 @Component({
   selector: 'app-home',
@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit,AfterViewInit {
   isStockReturn = false;
   isprofclicked = false;
   isEmployee = false;
+  isInventory = false;
   isSelected = 'Dashboard';
   appName = 'Project Tyche';
   loggedInName = '';
@@ -34,6 +35,7 @@ export class HomeComponent implements OnInit,AfterViewInit {
   StockReturnSub=StockReturnSub;
   ClientSub=ClientSub;
   EmployeeSub= EmployeeSub;
+  InventorySub=InventorySub;
 
   constructor(private route: Router) {
     this.isSelected = this.route.url.split('/Home/')[1];

@@ -27,3 +27,9 @@ export const EmployeeSub = [
   { id: 1, title: 'New Employee', route: 'Employee/NewEmployee' },
   { id: 2, title: 'Manage Employees', route: 'Employee/ManageEmployee' },
 ];
+
+export const InventorySub = [
+  { id: 1, title: 'Add Inventory', route: 'Inventory/NewInventory' },
+  { id: 2, title: 'Manage Inventory', route: 'Inventory/ManageInventory' },
+];
+

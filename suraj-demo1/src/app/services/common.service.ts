@@ -107,6 +107,13 @@ export class CommonService {
       );
     }
 
+    GetInventory(): Observable<any> {
+      return this.http.get(
+        'http://cyperinfotech.com/api/apiV2/Inventory/GetItem.php'
+      );
+    }
+
+
     OpenSnackBar(title,content){
       this._snackBar.open(title,content, {
         duration: 5000,

@@ -44,6 +44,19 @@
             {{subs.title}}
         </div>
     </div>
+    <div class="cat-label" (click)="isInventory = !isInventory">
+      <div>Inventory</div>
+    <div
+      class="push-left"
+      [ngClass]="{ 'down-arrow': isInventory, 'right-arrow': !isInventory }"
+    ></div>
+  </div>
+  <div *ngIf="isInventory" class="sub-catg-content">
+      <div *ngFor="let subs of InventorySub" class="sub-catg" (click)="NavigatePages(subs.route);isSelected=subs.route"
+      [ngClass]="{'SelectedLabel':isSelected.includes(subs.route)}">
+          {{subs.title}}
+      </div>
+  </div>
     <div class="cat-label" (click)="isPurchaseOrder = !isPurchaseOrder">
         <div>Purchase Order</div>
       <div

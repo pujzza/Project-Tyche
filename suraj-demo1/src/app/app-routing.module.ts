@@ -1,3 +1,5 @@
+import { ManageInventoryComponent } from './pages/Stock/Inventory/manage-inventory/manage-inventory.component';
+import { AddInventoryComponent } from './pages/Stock/Inventory/add-inventory/add-inventory.component';
 import { ManageEmployeeComponent } from './pages/CRM/Employee/manage-employee/manage-employee.component';
 import { AddEmployeeComponent } from './pages/CRM/Employee/add-employee/add-employee.component';
 import { ManageClientsComponent } from './pages/CRM/Clients/manage-clients/manage-clients.component';
@@ -41,6 +43,8 @@ const routes: Routes = [
       { path: 'Clients/ManageClient', component: ManageClientsComponent },
       { path: 'Employee/NewEmployee', component: AddEmployeeComponent },
       { path: 'Employee/ManageEmployee', component: ManageEmployeeComponent },
+      { path: 'Inventory/NewInventory', component: AddInventoryComponent },
+      { path: 'Inventory/ManageInventory', component: ManageInventoryComponent },
     ],
   },
 ];

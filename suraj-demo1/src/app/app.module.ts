@@ -25,6 +25,9 @@ import { AddEmployeeComponent } from './pages/CRM/Employee/add-employee/add-empl
 import { ManageEmployeeComponent } from './pages/CRM/Employee/manage-employee/manage-employee.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatSelectModule} from '@angular/material/select';
+import { AddInventoryComponent } from './pages/Stock/Inventory/add-inventory/add-inventory.component';
+import { ManageInventoryComponent } from './pages/Stock/Inventory/manage-inventory/manage-inventory.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +49,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     AddClientComponent,
     ManageClientsComponent,
     AddEmployeeComponent,
-    ManageEmployeeComponent
+    ManageEmployeeComponent,
+    AddInventoryComponent,
+    ManageInventoryComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +60,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     HttpClientModule,
     NgxDatatableModule,
     BrowserAnimationsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
