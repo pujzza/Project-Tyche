@@ -1,50 +1,58 @@
-<div class="page-header1">Add New Product</div>
-<br>
+<div class="page-header1">New Product</div>
+<br />
 <div>
-    <div class="d-flex m-down-10">
-        <div class="col-2 prod-label">Product Name</div>
-        <div class="col-5"><input class="form-control" [(ngModel)]="product.ProductName"></div>
+  <div class="d-flex m-down-10">
+    <div class="col-2 prod-label">Product Category *</div>
+    <div class="col-5">
+      <input class="form-control" [(ngModel)]="product.ProductCategory" />
     </div>
-    <div class="d-flex m-down-10">
-        <div class="col-2 prod-label">Product Category</div>
-        <div class="col-5"><input class="form-control" [(ngModel)]="product.ProductCategory"></div>
-
-    </div>
-    <div class="d-flex m-down-10">
-        <div class="col-2 prod-label">Warehouse</div>
-        <div class="col-5"> <select class="form-control" [(ngModel)]="product.Warehouse">
-            <option *ngFor="let item of warehouses" [value]="item">{{item}}</option>
-        </select></div>
-    </div>
-    <div class="d-flex m-down-10">
-        <div class="col-2 prod-label">Product Code</div>
-        <div class="col-5"><input class="form-control" [(ngModel)]="product.ProductCode"></div>
-    </div>
-    <div class="d-flex m-down-10">
-        <div class="col-2 prod-label">Product Retail Price</div>
-        <div class="col-5 input-group"  style="height: fit-content">
-            <div class="input-group-prepend">
-                <span class="input-group-text">&#8377;</span>
-              </div>
-            <input class="form-control" type="number" [(ngModel)]="product.ProductRetailPrice"></div>
-    </div>
-    <div class="d-flex m-down-10">
-        <div class="col-2 prod-label">Product Wholesale Price</div>
-        <div class="col-5 input-group" style="height: fit-content">
-            <div class="input-group-prepend">
-                <span class="input-group-text">&#8377;</span>
-              </div><input class="form-control" type="number" [(ngModel)]="product.ProductWholesalePrice"></div>
-    </div>
-    <div class="d-flex m-down-10">
-        <div class="col-2 prod-label">Stock Unit</div>
-        <div class="col-5"><input class="form-control" type="number" [(ngModel)]="product.StockUnit"></div>
-    </div>
-    <div class="d-flex m-down-10">
-        <div class="col-2 prod-label">Alert Quantity</div>
-        <div class="col-5"><input class="form-control" type="number" [(ngModel)]="product.AlertQuantity"></div>
-    </div>
-    <div class="d-flex addprodbtn">
-        <div class="col-2 prod-label"></div>
-        <div class="col-2 btn btn-success" (click)="AddProduct()">Add Product</div>
-    </div>
+    <div class="col-2">{{noprodcatgerror}}</div>
+  </div>
+  <hr />
+  <div class="d-flex">
+    <div class="page-header1">Enter Various Materials/Sizes</div>
+    <div class="addNewProd" (click)="AddSubProd()">Add</div>
+  </div>
+  <div class="table-container">
+    <table>
+      <tr>
+        <th colspan="1">Product Name</th>
+        <th colspan="2">Inventory Item</th>
+        <th colspan="1">Material</th>
+        <th colspan="1">Size</th>
+        <th colspan="1">Price</th>
+        <th colspan="1"></th>
+      </tr>
+      <tr *ngFor="let prod of subProds; let i = index">
+        <td colspan="1"><input type="text" class="form-control"  [(ngModel)]="prod.ProductCode"/></td>
+        <td colspan="2">
+          <select class="form-control"  [(ngModel)]="prod.ProductRawMaterials">
+            <option *ngFor="let op of itemList" [value]="op.ItemId">
+              {{ op.ItemName }}
+            </option>
+          </select>
+        </td>
+        <td colspan="1"><input type="text" class="form-control"  [(ngModel)]="prod.ProductMaterial"/></td>
+        <td colspan="1"><input type="text" class="form-control"  [(ngModel)]="prod.ProductSize"/></td>
+        <td colspan="1"><input type="text" class="form-control"  [(ngModel)]="prod.ProductPrice"/></td>
+        <td colspan="1" class="d-flex">
+          <div
+            *ngIf="!prod.isSaved"
+            class="save-icon mr-5 ml-3 cursor-pointer"
+            (click)="saveSubProd(prod)"
+          ></div>
+          <div
+            *ngIf="prod.isSaved"
+            class="delete-icon"
+            (click)="DeleteSubProd(i)"
+          ></div>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div>{{ saveError }}</div>
+  <div class="d-flex addprodbtn">
+    <div class="col-2 prod-label"></div>
+    <div class="col-2 btn btn-success" (click)="AddProduct()">Add Product</div>
+  </div>
 </div>
