@@ -6,119 +6,133 @@ import { BillModel, CustomerDetails } from '../entities/ClientsModel';
 import { loginModel } from '../entities/LoginModel';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CommonService {
+  // Do not edit this Oauth
+  Oauth = 'RVn06PJIj36gt40zSAmLwAD742f';
 
-    // Do not edit this Oauth
-    Oauth = 'RVn06PJIj36gt40zSAmLwAD742f';
+  constructor(private http: HttpClient, private _snackBar: MatSnackBar) {}
 
-    constructor(private http: HttpClient,private _snackBar: MatSnackBar) {}
-  
-    ToLogin(req: loginModel): Observable<any> {
-      return this.http.post('http://www.cyperinfotech.com/api/login.php', req);
-    }
-  
-    CustomerValidate(req: any): Observable<any> {
-      return this.http.post(
-        'http://cyperinfotech.com/api/apiV2/Customer/validate_customers.php',
-        req
-      );
-    }
-  
-    CreateCustomer(req: CustomerDetails): Observable<any> {
-      return this.http.post(
-        'http://cyperinfotech.com/api/apiV2/Customer/create_customers.php',
-        req
-      );
-    }
-  
-    CreateBill(req: BillModel): Observable<any> {
-      return this.http.post(
-        'http://cyperinfotech.com/api/apiV2/Product/create.php',
-        req
-      );
-    }
-  
-    GetBills(req: any): Observable<any> {
-      return this.http.post(
-        'http://cyperinfotech.com/api/apiV2/Product/read_filter.php',
-        req
-      );
-    }
-    GetOrders(req: any): Observable<any> {
-      return this.http.post(
-        'http://cyperinfotech.com/api/apiV2/Product/read_employ_order.php',
-        req
-      );
-    }
-    GetBillByOrderId(req: any): Observable<any> {
-      return this.http.post(
-        'http://cyperinfotech.com/api/apiV2/Product/read_products.php',
-        req
-      );
-    }
-    updateAmount(req: any): Observable<any> {
-      return this.http.post(
-        'http://cyperinfotech.com/api/apiV2/Product/products_update.php',
-        req
-      );
-    }
-    GetNotify(url:String) {
-      return this.http.get(
-        'http://cyperinfotech.com/api/notificationapiv2.php?list='+url,
-      );
-    }
-    PrintBill(employeeId,currentOrderId){
-      window.open('http://www.cyperinfotech.com/pdf/pdf.php?eid='+employeeId+'&order_id='+currentOrderId+'&papersize=bill&m=I');
-    }
-    DownloadBill(eid,orderid){
-      window.open('http://www.cyperinfotech.com/pdf/pdf.php?eid='+eid+'&order_id='+orderid+'&papersize=a4&m=D');
-    }
+  ToLogin(req: loginModel): Observable<any> {
+    return this.http.post('http://www.cyperinfotech.com/api/login.php', req);
+  }
 
-    CreateClient(req: any): Observable<any> {
-      return this.http.post(
-        'http://cyperinfotech.com/api/apiV2/Client/CreateClient.php',
-        req
-      );
-    }
+  CustomerValidate(req: any): Observable<any> {
+    return this.http.post(
+      'http://cyperinfotech.com/api/apiV2/Customer/validate_customers.php',
+      req
+    );
+  }
 
-    UpdateClient(req: any): Observable<any> {
-      return this.http.post(
-        'http://cyperinfotech.com/api/apiV2/Client/updateclient.php',
-        req
-      );
-    }
+  CreateCustomer(req: CustomerDetails): Observable<any> {
+    return this.http.post(
+      'http://cyperinfotech.com/api/apiV2/Customer/create_customers.php',
+      req
+    );
+  }
 
-    GetAllClients(req: any): Observable<any> {
-      return this.http.post('http://cyperinfotech.com/api/apiV2/Client/getclient.php', req);
-    }
+  CreateBill(req: BillModel): Observable<any> {
+    return this.http.post(
+      'http://cyperinfotech.com/api/apiV2/Product/create.php',
+      req
+    );
+  }
 
-    AddProduct(req: any): Observable<any> {
-      return this.http.post(
-        'http://cyperinfotech.com/api/apiV2/Stock/CreateProductNew.php',
-        req
-      );
-    }
-  
-    GetAllProducts(): Observable<any> {
-      return this.http.post(
-        'http://cyperinfotech.com/api/apiV2/Stock/GetProducts.php',''
-      );
-    }
+  GetBills(req: any): Observable<any> {
+    return this.http.post(
+      'http://cyperinfotech.com/api/apiV2/Product/read_filter.php',
+      req
+    );
+  }
+  GetOrders(req: any): Observable<any> {
+    return this.http.post(
+      'http://cyperinfotech.com/api/apiV2/Product/read_employ_order.php',
+      req
+    );
+  }
+  GetBillByOrderId(req: any): Observable<any> {
+    return this.http.post(
+      'http://cyperinfotech.com/api/apiV2/Product/read_products.php',
+      req
+    );
+  }
+  updateAmount(req: any): Observable<any> {
+    return this.http.post(
+      'http://cyperinfotech.com/api/apiV2/Product/products_update.php',
+      req
+    );
+  }
+  GetNotify(url: String) {
+    return this.http.get(
+      'http://cyperinfotech.com/api/notificationapiv2.php?list=' + url
+    );
+  }
+  PrintBill(employeeId, currentOrderId) {
+    window.open(
+      'http://www.cyperinfotech.com/pdf/pdf.php?eid=' +
+        employeeId +
+        '&order_id=' +
+        currentOrderId +
+        '&papersize=bill&m=I'
+    );
+  }
+  DownloadBill(eid, orderid) {
+    window.open(
+      'http://www.cyperinfotech.com/pdf/pdf.php?eid=' +
+        eid +
+        '&order_id=' +
+        orderid +
+        '&papersize=a4&m=D'
+    );
+  }
 
-    GetInventory(): Observable<any> {
-      return this.http.get(
-        'http://cyperinfotech.com/api/apiV2/Inventory/GetItem.php'
-      );
-    }
+  CreateClient(req: any): Observable<any> {
+    return this.http.post(
+      'http://cyperinfotech.com/api/apiV2/Client/CreateClient.php',
+      req
+    );
+  }
 
+  UpdateClient(req: any): Observable<any> {
+    return this.http.post(
+      'http://cyperinfotech.com/api/apiV2/Client/updateclient.php',
+      req
+    );
+  }
 
-    OpenSnackBar(title,content){
-      this._snackBar.open(title,content, {
-        duration: 5000,
-        horizontalPosition: "right",
-        verticalPosition: "top",
-      });
-    }
+  GetAllClients(req: any): Observable<any> {
+    return this.http.post(
+      'http://cyperinfotech.com/api/apiV2/Client/getclient.php',
+      req
+    );
+  }
+
+  AddProduct(req: any): Observable<any> {
+    return this.http.post(
+      'http://cyperinfotech.com/api/apiV2/Stock/CreateProductNew.php',
+      req
+    );
+  }
+
+  GetAllProducts(): Observable<any> {
+    return this.http.post(
+      'http://cyperinfotech.com/api/apiV2/Stock/GetProducts.php',
+      ''
+    );
+  }
+
+  GetInventory(): Observable<any> {
+    return this.http.get(
+      'http://cyperinfotech.com/api/apiV2/Inventory/GetItem.php'
+    );
+  }
+
+  OpenSnackBar(title, content) {
+    this._snackBar.open(title, content, {
+      duration: 5000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+    });
+  }
 }

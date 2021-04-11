@@ -11,43 +11,46 @@ import { ProductsModel, SubProducts } from 'src/app/entities/StockModels';
 export class ManageProductComponent implements OnInit {
   loadingIndicator = true;
   reorderable = true;
-  data : SubProducts[] = [];
+  data: SubProducts[] = [];
   ColumnMode = ColumnMode;
   SortType = SortType;
   filteredList = [];
   searchProduct;
   columns = [
-    { prop: 'ProductId', name: '#',width: 10 },
-    { prop: 'ProductCode', name: 'Code',width: 50 },
-    { prop: 'ProductCategory', name: 'Category',width: 100 },
-    { prop: 'ProductPrice', name: 'Price',width: 50 },
-    { prop: 'ProductMaterial', name: 'Material',width: 100 },
-    { prop: 'ProductSize', name: 'Size',width: 50 },
-    { name: 'Settings',width: 100 },
+    { prop: 'ProductId', name: '#', width: 10 },
+    { prop: 'ProductCode', name: 'Code', width: 50 },
+    { prop: 'ProductCategory', name: 'Category', width: 100 },
+    { prop: 'ProductPrice', name: 'Price', width: 50 },
+    { prop: 'ProductMaterial', name: 'Material', width: 100 },
+    { prop: 'ProductSize', name: 'Size', width: 50 },
+    { name: 'Settings', width: 100 },
   ];
-  constructor(public service: CommonService) {
-  }
+  constructor(public service: CommonService) {}
 
   ngOnInit(): void {
-    document.getElementById('ngxtable').style.height = `${screen.height - 170}px`;
+    document.getElementById('ngxtable').style.height = `${
+      screen.height - 170
+    }px`;
     this.getAllProducts();
   }
 
-  getAllProducts(){
-    this.service.GetAllProducts().subscribe(res => {
-      if(res && res.returncode == 200){
+  getAllProducts() {
+    this.service.GetAllProducts().subscribe((res) => {
+      if (res && res.returncode == 200) {
         this.data = res.returndata;
         this.filteredList = res.returndata;
       }
-    })
+    });
   }
 
   SearchProduct() {
     const lowerValue = this.searchProduct.toLowerCase();
-    this.filteredList = this.data.filter(item => 
-      item.ProductCode.toLowerCase().indexOf(lowerValue) !== -1 || !lowerValue
-      || item.ProductMaterial.toLowerCase().indexOf(lowerValue) !== -1
-      || item.ProductSize.toLowerCase().indexOf(lowerValue) !== -1
-      );
+    this.filteredList = this.data.filter(
+      (item) =>
+        item.ProductCode.toLowerCase().indexOf(lowerValue) !== -1 ||
+        !lowerValue ||
+        item.ProductMaterial.toLowerCase().indexOf(lowerValue) !== -1 ||
+        item.ProductSize.toLowerCase().indexOf(lowerValue) !== -1
+    );
   }
 }
