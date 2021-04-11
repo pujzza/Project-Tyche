@@ -1,8 +1,27 @@
-<div class="page-header1">Products</div>
+<div class="d-flex">
+  <div class="col-3"><div class="page-header1">Products</div></div>
+  <div class="col-5"></div>
+  <div class="col-4">
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="searchProduct"
+        placeholder="Search Products"
+        (keyup)="SearchProduct()"
+      />
+      <div
+        class="input-group-prepend"
+      >
+        <span class="input-group-text search-icon"></span>
+      </div>
+    </div>
+  </div>
+</div>
 <div id="ngxtable" class="table-container">
   <ngx-datatable
     class="bootstrap fullscreen"
-    [rows]="data"
+    [rows]="filteredList"
     style="font-family: Nunito; height: inherit"
     [columnMode]="ColumnMode.force"
     [headerHeight]="50"
@@ -17,11 +36,13 @@
       [width]="col.width"
       headerClass="theader1"
     >
-    <ng-template let-value="value" ngx-datatable-header-template>
-      <span >{{ col.name }}</span>
-    </ng-template>
+      <ng-template let-value="value" ngx-datatable-header-template>
+        <span>{{ col.name }}</span>
+      </ng-template>
       <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
-        <div *ngIf="!col.name.includes('Settings')" [title]="row[col.prop]">{{ row[col.prop] }}</div>
+        <div *ngIf="!col.name.includes('Settings')" [title]="row[col.prop]">
+          {{ row[col.prop] }}
+        </div>
         <div *ngIf="col.name.includes('Settings')">
           <div class="d-flex" style="height: 30px">
             <div class="col-2 edit-icon"></div>

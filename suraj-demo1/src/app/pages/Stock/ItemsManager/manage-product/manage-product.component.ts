@@ -1,7 +1,7 @@
 import { CommonService } from 'src/app/services/common.service';
 import { Component, OnInit } from '@angular/core';
 import { ColumnMode, SortType } from '@swimlane/ngx-datatable';
-import { ProductsModel } from 'src/app/entities/StockModels';
+import { ProductsModel, SubProducts } from 'src/app/entities/StockModels';
 
 @Component({
   selector: 'app-manage-product',
@@ -11,24 +11,25 @@ import { ProductsModel } from 'src/app/entities/StockModels';
 export class ManageProductComponent implements OnInit {
   loadingIndicator = true;
   reorderable = true;
-  data : ProductsModel[] = [];
+  data : SubProducts[] = [];
   ColumnMode = ColumnMode;
   SortType = SortType;
+  filteredList = [];
+  searchProduct;
   columns = [
-    { prop: 'id', name: '#',width: 10 },
+    { prop: 'ProductId', name: '#',width: 10 },
     { prop: 'ProductCode', name: 'Code',width: 50 },
-    { prop: 'ProductName', name: 'Product Name',width: 100 },
     { prop: 'ProductCategory', name: 'Category',width: 100 },
-    { prop: 'StockUnit', name: 'Quantity',width: 50 },
-    { prop: 'ProductRetailPrice', name: 'Retail Price',width: 50 },
-    { prop: 'ProductWholesalePrice', name: 'Wholesale Price',width: 70 },
+    { prop: 'ProductPrice', name: 'Price',width: 50 },
+    { prop: 'ProductMaterial', name: 'Material',width: 100 },
+    { prop: 'ProductSize', name: 'Size',width: 50 },
     { name: 'Settings',width: 100 },
   ];
   constructor(public service: CommonService) {
-    document.getElementById('ngxtable').style.height = `${screen.height - 170}px`;
   }
 
   ngOnInit(): void {
+    document.getElementById('ngxtable').style.height = `${screen.height - 170}px`;
     this.getAllProducts();
   }
 
@@ -36,7 +37,17 @@ export class ManageProductComponent implements OnInit {
     this.service.GetAllProducts().subscribe(res => {
       if(res && res.returncode == 200){
         this.data = res.returndata;
+        this.filteredList = res.returndata;
       }
     })
+  }
+
+  SearchProduct() {
+    const lowerValue = this.searchProduct.toLowerCase();
+    this.filteredList = this.data.filter(item => 
+      item.ProductCode.toLowerCase().indexOf(lowerValue) !== -1 || !lowerValue
+      || item.ProductMaterial.toLowerCase().indexOf(lowerValue) !== -1
+      || item.ProductSize.toLowerCase().indexOf(lowerValue) !== -1
+      );
   }
 }

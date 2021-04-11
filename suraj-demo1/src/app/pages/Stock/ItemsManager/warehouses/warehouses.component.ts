@@ -23,7 +23,7 @@ export class WarehousesComponent implements OnInit {
     { prop: 'totalstock', name: 'Total Stock',width: 50 },
     { name: 'Settings',width: 100 },
   ];
-
+data = [];
   isnewWarehouse = false;
 
   warehouse = new NewWarehouse();

@@ -96,14 +96,14 @@ export class CommonService {
 
     AddProduct(req: any): Observable<any> {
       return this.http.post(
-        'http://cyperinfotech.com/api/apiV2/Stock/CreateProducts.php',
+        'http://cyperinfotech.com/api/apiV2/Stock/CreateProductNew.php',
         req
       );
     }
   
     GetAllProducts(): Observable<any> {
       return this.http.post(
-        'http://cyperinfotech.com/api/apiV2/Stock/getstockproducts.php',''
+        'http://cyperinfotech.com/api/apiV2/Stock/GetProducts.php',''
       );
     }
 

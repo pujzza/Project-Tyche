@@ -1,7 +1,7 @@
 export class ProductsModel {
   oauth?: string;
   ProductCategory: string;
-  products: SubProducts[];
+  Products: SubProducts[];
 }
 
 export class InventoryItem {
@@ -32,6 +32,6 @@ export class SubProducts {
   ProductMaterial: string;
   ProductSize: string;
   ProductPrice: string;
-  ProductRawMaterials: string;
+  ProductRawMaterials: string[];
   isSaved?: boolean = false;
 }

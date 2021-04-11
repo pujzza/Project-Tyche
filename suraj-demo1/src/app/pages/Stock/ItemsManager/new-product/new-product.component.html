@@ -6,7 +6,7 @@
     <div class="col-5">
       <input class="form-control" [(ngModel)]="product.ProductCategory" />
     </div>
-    <div class="col-2">{{noprodcatgerror}}</div>
+    <div class="col-2 errormsg">{{noprodcatgerror}}</div>
   </div>
   <hr />
   <div class="d-flex">
@@ -17,40 +17,45 @@
     <table>
       <tr>
         <th colspan="1">Product Name</th>
-        <th colspan="2">Inventory Item</th>
+        <th colspan="1">Inventory Item</th>
         <th colspan="1">Material</th>
         <th colspan="1">Size</th>
         <th colspan="1">Price</th>
         <th colspan="1"></th>
       </tr>
       <tr *ngFor="let prod of subProds; let i = index">
-        <td colspan="1"><input type="text" class="form-control"  [(ngModel)]="prod.ProductCode"/></td>
-        <td colspan="2">
-          <select class="form-control"  [(ngModel)]="prod.ProductRawMaterials">
+        <td colspan="1"><input type="text" class="form-control"  [(ngModel)]="prod.ProductCode" [disabled]="prod.isSaved" /></td>
+        <td colspan="1">
+          <!-- <select class="form-control"  [(ngModel)]="prod.ProductRawMaterials" [disabled]="prod.isSaved" >
             <option *ngFor="let op of itemList" [value]="op.ItemId">
               {{ op.ItemName }}
             </option>
-          </select>
+          </select> -->
+
+          <mat-select class="form-control"  [(ngModel)]="prod.ProductRawMaterials" [disabled]="prod.isSaved" multiple>
+            <mat-option *ngFor="let op of itemList" [value]="op.ItemId">{{op.ItemName}}</mat-option>
+          </mat-select>
         </td>
-        <td colspan="1"><input type="text" class="form-control"  [(ngModel)]="prod.ProductMaterial"/></td>
-        <td colspan="1"><input type="text" class="form-control"  [(ngModel)]="prod.ProductSize"/></td>
-        <td colspan="1"><input type="text" class="form-control"  [(ngModel)]="prod.ProductPrice"/></td>
+        <td colspan="1"><input type="text" class="form-control"  [(ngModel)]="prod.ProductMaterial" [disabled]="prod.isSaved" /></td>
+        <td colspan="1"><input type="text" class="form-control"  [(ngModel)]="prod.ProductSize" [disabled]="prod.isSaved" /></td>
+        <td colspan="1"><input type="text" class="form-control"  [(ngModel)]="prod.ProductPrice" [disabled]="prod.isSaved" /></td>
         <td colspan="1" class="d-flex">
           <div
             *ngIf="!prod.isSaved"
             class="save-icon mr-5 ml-3 cursor-pointer"
-            (click)="saveSubProd(prod)"
+            (click)="saveSubProd(prod,i)"
           ></div>
           <div
-            *ngIf="prod.isSaved"
+            
             class="delete-icon"
             (click)="DeleteSubProd(i)"
           ></div>
+          <div *ngIf="i == errorIndex" class="errormsg">*{{prodfillEroor}}</div>
         </td>
       </tr>
     </table>
   </div>
-  <div>{{ saveError }}</div>
+  <div class="col-3 errormsg">{{ saveError }}</div>
   <div class="d-flex addprodbtn">
     <div class="col-2 prod-label"></div>
     <div class="col-2 btn btn-success" (click)="AddProduct()">Add Product</div>

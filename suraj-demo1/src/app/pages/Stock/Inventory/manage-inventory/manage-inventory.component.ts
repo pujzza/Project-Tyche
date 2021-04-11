@@ -8,7 +8,7 @@ import { CommonService } from 'src/app/services/common.service';
   styleUrls: ['./manage-inventory.component.scss']
 })
 export class ManageInventoryComponent implements OnInit {
-
+data =[];
   loadingIndicator = true;
   reorderable = true;
   ColumnMode = ColumnMode;
