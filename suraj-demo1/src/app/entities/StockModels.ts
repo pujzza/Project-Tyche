@@ -6,15 +6,14 @@ export class ProductsModel {
 
 export class InventoryItem {
   oauth?: string;
-  itemid?: string;
-  itemname: string;
-  size: string;
-  material: string;
-  bundles: string;
-  perbundle: string;
-  alerQty: string;
-  warehouse: string;
+  ItemId:        string;
+  ItemName:      string;
+  Category:      string;
+  Bundles:       string;
+  ItemPerBundle: string;
+  AlertQuantity: string;
 }
+
 
 export class NewWarehouse {
   oauth?: string;

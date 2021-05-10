@@ -29,7 +29,7 @@ client: CreateClientReq = new CreateClientReq();
     },
     (error) => {
       this.service.OpenSnackBar('Something went wrong','SORRY');
-    })
+    });
     console.log(this.client);
   }
 }

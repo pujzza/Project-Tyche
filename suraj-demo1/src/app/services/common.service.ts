@@ -128,6 +128,27 @@ export class CommonService {
     );
   }
 
+  CreateInventory(req: any): Observable<any> {
+    return this.http.post(
+      'http://cyperinfotech.com/api/apiV2/Inventory/CreateInventory.php',
+      req
+    );
+  }
+
+  UpdateInventory(req: any): Observable<any> {
+    return this.http.post(
+      'http://cyperinfotech.com/api/apiV2/Inventory/UpdateInventory.php',
+      req
+    );
+  }
+
+  InventoryDropItem(req: any): Observable<any> {
+    return this.http.post(
+      'http://cyperinfotech.com/api/apiV2/Inventory/DropItems.php',
+      req
+    );
+  }
+
   OpenSnackBar(title, content) {
     this._snackBar.open(title, content, {
       duration: 5000,

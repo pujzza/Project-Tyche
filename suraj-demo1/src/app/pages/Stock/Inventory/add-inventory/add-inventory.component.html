@@ -3,33 +3,29 @@
 <div>
     <div class="d-flex m-down-10">
         <div class="col-2 prod-label">Item Name</div>
-        <div class="col-5"><input class="form-control" [(ngModel)]="item.itemname"></div>
+        <div class="col-5"><input class="form-control" [(ngModel)]="item.ItemName"></div>
     </div>
     <div class="d-flex m-down-10">
-        <div class="col-2 prod-label">Item Size</div>
-        <div class="col-5"><input class="form-control"  [(ngModel)]="item.size"></div>
+        <div class="col-2 prod-label">Item Category</div>
+        <div class="col-5"><input class="form-control"  [(ngModel)]="item.Category"></div>
     </div>
-    <div class="d-flex m-down-10">
-        <div class="col-2 prod-label">Item Material</div>
-        <div class="col-5"><input class="form-control"  [(ngModel)]="item.material"></div>
-    </div>
-    <div class="d-flex m-down-10">
+    <!-- <div class="d-flex m-down-10">
         <div class="col-2 prod-label">Warehouse</div>
         <div class="col-5"> <select class="form-control"  [(ngModel)]="item.warehouse">
             <option *ngFor="let item of warehouses" [value]="item">{{item}}</option>
         </select></div>
-    </div>
+    </div> -->
     <div class="d-flex m-down-10">
         <div class="col-2 prod-label">Bundle</div>
-        <div class="col-5"><input class="form-control" type="number" [(ngModel)]="item.bundles"></div>
+        <div class="col-5"><input class="form-control" type="number" [(ngModel)]="item.Bundles"></div>
     </div>
     <div class="d-flex m-down-10">
         <div class="col-2 prod-label">Item per Bundle</div>
-        <div class="col-5"><input class="form-control" type="number" [(ngModel)]="item.perbundle"></div>
+        <div class="col-5"><input class="form-control" type="number" [(ngModel)]="item.ItemPerBundle"></div>
     </div>
     <div class="d-flex m-down-10">
         <div class="col-2 prod-label">Alert Quantity</div>
-        <div class="col-5"><input class="form-control" type="number" [(ngModel)]="item.alerQty"></div>
+        <div class="col-5"><input class="form-control" type="number" [(ngModel)]="item.AlertQuantity"></div>
     </div>
     <div class="d-flex addprodbtn">
         <div class="col-2 prod-label"></div>
