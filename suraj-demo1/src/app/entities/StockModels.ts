@@ -33,4 +33,6 @@ export class SubProducts {
   ProductPrice: string;
   ProductRawMaterials: string[];
   isSaved?: boolean = false;
+  ProductCategory? : string;
+  ProductId?:string
 }

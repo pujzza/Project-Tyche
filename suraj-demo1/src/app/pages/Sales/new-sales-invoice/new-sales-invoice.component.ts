@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { MetaProducts } from 'src/app/entities/MetaProducts';
 import { BillModel, CustomerDetails,Products } from 'src/app/entities/ClientsModel';
+import { SubProducts } from 'src/app/entities/StockModels';
 
 @Component({
   selector: 'app-new-sales-invoice',
@@ -22,7 +23,7 @@ export class NewSalesInvoiceComponent implements OnInit, AfterViewInit {
   invoiceRef: any;
   invoiceDate: any;
   invoiceDueDate: any;
-  selectProduct = MetaProducts[0];
+  selectProduct :any;
   selectedMaterial: any = '';
   selectedSize: any = '';
   TaxNeed = false;
@@ -53,6 +54,10 @@ export class NewSalesInvoiceComponent implements OnInit, AfterViewInit {
   NC_firstname;
   NC_lastname;
   NC_email;
+  products :SubProducts[] = [];
+  ProdCategory :any[] = [];
+  ProdMaterial :any[] = [];
+  ProdSize :any[] = [];
   @ViewChild('addClient', { static: true }) addclient: ElementRef;
   @ViewChild('checkoutDialog', { static: true }) checkoutDialog: ElementRef;
   
@@ -65,19 +70,32 @@ export class NewSalesInvoiceComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     //this.initalPush();
+    this.service.GetAllProducts().subscribe(
+      res => {
+        if(res){
+          this.products = res.returndata;
+          this.ProdCategory = Array.from(new Set(res.returndata.map((item) => item.ProductCategory.toLowerCase())));
+        }
+      }
+    );
   }
 
   productSelection(product) {
     this.selectProduct = product;
-    if (product.material.length == 1) {
-      this.selectedMaterial = product.material[0];
-    } else {
-      this.selectedMaterial = '';
-    }
-    if (product.size.length == 1) {
-      this.selectedSize = product.size[0];
-    } else {
-      this.selectedSize = '';
+    this.ProdMaterial = [];
+    let material = this.products.filter(item => item.ProductCategory.toLowerCase().includes(this.selectProduct.toLowerCase()));
+    if(material){
+      this.ProdMaterial = Array.from(new Set(material.map((item) => item.ProductMaterial.toLowerCase())));
+      if(this.ProdMaterial && this.ProdMaterial.length == 1){
+        this.selectedMaterial = this.ProdMaterial[0];
+        let size = this.products.filter(item => (item.ProductCategory.toLowerCase().includes(this.selectProduct.toLowerCase()) && item.ProductMaterial.toLowerCase().includes(this.selectedMaterial.toLowerCase())));
+        if(size){
+          this.ProdSize = Array.from(new Set(size.map((item) => item.ProductSize.toLowerCase())));
+          if(this.ProdSize && this.ProdSize.length == 1){
+            this.selectedSize = this.ProdSize[0];
+          }
+        }
+      }
     }
     this.qty = this.qty == 0 ? 1 : this.qty;
     this.calcPrice(-2);
@@ -100,7 +118,7 @@ export class NewSalesInvoiceComponent implements OnInit, AfterViewInit {
 
   initalPush() {
     const obj = {};
-    obj['prodname'] = this.selectProduct.name;
+    obj['prodname'] = this.selectProduct;
     obj['prodmaterial'] = this.selectedMaterial;
     obj['prodsize'] = this.selectedSize;
     obj['prodqty'] = this.selectedQty;
@@ -118,6 +136,13 @@ export class NewSalesInvoiceComponent implements OnInit, AfterViewInit {
 
   onSelectMatrial() {
     const length = this.prodtableData.length;
+    let size = this.products.filter(item => (item.ProductCategory.toLowerCase().includes(this.selectProduct.toLowerCase()) && item.ProductMaterial.toLowerCase().includes(this.selectedMaterial.toLowerCase())));
+        if(size){
+          this.ProdSize = Array.from(new Set(size.map((item) => item.ProductSize.toLowerCase())));
+          if(this.ProdSize && this.ProdSize.length == 1){
+            this.selectedSize = this.ProdSize[0];
+          }
+        }
     this.qty = this.qty == 0 ? 1 : this.qty;
     this.isMaterialError = false;
     this.calcPrice(-2);
@@ -126,13 +151,19 @@ export class NewSalesInvoiceComponent implements OnInit, AfterViewInit {
   calcPrice(index = -2) {
     const length = this.prodtableData.length;
     if (index == -2) {
-      this.cost = this.selectProduct.price * this.qty;
+      this.cost = 0;
+      let cost = this.filerProduct(this.selectProduct,this.selectedMaterial,this.selectedSize); 
+      if(cost){
+        this.cost = Number(cost[0].ProductPrice) * this.qty;
+      }
     } else {
-      const prodprice = this.MetaProducts.filter(
-        (x) => x.name == this.prodtableData[index]['prodname']
-      )[0].price;
-      this.prodtableData[index]['prodprice'] =
-        prodprice * this.prodtableData[index]['prodqty'];
+      let prod = this.prodtableData[index];
+      let cost = this.filerProduct(prod['prodname'],prod['prodmaterial'],prod['prodsize']); 
+      if(cost){
+        this.prodtableData[index]['prodprice'] =
+        Number(cost[0].ProductPrice) * this.prodtableData[index]['prodqty'];
+      }
+      
     }
   }
 
@@ -175,7 +206,7 @@ export class NewSalesInvoiceComponent implements OnInit, AfterViewInit {
       return;
     } else {
       const obj = {};
-      obj['prodname'] = this.selectProduct.name;
+      obj['prodname'] = this.selectProduct;
       obj['prodmaterial'] = this.selectedMaterial;
       obj['prodsize'] = this.selectedSize;
       obj['prodqty'] = this.qty;
@@ -228,6 +259,7 @@ export class NewSalesInvoiceComponent implements OnInit, AfterViewInit {
     postParameter.paidamount = this.paidAmt.toString();
     this.service.CreateBill(postParameter).subscribe(res => {
       if(res && res.returncode == 200){
+        this.reduceMaterials();
         this.currentOrderId = postParameter.orderid;
         this.isCheckout = true;
         this.checkoutError = false;
@@ -248,7 +280,7 @@ export class NewSalesInvoiceComponent implements OnInit, AfterViewInit {
       prod.totalamount = obj['prodprice'];
       prod.paidamount = this.paidAmt.toString();
       prod.orderid = obj['orderid'];
-      prod.price = this.MetaProducts.filter( p => p.name == prod.product)[0].price.toString();
+      prod.price = (Number(obj['prodprice'])/Number(obj['prodqty'])).toString();
       prod.category_id = '2';
       prod.description = 'testing';
       prod.created = `${new Date().toDateString()}`;
@@ -307,5 +339,36 @@ export class NewSalesInvoiceComponent implements OnInit, AfterViewInit {
     this.newCustomer = new CustomerDetails();
     this.createCustomerError = false;
     this.checkOutErrorMsg = '';
+  }
+
+  reduceMaterials(){
+    this.prodtableData.forEach(
+      item => {
+        let prod = this.filerProduct(item['prodname'],item['prodmaterial'],item['prodsize']); 
+        if(prod){
+          let postparam = {};
+          postparam['ItemId'] = prod[0].ProductId;
+          postparam['Amount'] = item['prodqty'];
+          postparam['oauth'] = this.service.Oauth;
+          this.service.InventoryDropItem(postparam).subscribe(res => {
+            if(res && res.returncode == 200){
+              console.log('Inventory Drop Successfull');
+            }
+          });
+        }
+      }
+    )
+  }
+
+  filerProduct(prodname,prodmaterial,prodsize): any{
+    var prod = this.products.filter(
+      item => (
+        item.ProductCategory.toLowerCase().includes(prodname.toLowerCase()) &&
+        item.ProductMaterial.toLowerCase().includes(prodmaterial.toLowerCase()) &&
+        item.ProductSize.toLowerCase().includes(prodsize.toLowerCase())
+      )
+    );
+
+    return prod;
   }
 }

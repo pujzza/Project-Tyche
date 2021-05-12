@@ -138,12 +138,12 @@
     </div>
     <div class="prod-container">
       <div
-        *ngFor="let product of MetaProducts"
+        *ngFor="let product of ProdCategory"
         class="col-5 product"
         (click)="productSelection(product)"
-        [ngClass]="{ selectedProd: selectProduct.name == product.name }"
+        [ngClass]="{ selectedProd: selectProduct == product }"
       >
-        {{ product.name }}
+        {{ product }}
       </div>
     </div>
   </div>
@@ -160,7 +160,7 @@
       Material
     </div>
     <div
-      *ngFor="let material of selectProduct.material"
+      *ngFor="let material of ProdMaterial"
       class="col-12 product"
       (click)="selectedMaterial = material; onSelectMatrial()"
       [ngClass]="{ selectedProd: selectedMaterial == material }"
@@ -180,7 +180,7 @@
       Size
     </div>
     <div
-      *ngFor="let size of selectProduct.size"
+      *ngFor="let size of ProdSize"
       class="col-12 product"
       (click)="selectedSize = size; onSelectSize()"
       [ngClass]="{ selectedProd: selectedSize == size }"
