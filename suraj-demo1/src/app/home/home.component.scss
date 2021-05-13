@@ -1,5 +1,6 @@
 .sidebar {
   transition: 0.5s;
+  height: 100%;
   //background-color: #e6e9f0; /* fallback for old browsers */
   // background: -webkit-linear-gradient(
   //   to top,
@@ -24,6 +25,7 @@
 
 #main {
   transition: margin-left 0.5s;
+  height: inherit;
 }
 
 .user-icon {

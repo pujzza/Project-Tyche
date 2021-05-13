@@ -37,7 +37,6 @@ $font-color: #0b0c10;
   border-bottom: 1px solid #c5c6c7;
   //  box-shadow: 3px 2px 12px #c5c6c7eb;
   background-color: #a2add888;
-  margin-bottom: 20px;
 }
 .content {
   padding: 20px;
@@ -106,11 +105,10 @@ $font-color: #0b0c10;
   color: black;
   font-family: Nunito;
   text-align: center;
-  border-bottom: 1px solid #c5c6c7;
   font-size: 16px;
   height: 50px !important;
   padding: 12.5px 0px;
-  background-color: #a2add888;
+  margin: 0px auto 0px 50px;
 }
 
 .page-header1 {
@@ -228,3 +226,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   width: 50%;
 }
 
+.pagecontainer{
+  height: calc(100vh -50px) ;
+}

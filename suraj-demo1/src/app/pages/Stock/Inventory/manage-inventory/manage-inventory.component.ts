@@ -28,7 +28,6 @@ data =[];
   }
 
   ngOnInit(): void {
-    document.getElementById('ngxtable').style.height = `${screen.height - 170}px`;
     this.GetData();
   }
 

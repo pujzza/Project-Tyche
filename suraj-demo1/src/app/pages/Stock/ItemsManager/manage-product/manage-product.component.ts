@@ -28,9 +28,6 @@ export class ManageProductComponent implements OnInit {
   constructor(public service: CommonService) {}
 
   ngOnInit(): void {
-    document.getElementById('ngxtable').style.height = `${
-      screen.height - 170
-    }px`;
     this.getAllProducts();
   }
 

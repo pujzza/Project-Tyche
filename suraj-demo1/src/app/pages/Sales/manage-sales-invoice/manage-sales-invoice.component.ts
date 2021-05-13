@@ -53,7 +53,6 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
   errorText: string;
   constructor(public service: CommonService) {
     this.employeeId = localStorage.getItem('UserId').toString();
-    document.getElementById('ngxtable').style.height = `${screen.height - 170}px`;
   }
   ngAfterViewInit(): void {
   }
