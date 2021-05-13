@@ -37,7 +37,7 @@
           },
           "configurations": {
             "production": {
-              "baseHref": "http://funguysstudio.com/billappv6/",
+              "baseHref": "/billappv6/",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
