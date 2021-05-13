@@ -1,3 +1,4 @@
+import { AuthGuardService } from './services/auth-guard.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
@@ -28,6 +29,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatSelectModule} from '@angular/material/select';
 import { AddInventoryComponent } from './pages/Stock/Inventory/add-inventory/add-inventory.component';
 import { ManageInventoryComponent } from './pages/Stock/Inventory/manage-inventory/manage-inventory.component';
+import {LocationStrategy, HashLocationStrategy} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -63,7 +65,7 @@ import { ManageInventoryComponent } from './pages/Stock/Inventory/manage-invento
     MatSnackBarModule,
     MatSelectModule
   ],
-  providers: [],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy},AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
