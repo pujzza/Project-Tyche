@@ -49,4 +49,23 @@ export class ManageClientsComponent implements OnInit {
     this.isviewClient = true;
     this.viewClient = row;
   }
+
+  DeleteClient(row){
+    let postparam = {};
+    postparam['ID'] = row['id'];
+    postparam['oauth'] = this.service.Oauth;
+    this.service.DeleteClientById(postparam).subscribe(
+      res => {
+        if(res && res.returncode == 200){
+          this.service.OpenSnackBar('Delete Successfull','SUCCESS');
+          this.getAllClients();
+        } else {
+          this.service.OpenSnackBar(res.returnmessage,'ERROR');
+        }
+      },
+      err => {
+        this.service.OpenSnackBar('Something went wrong','SORRY');
+      }
+    );
+  }
 }
