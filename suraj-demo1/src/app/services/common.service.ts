@@ -149,6 +149,19 @@ export class CommonService {
     );
   }
 
+  DeleteClientById(req: any): Observable<any> {
+    return this.http.post(
+      'http://cyperinfotech.com/api/apiV2/Client/DeleteClient.php',
+      req
+    );
+  }
+  DeleteInventory(req: any): Observable<any> {
+    return this.http.post(
+      'http://cyperinfotech.com/api/apiV2/Inventory/DeleteInventoryItem.php',
+      req
+    );
+  }
+
   OpenSnackBar(title, content) {
     this._snackBar.open(title, content, {
       duration: 5000,

@@ -68,4 +68,23 @@ data =[];
     this.Item = item;
   }
 
+  DeleteInventory(item){
+    let postparam = {};
+    postparam['ItemId'] = item['ItemId'];
+    postparam['oauth'] = this.service.Oauth;
+    this.service.DeleteInventory(postparam).subscribe(
+      res => {
+        if(res && res.returncode == 200){
+          this.service.OpenSnackBar('Delete Successfull','SUCCESS');
+          this.GetData();
+        } else {
+          this.service.OpenSnackBar(res.returnmessage,'ERROR');
+        }
+      },
+      err => {
+        this.service.OpenSnackBar('Something went wrong','SORRY');
+      }
+    );
+  }
+
 }
