@@ -22,6 +22,7 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
   rows = [
     { sno: 1, invoiceNo: 1234, date: '2/2/2020', amount: 4000, status: 'paid' },
   ];
+  searchInvoice: any
   loadingIndicator = true;
   disablePay = false;
   reorderable = false;
@@ -31,6 +32,7 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
   isShowBill = false;
   ispayAmt = false;
   bill = new BillHistory();
+  filteredList = [];
   TotalAmt;
   DueAmt;
   columns = [
@@ -69,6 +71,7 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
     this.service.GetOrders(billreq).subscribe((res) => {
       if (res.returncode === 200) {
         this.orders = res.orders;
+        this.filteredList = res.orders;
         this.orders.map((r) => {
           r.dueAmt = Number(r.totalamount) - Number(r.paidamount);
         });
@@ -145,5 +148,16 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
     if(row)
     return Number(row['totalamount']) - Number(row['paidamount'])
     else return 0
+  }
+
+  SearchInvoice() {
+    const lowerValue = this.searchInvoice.toLowerCase();
+    this.filteredList = this.orders.filter(
+      (item) =>
+        item.orderid.toString().toLowerCase().indexOf(lowerValue) !== -1 ||
+        !lowerValue ||
+        item.phonenumber.toLowerCase().indexOf(lowerValue) !== -1 ||
+        item.firstname.toLowerCase().indexOf(lowerValue) !== -1
+    );
   }
 }

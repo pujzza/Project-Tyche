@@ -1,8 +1,24 @@
-<div class="page-header1">Invoices</div>
-<div id="ngxtable" class="table-container">
+<div class="d-flex">
+  <div class="col-3" style="padding-top: 10px;"><div class="page-header1">Invoices</div></div>
+  <div class="col-5"></div>
+  <div class="col-4" style="padding-top:  10px;">
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="searchInvoice"
+        placeholder="Search Invoice"
+        (keyup)="SearchInvoice()"
+      />
+      <div class="input-group-prepend">
+        <span class="input-group-text search-icon"></span>
+      </div>
+    </div>
+  </div>
+</div><div id="ngxtable" class="table-container">
   <ngx-datatable
   class="bootstrap fullscreen"
-  [rows]="orders"
+  [rows]="filteredList"
   style="font-family: Nunito;height: inherit;"
   [columnMode]="ColumnMode.force"
   [headerHeight]="50"

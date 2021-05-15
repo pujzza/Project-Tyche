@@ -13,6 +13,9 @@ export class Orders{
     paidamount: string;
     totalamount: string;
     dueAmt?:number;
+    firstname?:string;
+    lastname?:string;
+    phonenumber?:string;
 }
 
 export class payAmt{
