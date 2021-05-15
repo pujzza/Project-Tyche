@@ -1,10 +1,28 @@
-<div class="page-header1">Manage Inventory</div>
-<br />
+<div class="d-flex">
+  <div class="col-3" style="padding-top: 10px">
+    <div class="page-header1">Inventory</div>
+  </div>
+  <div class="col-5"></div>
+  <div class="col-4" style="padding-top: 10px">
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="searchInventory"
+        placeholder="Search Inventory"
+        (keyup)="SearchInventory()"
+      />
+      <div class="input-group-prepend">
+        <span class="input-group-text search-icon"></span>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div id="ngxtable" class="float-none table-container">
   <ngx-datatable
     class="bootstrap fullscreen"
-    [rows]="data"
+    [rows]="filteredList"
     style="font-family: Nunito; height: inherit"
     [columnMode]="ColumnMode.force"
     [headerHeight]="50"

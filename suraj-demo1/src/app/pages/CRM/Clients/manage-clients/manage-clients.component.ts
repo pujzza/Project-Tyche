@@ -18,6 +18,8 @@ export class ManageClientsComponent implements OnInit {
   clientData: Clients[];
   isviewClient = false;
   viewClient = new Clients();
+  filteredList= [];
+  searchClient:any
 
   columns = [
     { prop: 'id', name: 'Client ID',width: 50 },
@@ -38,6 +40,7 @@ export class ManageClientsComponent implements OnInit {
     this.service.GetAllClients('').subscribe((res) => {
       if (res && res.returncode == 200) {
         this.clientData = res.returndata;
+        this.filteredList = res.returndata;
       }
     });
   }
@@ -63,6 +66,18 @@ export class ManageClientsComponent implements OnInit {
       err => {
         this.service.OpenSnackBar('Something went wrong','SORRY');
       }
+    );
+  }
+
+  SearchClient() {
+    const lowerValue = this.searchClient.toLowerCase();
+    this.filteredList = this.clientData.filter(
+      (item) =>
+        item.BillingEmail.toString().toLowerCase().indexOf(lowerValue) !== -1 ||
+        !lowerValue ||
+        item.BillingPhone.toLowerCase().indexOf(lowerValue) !== -1 ||
+        item.OrgName.toLowerCase().indexOf(lowerValue) !== -1 ||
+        item.id.toLowerCase().indexOf(lowerValue) !== -1
     );
   }
 }

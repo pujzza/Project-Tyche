@@ -15,6 +15,8 @@ data =[];
   ColumnMode = ColumnMode;
   SortType = SortType;
   editQty = false;
+  filteredList = [];
+  searchInventory:any
   columns = [
     { prop: 'ItemId', name: '#',width: 10 },
     { prop: 'ItemName', name: 'Item Name',width: 100 },
@@ -36,6 +38,7 @@ data =[];
       res => {
         if(res && res.returncode == 200){
           this.data = res.returndata;
+          this.filteredList = res.returndata;
         }
       }
     );
@@ -85,5 +88,14 @@ data =[];
       }
     );
   }
-
+  SearchInventory() {
+    const lowerValue = this.searchInventory.toLowerCase();
+    this.filteredList = this.data.filter(
+      (item) =>
+        item.ItemId.toString().toLowerCase().indexOf(lowerValue) !== -1 ||
+        !lowerValue ||
+        item.ItemName.toLowerCase().indexOf(lowerValue) !== -1 ||
+        item.Category.toLowerCase().indexOf(lowerValue) !== -1
+    );
+  }
 }
