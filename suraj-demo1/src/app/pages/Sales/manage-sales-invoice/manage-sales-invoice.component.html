@@ -30,14 +30,13 @@
       <div *ngIf="col.name.includes('Settings')">
         <div class="d-flex" style="height: 30px">
           <div class="col-2"></div>
-          <div class="col-2 due-enable-icon" *ngIf="getDue(row) == 0"></div>
-          <div *ngIf="getDue(row) != 0" class="col-2 due-disable-icon"  (click)="openPayAmt(row)"></div>
+          <button class="col-2 badge" *ngIf="getDue(row) == 0" mat-raised-button color="primary">Paid</button>
+          <button *ngIf="getDue(row) != 0" class="col-2 badge"  mat-raised-button color="warn"  (click)="openPayAmt(row)">Due</button>
           <div class="col-2 view-icon" (click)="ShowBill(row.orderid)"></div>
           <div
             class="col-2 download-icon"
             (click)="downloadBill(row.orderid)"
           ></div>
-          <div class="col-2 delete-icon"></div>
         </div>
       </div>
     </ng-template>

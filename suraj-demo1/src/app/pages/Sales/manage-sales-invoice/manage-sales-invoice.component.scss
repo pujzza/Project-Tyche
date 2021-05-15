@@ -73,3 +73,11 @@
     display: flex;
     height: 100%;
   }
+
+  .badge{
+    border-radius: 10px !important;
+    height: 25px !important;
+    width: auto !important;
+    line-height: 1;
+    margin-right: 3px;
+  }

@@ -27,6 +27,7 @@ import { ManageEmployeeComponent } from './pages/CRM/Employee/manage-employee/ma
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatSelectModule} from '@angular/material/select';
+import {MatButtonModule} from '@angular/material/button';
 import { AddInventoryComponent } from './pages/Stock/Inventory/add-inventory/add-inventory.component';
 import { ManageInventoryComponent } from './pages/Stock/Inventory/manage-inventory/manage-inventory.component';
 import {LocationStrategy, HashLocationStrategy} from '@angular/common';
@@ -63,7 +64,8 @@ import {LocationStrategy, HashLocationStrategy} from '@angular/common';
     NgxDatatableModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
-    MatSelectModule
+    MatSelectModule,
+    MatButtonModule
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy},AuthGuardService],
   bootstrap: [AppComponent]
