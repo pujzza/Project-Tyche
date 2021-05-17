@@ -67,7 +67,7 @@ import {LocationStrategy, HashLocationStrategy} from '@angular/common';
     MatSelectModule,
     MatButtonModule
   ],
-  providers: [{provide: LocationStrategy, useClass: PathLocationStrategy},AuthGuardService],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy},AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
