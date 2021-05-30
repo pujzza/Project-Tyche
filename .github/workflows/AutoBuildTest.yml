@@ -28,6 +28,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '10.x'
+      - name: Install Angular
+        run: npm install angular-cli
 
       # Runs a single command using the runners shell
       - name: Folder
