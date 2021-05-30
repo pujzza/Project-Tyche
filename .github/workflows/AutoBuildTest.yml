@@ -30,8 +30,11 @@ jobs:
           node-version: '10.x'
 
       # Runs a single command using the runners shell
+      - name: Folder
+        run: cd Project-Tyche
+      - name: Folder
+        run: cd suraj-demo1
       - name: NPM INSTALL
         run: npm install
-        
       - name: NG build
         run: ng build --prod
