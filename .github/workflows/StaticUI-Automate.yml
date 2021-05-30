@@ -1,0 +1,51 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Build Static App
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the Puja branch
+  push:
+    branches: [ Puja ]
+  pull_request:
+    branches: [ Puja ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  InitialzeNode:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+        
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      - name: Use Node 12.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+  NPMDownload:
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./StaticUI
+  NGBuild:
+      - name: Build
+        run: npm run build:ci
+        working-directory: ./StaticUI
+  ArchiveBuild:
+      - name: Archive build
+        if: success()
+        uses: actions/upload-artifact@v2.2.3
+        with:
+          name: StaticUIBuildFile
+          path: ./StaticUI/dist
+  DownloadBuild:
+      - name : Download
+        uses: actions/download-artifact@v2
+        with:
+          name: 'StaticUIBuildFile'
+          path: ./Build
+      - name: git_commit
+        uses: zwaldowski/git-commit-action@v1
+      - run: echo "${{ steps.git_commit.outputs.sha }}"
+
