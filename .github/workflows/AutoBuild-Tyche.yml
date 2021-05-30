@@ -25,7 +25,6 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '12.x'
-          working-directory: ./suraj-demo1
       - name: Install dependencies
         run: npm install
         working-directory: ./suraj-demo1
@@ -34,9 +33,9 @@ jobs:
         working-directory: ./suraj-demo1
       - name: Archive build
         if: success()
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v2.2.3
         with:
           name: BuildFile
-          path: ./Build
+          path: ./Build/
 
 
