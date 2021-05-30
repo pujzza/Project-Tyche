@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit,AfterViewInit {
   isInventory = false;
   isSelected = 'Dashboard';
   appName = 'Project Tyche';
-  appversion:any;
+  appVersion:any;
   loggedInName = '';
 
   //Imports constants
@@ -78,7 +78,7 @@ export class HomeComponent implements OnInit,AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.appversion = environment.appVersion;
+    this.appVersion = environment.appVersion;
     if (this.isSideNavOpen) {
       this.openNav();
     }
