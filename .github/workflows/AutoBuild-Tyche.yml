@@ -37,6 +37,10 @@ jobs:
         with:
           name: BuildFile
           path: ./suraj-demo1/dist
-          target: ./Build/
 
+      - name : Download
+        uses: actions/download-artifact@v2
+        with:
+          name: 'Build'
+          path: ./Build
 
