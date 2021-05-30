@@ -1,0 +1,116 @@
+.inp-container{
+    height: 50px;
+    border-radius: 25px;
+    background-color: #e6e6e6;
+    color: white;
+    display: flex;
+    width: 290px;
+}
+
+.user-icon{
+    background-image: url(../../assets/Icons/user-solid.svg);
+    height: 15px;
+    width: 15px;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    padding-left: 50px;
+    padding-right: 20px;
+    background-size: 15px;
+}
+
+.pass-icon{
+    background-image: url(../../assets/Icons/lock-solid.svg);
+    height: 15px;
+    width: 15px;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding-top: 25px;
+    padding-bottom: 25px;
+        padding-left: 50px;
+    padding-right: 20px;
+    background-size: 15px;
+}
+
+.inp-wrap{
+    height: 50px;
+    padding: 12px 0px;
+    width: 100%;
+}
+
+.text-inp{
+    outline: none;
+    width: calc(100% - 10px);
+    border: none;
+    background-color: inherit;
+    font-family: Poppins-Medium;
+    font-size: 15px;
+    color: #666666;
+}
+
+.pass-inp{
+    outline: none;
+    width: calc(100% - 30px);
+    border: none;
+    background-color: inherit;
+    font-family: Poppins-Medium;
+    font-size: 15px;
+    color: #666666;
+}
+
+.login-btn{
+    height: 50px;
+    width: 290px;
+    border-radius: 50px;
+    background-color: #424874;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+}
+
+.login-btn:hover{
+    background-color: #333333;
+    border-radius: 50px;
+}
+.txt-field{
+    padding: 10px 10px;
+    font-size: 15px;
+    font-family: Poppins-Bold;
+    line-height: 2;
+}
+
+.form-cntr{
+    width: auto;
+    height: auto;
+    padding: 40px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.cntr{
+    height: 100%;
+   background:linear-gradient(141deg, #424874 0%, #a6b1e1 51%, #dcd6f7 75%);
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+   align-items: center;
+}
+
+.login-label{
+    font-family: Poppins-Bold;
+    font-size: 24px;
+    color: #333333;
+    height: 40px;
+    text-align: center;
+    padding: 15px;
+}
+
+.warn-msg{
+    color: #ffcc00;
+    font-family: 'Poppins-Medium';
+    font-size: 14px;
+    padding: 5px 10px;
+    height: 30px;
+    text-align: center;
+}

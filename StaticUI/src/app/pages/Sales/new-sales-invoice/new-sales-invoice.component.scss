@@ -1,0 +1,253 @@
+*{
+  font-family: Nunito;
+}
+
+.invoice-number{
+    background: url(../../../../assets/Icons/file-alt-regular.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 10px;
+}
+
+.search-icon{
+    background: url(../../../../assets/Icons/searchengin-brands.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 15px;
+    cursor: pointer;
+}
+
+.invoice-date1{
+    background: url(../../../../assets/Icons/calendar-check-regular.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 10px;
+}
+
+.invoice-date2{
+    background: url(../../../../assets/Icons/calendar-times-regular.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 10px;
+}
+
+.invoice-ref{
+    background: url(../../../../assets/Icons/bookmark-solid.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 10px;
+}
+
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 55px;
+    height: 25px;
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 4px;
+    bottom: 2.5px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #2196F3;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+
+  .add-client-btn{
+    margin: 12px;
+    border-radius: 20px;
+    background-color: #2196F3;
+    font-size: 12px;
+    padding: 4px;
+    width: 70px;
+    text-align: center;
+    color: white;
+    height: 25px;
+    cursor: pointer;
+  }
+
+  .prod-container{
+    display: flex;
+    flex-flow: row wrap;
+    flex-grow: 1;
+    align-content: space-between;
+    justify-content: space-between;
+  }
+
+.product{
+  border: 1px solid black;
+  border-radius: 20px;
+  margin: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space:nowrap;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.selectedProd{
+  background-color: #2196F3;
+  color: white;
+  font-weight: bold;
+}
+.table-container{
+  margin: 10px;
+}
+table {
+  width: 100%;
+}
+td,th{
+  padding: 0px 10px;
+  height: 50px;
+  width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space:nowrap;
+  font-size: 14px;
+  border-bottom: 1px solid #ddd;
+}
+
+
+.plus-icon{
+  height: inherit;
+  width: 15px;
+  background: url(../../../../assets/Icons/plus-solid.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 15px;
+}
+
+.delete-icon{
+  height: inherit;
+  width: 15px;
+  background: url(../../../../assets/Icons/trash-alt-regular.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 15px;
+}
+.edit-icon{
+  height: inherit;
+  width: 15px;
+  background: url(../../../../assets/Icons/pen-solid.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 15px;
+}
+
+.save-icon{
+  height: inherit;
+  width: 15px;
+  background: url(../../../../assets/Icons/save-regular.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 15px;
+}
+
+.clientmodal {
+  display: block; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding: 20px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.clientmodal-content {
+  background-color: white;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  height: 97%;
+  overflow-y: scroll;
+}
+
+.btn-m-5{
+  margin: 0px 5px;
+}
+
+.checkoutModel {
+  display: block; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding: 20px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%;
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  display: flex;
+}
+
+.checkoutModel-content {
+  background-color: white;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%;
+}
+
+.print-icon{
+  height: 20px;
+  width: 20px;
+  background: url(../../../../assets/Icons/print-solid.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 20px;
+  cursor: pointer;
+}

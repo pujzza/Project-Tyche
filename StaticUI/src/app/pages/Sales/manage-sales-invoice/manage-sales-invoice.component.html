@@ -1,0 +1,160 @@
+<div class="d-flex">
+  <div class="col-3" style="padding-top: 10px">
+    <div class="page-header1">Invoices</div>
+  </div>
+  <div class="col-5"></div>
+  <div class="col-4" style="padding-top: 10px">
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="searchInvoice"
+        placeholder="Search Invoice"
+        (keyup)="SearchInvoice()"
+      />
+      <div class="input-group-prepend">
+        <span class="input-group-text search-icon"></span>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="ngxtable" class="table-container">
+  <ngx-datatable
+    class="bootstrap fullscreen"
+    [rows]="filteredList"
+    style="font-family: Nunito; height: inherit"
+    [columnMode]="ColumnMode.force"
+    [headerHeight]="50"
+    [footerHeight]="50"
+    [rowHeight]="50"
+    [scrollbarH]="true"
+    [scrollbarV]="true"
+  >
+    <ngx-datatable-column
+      *ngFor="let col of columns"
+      name="{{ col.prop }}"
+      [width]="col.width"
+      [headerClass]="col.headerClass"
+    >
+      <ng-template let-value="value" ngx-datatable-header-template>
+        <span>{{ col.name }}</span>
+      </ng-template>
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        <div *ngIf="col.name.includes('Sno.')">{{ getRowIndex(row) }}</div>
+        <div
+          *ngIf="!col.name.includes('Settings') && !col.name.includes('Sno.')"
+        >
+          {{ value }}
+        </div>
+        <div *ngIf="col.name.includes('Settings')">
+          <div class="d-flex" style="height: 30px">
+            <div class="col-2"></div>
+            <button
+              class="col-2 badge"
+              *ngIf="getDue(row) == 0"
+              mat-raised-button
+              color="primary"
+            >
+              Paid
+            </button>
+            <button
+              *ngIf="getDue(row) != 0"
+              class="col-2 badge"
+              mat-raised-button
+              color="warn"
+              (click)="openPayAmt(row)"
+            >
+              Due
+            </button>
+            <div class="col-2 view-icon" (click)="ShowBill(row.orderid)"></div>
+            <div
+              class="col-2 download-icon"
+              (click)="downloadBill(row)"
+            ></div>
+          </div>
+        </div>
+      </ng-template>
+    </ngx-datatable-column>
+  </ngx-datatable>
+</div>
+
+<div #showBill *ngIf="isShowBill" class="checkoutModel">
+  <div class="checkoutModel-content">
+    <div class="float-right cursor-pointer" (click)="isShowBill = !isShowBill">
+      X
+    </div>
+    <div class="m-3">
+      <div class="d-flex">
+        <div class="col-4">
+          <img src="../../../../assets/images/logo.png" width="100px" height="inherit">
+        </div>
+        <div class="col-8">
+          <div class="text-right"><h3>Invoice</h3></div>
+          <br><br>
+          <div class="text-right">ID : {{templateObj.orderid}}</div>
+          <div class="text-right">{{templateObj.firstname}} {{templateObj.firstname}}</div>
+          <div class="text-right">{{templateObj.phonenumber}}</div>
+        </div>
+      </div>
+      <div>
+        <table class="pdf-table">
+          <tr>
+            <th colspan="1">Id</th>
+            <th colspan="1">Prodcut</th>
+            <th colspan="1">Material</th>
+            <th colspan="1">Size</th>
+            <th colspan="1">Qty</th>
+            <th colspan="1">Price</th>
+          </tr>
+          <tr *ngFor="let prod of bill.products">
+            <td>{{ prod.id }}</td>
+            <td>{{ prod.product }}</td>
+            <td>{{ prod.material }}</td>
+            <td>{{ prod.size }}</td>
+            <td>{{ prod.count }} X {{ getMetaPrice(prod.product) }}</td>
+            <td>{{ prod.price }}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div #payAmt *ngIf="ispayAmt" class="checkoutModel">
+  <div class="checkoutModel-content">
+    <div class="pay-amt-title">Order Id : {{ payAmtReq.orderid }}</div>
+    <div class="pay-amt-content">
+      <div class="amt-container">Total Amount: {{ TotalAmt }}</div>
+      <div class="amt-container">Customer Due: {{ DueAmt }}</div>
+    </div>
+    <div>Amount Paid Now:</div>
+    <div>
+      <input
+        type="number"
+        [(ngModel)]="payAmtReq.paidamount"
+        class="form-control text-center"
+        (keyup)="checkPayAmt()"
+      />
+    </div>
+    <br />
+    <div class="errorText">{{ errorText }}</div>
+    <div align="center">
+      <button class="btn btn-danger m-1" (click)="ispayAmt = !ispayAmt">
+        Cancel
+      </button>
+      <button
+        class="btn btn-success m-1"
+        (click)="payDue()"
+        [disabled]="disablePay"
+      >
+        Pay
+      </button>
+    </div>
+  </div>
+</div>
+
+  <div id="pdf-template" #pdftemplate>
+
+  </div>
+
+
