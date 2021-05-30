@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "postinstall": "ngcc",
-    "build:ci": "ng build --prod --sourceMap=false --base-href pujzza/Project-Tyche"
+    "build:ci": "ng build --prod --sourceMap=false"
   },
   "private": true,
   "dependencies": {
