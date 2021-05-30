@@ -18,9 +18,11 @@ jobs:
     runs-on: ubuntu-latest
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+        
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-
+      - name: Set current date as env variable
+        run: echo "NOW::$(date +'%Y-%m-%d')" >> $GITHUB_ENV
       - name: Use Node 12.x
         uses: actions/setup-node@v1
         with:
@@ -36,8 +38,7 @@ jobs:
         if: success()
         uses: actions/upload-artifact@v1
         with:
+          name: Build.${{NOW}}
           path: ./Build
-          archiveType: 'zip'
-          archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
 
 
