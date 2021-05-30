@@ -5,10 +5,7 @@ name: Build suraj-xerox1
 # Controls when the action will run. 
 on:
   # Triggers the workflow on push or pull request events but only for the Puja branch
-  push:
-    #branches: [ Puja ]
-    paths:
-      - './suraj-demo1/**'
+ 
   pull_request:
     #branches: [ Puja ]
     paths:
