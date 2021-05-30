@@ -1,5 +1,11 @@
 import { CommonService } from 'src/app/services/common.service';
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  AfterViewInit,
+  ElementRef,
+  ViewChild,
+} from '@angular/core';
 import { ColumnMode, SortType } from '@swimlane/ngx-datatable';
 import { ProductsModel, SubProducts } from 'src/app/entities/StockModels';
 
@@ -8,7 +14,7 @@ import { ProductsModel, SubProducts } from 'src/app/entities/StockModels';
   templateUrl: './manage-product.component.html',
   styleUrls: ['./manage-product.component.scss'],
 })
-export class ManageProductComponent implements OnInit {
+export class ManageProductComponent implements OnInit, AfterViewInit {
   loadingIndicator = true;
   reorderable = true;
   data: SubProducts[] = [];
@@ -25,9 +31,18 @@ export class ManageProductComponent implements OnInit {
     { prop: 'ProductSize', name: 'Size', width: 50 },
     { name: 'Settings', width: 100 },
   ];
+  @ViewChild('table', { static: false }) table: ElementRef;
+
   constructor(public service: CommonService) {}
 
+  ngAfterViewInit(): void {
+    this.table.nativeElement.style.height = `${this.service.screenH}px`;
+  }
+
   ngOnInit(): void {
+    document.getElementById(
+      'ngxtable'
+    ).style.height = `${this.service.screenH}px`;
     this.getAllProducts();
   }
 

@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { NavigationEnd, Router } from '@angular/router';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ClientSub, EmployeeSub, InventorySub, ItemManagerSub, PurchaseSub, SalesSub, StockReturnSub } from './home-constants';
@@ -26,6 +27,7 @@ export class HomeComponent implements OnInit,AfterViewInit {
   isInventory = false;
   isSelected = 'Dashboard';
   appName = 'Project Tyche';
+  appversion:any;
   loggedInName = '';
 
   //Imports constants
@@ -76,6 +78,7 @@ export class HomeComponent implements OnInit,AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.appversion = environment.appVersion;
     if (this.isSideNavOpen) {
       this.openNav();
     }
