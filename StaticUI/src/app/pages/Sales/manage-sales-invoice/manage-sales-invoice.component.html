@@ -18,7 +18,7 @@
     </div>
   </div>
 </div>
-<div id="ngxtable" class="table-container">
+<div id="ngxtable" class="table-container" #table>
   <ngx-datatable
     class="bootstrap fullscreen"
     [rows]="filteredList"
@@ -67,10 +67,7 @@
               Due
             </button>
             <div class="col-2 view-icon" (click)="ShowBill(row.orderid)"></div>
-            <div
-              class="col-2 download-icon"
-              (click)="downloadBill(row)"
-            ></div>
+            <div class="col-2 download-icon" (click)="downloadBill(row)"></div>
           </div>
         </div>
       </ng-template>
@@ -86,14 +83,20 @@
     <div class="m-3">
       <div class="d-flex">
         <div class="col-4">
-          <img src="../../../../assets/images/logo.png" width="100px" height="inherit">
+          <img
+            src="../../../../assets/images/logo.png"
+            width="100px"
+            height="inherit"
+          />
         </div>
         <div class="col-8">
           <div class="text-right"><h3>Invoice</h3></div>
-          <br><br>
-          <div class="text-right">ID : {{templateObj.orderid}}</div>
-          <div class="text-right">{{templateObj.firstname}} {{templateObj.firstname}}</div>
-          <div class="text-right">{{templateObj.phonenumber}}</div>
+          <br /><br />
+          <div class="text-right">ID : {{ templateObj.orderid }}</div>
+          <div class="text-right">
+            {{ templateObj.firstname }} {{ templateObj.firstname }}
+          </div>
+          <div class="text-right">{{ templateObj.phonenumber }}</div>
         </div>
       </div>
       <div>
@@ -153,8 +156,6 @@
   </div>
 </div>
 
-  <div id="pdf-template" #pdftemplate>
-
-  </div>
-
-
+<div id="pdf-template" #pdftemplate>
+  <h2>Coming Soon</h2>
+</div>

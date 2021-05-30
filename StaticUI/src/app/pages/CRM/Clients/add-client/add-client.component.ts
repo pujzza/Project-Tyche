@@ -30,6 +30,7 @@ client: CreateClientReq = new CreateClientReq();
     // (error) => {
     //   this.service.OpenSnackBar('Something went wrong','SORRY');
     // });
+    this.service.OpenSnackBar('Client Created!','SUCCESS');
     this.isclientcreated = false;
     console.log(this.client);
   }

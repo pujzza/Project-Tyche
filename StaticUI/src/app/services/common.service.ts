@@ -11,8 +11,11 @@ import { loginModel } from '../entities/LoginModel';
 export class CommonService {
   // Do not edit this Oauth
   Oauth = 'RVn06PJIj36gt40zSAmLwAD742f';
+  screenHeight;
 
-  constructor(private http: HttpClient, private _snackBar: MatSnackBar) {}
+  constructor(private http: HttpClient, private _snackBar: MatSnackBar) {
+    this.screenHeight = window.screen.availHeight;
+  }
 
   ToLogin(req: loginModel): Observable<any> {
     return this.http.post('http://www.cyperinfotech.com/api/login.php', req);

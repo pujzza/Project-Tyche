@@ -75,9 +75,12 @@ ispdftemplate = false;
   constructor(public service: CommonService) {
     this.employeeId = localStorage.getItem('UserId').toString();
   }
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void {
+    this.table.nativeElement.style.height = `${this.service.screenHeight}px`;
+  }
 
   ngOnInit(): void {
+    document.getElementById('ngxtable').style.height = `${this.service.screenHeight}px`;
     this.GetOrders();
   }
 
@@ -86,15 +89,15 @@ ispdftemplate = false;
       oauth: this.service.Oauth,
       eid: this.employeeId,
     };
-    // this.service.GetOrders(billreq).subscribe((res) => {
-    //   if (res.returncode === 200) {
-    //     this.orders = res.orders;
-    //     this.filteredList = res.orders;
-    //     this.orders.map((r) => {
-    //       r.dueAmt = Number(r.totalamount) - Number(r.paidamount);
-    //     });
-    //   }
-    // });
+    this.service.GetOrders(billreq).subscribe((res) => {
+      if (res.returncode === 200) {
+        this.orders = res.orders;
+        this.filteredList = res.orders;
+        this.orders.map((r) => {
+          r.dueAmt = Number(r.totalamount) - Number(r.paidamount);
+        });
+      }
+    });
   }
 
   downloadBill(order) {
@@ -128,6 +131,7 @@ ispdftemplate = false;
     //     this.isShowBill = showbill;
     //   }
     // });
+    this.downloadInvoice(orderId);
     this.isShowBill = showbill;
   }
 
@@ -168,6 +172,7 @@ ispdftemplate = false;
     //   } else {
     //   }
     // });
+    this.ispayAmt = false;
   }
   getDue(row) {
     if (row) return Number(row['totalamount']) - Number(row['paidamount']);
@@ -188,17 +193,16 @@ ispdftemplate = false;
   downloadInvoice(orderId) {
     let PDF = new jsPDF('p', 'mm', 'a4');
     let source = document.getElementById('pdf-template');
-    //source.style.display = 'block';
+    source.style.display = 'block';
     html2canvas(source).then((canvas) => {
       let fileWidth = 208;
       let fileHeight = (canvas.height * fileWidth) / canvas.width;
-
       const FILEURI = canvas.toDataURL('image/png');
       let position = 0;
       PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
-      //source.style.display = 'none';this.ispdftemplate = false;
       PDF.save('invoice.pdf');
     });
+    source.style.display = 'none';
     this.ispdftemplate = false;
 
   }

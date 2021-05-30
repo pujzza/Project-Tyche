@@ -72,14 +72,14 @@ export class NewSalesInvoiceComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     //this.initalPush();
-    // this.service.GetAllProducts().subscribe(
-    //   res => {
-    //     if(res){
-    //       this.products = res.returndata;
-    //       this.ProdCategory = Array.from(new Set(res.returndata.map((item) => item.ProductCategory.toLowerCase())));
-    //     }
-    //   }
-    // );
+    this.service.GetAllProducts().subscribe(
+      res => {
+        if(res){
+          this.products = res.returndata;
+          this.ProdCategory = Array.from(new Set(res.returndata.map((item) => item.ProductCategory.toLowerCase())));
+        }
+      }
+    );
   }
 
   productSelection(product) {
