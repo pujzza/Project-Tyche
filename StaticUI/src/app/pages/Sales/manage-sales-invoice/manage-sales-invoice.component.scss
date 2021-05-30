@@ -23,7 +23,7 @@
 
   .table-container{
     margin: 10px;
-    height: calc(100% - 100px);
+    // height: calc(100% - 100px);
   }
   table {
     width: 100%;
@@ -92,4 +92,8 @@
 
   .pdf-table{
     margin-top: 10px;
+  }
+
+  #pdf-template{
+    display: none;
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { ColumnMode, SortType } from '@swimlane/ngx-datatable';
 import { NewWarehouse } from 'src/app/entities/StockModels';
 import { CommonService } from 'src/app/services/common.service';
@@ -8,7 +8,9 @@ import { CommonService } from 'src/app/services/common.service';
   templateUrl: './warehouses.component.html',
   styleUrls: ['./warehouses.component.scss']
 })
-export class WarehousesComponent implements OnInit {
+export class WarehousesComponent implements OnInit,AfterViewInit {
+
+  @ViewChild('table', { static: true }) table: ElementRef;
 
   loadingIndicator = true;
   reorderable = true;
@@ -29,8 +31,12 @@ data = [];
   warehouse = new NewWarehouse();
   constructor(public service: CommonService) {
   }
+  ngAfterViewInit(): void {
+    this.table.nativeElement.style.height = `${this.service.screenHeight}px`;
+  }
 
   ngOnInit(): void {
+    document.getElementById('ngxtable').style.height = `${this.service.screenHeight}px`;
   }
 
   closeNewWarehouse(){

@@ -1,5 +1,5 @@
 import { CommonService } from 'src/app/services/common.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { ColumnMode, SortType } from '@swimlane/ngx-datatable';
 import { ProductsModel, SubProducts } from 'src/app/entities/StockModels';
 
@@ -8,7 +8,7 @@ import { ProductsModel, SubProducts } from 'src/app/entities/StockModels';
   templateUrl: './manage-product.component.html',
   styleUrls: ['./manage-product.component.scss'],
 })
-export class ManageProductComponent implements OnInit {
+export class ManageProductComponent implements OnInit,AfterViewInit {
   loadingIndicator = true;
   reorderable = true;
   data: SubProducts[] = [];
@@ -16,6 +16,8 @@ export class ManageProductComponent implements OnInit {
   SortType = SortType;
   filteredList = [];
   searchProduct;
+  @ViewChild('table', { static: true }) table: ElementRef;
+
   columns = [
     { prop: 'ProductId', name: '#', width: 10 },
     { prop: 'ProductCode', name: 'Code', width: 50 },
@@ -26,18 +28,22 @@ export class ManageProductComponent implements OnInit {
     { name: 'Settings', width: 100 },
   ];
   constructor(public service: CommonService) {}
+  ngAfterViewInit(): void {
+    this.table.nativeElement.style.height = `${this.service.screenHeight}px`;
+  }
 
   ngOnInit(): void {
+    document.getElementById('ngxtable').style.height = `${this.service.screenHeight}px`;
     this.getAllProducts();
   }
 
   getAllProducts() {
-    // this.service.GetAllProducts().subscribe((res) => {
-    //   if (res && res.returncode == 200) {
-    //     this.data = res.returndata;
-    //     this.filteredList = res.returndata;
-    //   }
-    // });
+    this.service.GetAllProducts().subscribe((res) => {
+      if (res && res.returncode == 200) {
+        this.data = res.returndata;
+        this.filteredList = res.returndata;
+      }
+    });
   }
 
   SearchProduct() {
