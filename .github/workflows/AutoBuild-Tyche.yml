@@ -43,4 +43,7 @@ jobs:
         with:
           name: 'BuildFile'
           path: ./Build
+      - id: git_commit
+        uses: zwaldowski/git-commit-action@v1
+      - run: echo "${{ steps.git_commit.outputs.sha }}"
 
