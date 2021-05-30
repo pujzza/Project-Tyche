@@ -1,5 +1,5 @@
 import { InventoryItem } from 'src/app/entities/StockModels';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { ColumnMode, SortType } from '@swimlane/ngx-datatable';
 import { CommonService } from 'src/app/services/common.service';
 
@@ -8,7 +8,7 @@ import { CommonService } from 'src/app/services/common.service';
   templateUrl: './manage-inventory.component.html',
   styleUrls: ['./manage-inventory.component.scss']
 })
-export class ManageInventoryComponent implements OnInit {
+export class ManageInventoryComponent implements OnInit,AfterViewInit {
 data =[];
   loadingIndicator = true;
   reorderable = true;
@@ -17,6 +17,8 @@ data =[];
   editQty = false;
   filteredList = [];
   searchInventory:any
+  @ViewChild('table', { static: false }) table: ElementRef;
+
   columns = [
     { prop: 'ItemId', name: '#',width: 10 },
     { prop: 'ItemName', name: 'Item Name',width: 100 },
@@ -28,8 +30,13 @@ data =[];
   Item = new InventoryItem();
   constructor(public service: CommonService) {
   }
+  ngAfterViewInit(): void {
+    this.table.nativeElement.style.height = `${this.service.screenH}px`;
+  }
+
 
   ngOnInit(): void {
+    document.getElementById('ngxtable').style.height = `${this.service.screenH}px`;
     this.GetData();
   }
 
