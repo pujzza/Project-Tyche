@@ -31,8 +31,6 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Folder
-        run: cd Project-Tyche
-      - name: Folder
         run: cd suraj-demo1
       - name: NPM INSTALL
         run: npm install
