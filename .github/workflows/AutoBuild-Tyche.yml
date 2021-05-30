@@ -36,6 +36,7 @@ jobs:
         uses: actions/upload-artifact@v2.2.3
         with:
           name: BuildFile
-          path: ./Build/
+          path: ./suraj-demo1/dist
+          target: ./Build/
 
 
