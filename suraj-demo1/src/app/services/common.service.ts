@@ -110,6 +110,7 @@ export class CommonService {
       req
     );
   }
+  
 
   AddProduct(req: any): Observable<any> {
     return this.http.post(
@@ -164,6 +165,20 @@ export class CommonService {
       req
     );
   }
+  
+  GetAllEmployees(req: any): Observable<any> {
+    return this.http.post(
+      'http://cyperinfotech.com/api/apiV2/Employee/GetEmployeeDetails.php',
+      req
+    );
+  }
+  CreateEmployee(req: any): Observable<any> {
+    return this.http.post(
+      'http://cyperinfotech.com/api/apiV2/Employee/CreateEmployeeCred.php',
+      req
+    );
+  }
+
 
   OpenSnackBar(title, content) {
     this._snackBar.open(title, content, {
