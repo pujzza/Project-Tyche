@@ -18,7 +18,7 @@ export class CommonService {
   }
 
   ToLogin(req: loginModel): Observable<any> {
-    return this.http.post('http://www.cyperinfotech.com/api/login.php', req);
+    return this.http.post('http://www.cyperinfotech.com/cyperinfotech/login.php', req);
   }
 
   CustomerValidate(req: any): Observable<any> {
