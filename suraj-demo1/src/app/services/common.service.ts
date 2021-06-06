@@ -23,46 +23,46 @@ export class CommonService {
 
   CustomerValidate(req: any): Observable<any> {
     return this.http.post(
-      'http://cyperinfotech.com/api/apiV2/Customer/validate_customers.php',
+      'http://api.cyperinfotech.com/Customer/validate_customers.php',
       req
     );
   }
 
   CreateCustomer(req: CustomerDetails): Observable<any> {
     return this.http.post(
-      'http://cyperinfotech.com/api/apiV2/Customer/create_customers.php',
+      'http://api.cyperinfotech.com/Customer/create_customers.php',
       req
     );
   }
 
   CreateBill(req: BillModel): Observable<any> {
     return this.http.post(
-      'http://cyperinfotech.com/api/apiV2/Product/create.php',
+      'http://api.cyperinfotech.com/Product/create.php',
       req
     );
   }
 
   GetBills(req: any): Observable<any> {
     return this.http.post(
-      'http://cyperinfotech.com/api/apiV2/Product/read_filter.php',
+      'http://api.cyperinfotech.com/Product/read_filter.php',
       req
     );
   }
   GetOrders(req: any): Observable<any> {
     return this.http.post(
-      'http://cyperinfotech.com/api/apiV2/Product/read_employ_order.php',
+      'http://api.cyperinfotech.com/Product/read_employ_order.php',
       req
     );
   }
   GetBillByOrderId(req: any): Observable<any> {
     return this.http.post(
-      'http://cyperinfotech.com/api/apiV2/Product/read_products.php',
+      'http://api.cyperinfotech.com/Product/read_products.php',
       req
     );
   }
   updateAmount(req: any): Observable<any> {
     return this.http.post(
-      'http://cyperinfotech.com/api/apiV2/Product/products_update.php',
+      'http://api.cyperinfotech.com/Product/products_update.php',
       req
     );
   }
@@ -92,21 +92,21 @@ export class CommonService {
 
   CreateClient(req: any): Observable<any> {
     return this.http.post(
-      'http://cyperinfotech.com/api/apiV2/Client/CreateClient.php',
+      'http://api.cyperinfotech.com/Client/CreateClient.php',
       req
     );
   }
 
   UpdateClient(req: any): Observable<any> {
     return this.http.post(
-      'http://cyperinfotech.com/api/apiV2/Client/updateclient.php',
+      'http://api.cyperinfotech.com/Client/updateclient.php',
       req
     );
   }
 
   GetAllClients(req: any): Observable<any> {
     return this.http.post(
-      'http://cyperinfotech.com/api/apiV2/Client/getclient.php',
+      'http://api.cyperinfotech.com/Client/getclient.php',
       req
     );
   }
@@ -114,67 +114,67 @@ export class CommonService {
 
   AddProduct(req: any): Observable<any> {
     return this.http.post(
-      'http://cyperinfotech.com/api/apiV2/Stock/CreateProductNew.php',
+      'http://api.cyperinfotech.com/Stock/CreateProductNew.php',
       req
     );
   }
 
   GetAllProducts(): Observable<any> {
     return this.http.post(
-      'http://cyperinfotech.com/api/apiV2/Stock/GetProducts.php',
+      'http://api.cyperinfotech.com/Stock/GetProducts.php',
       ''
     );
   }
 
   GetInventory(): Observable<any> {
     return this.http.get(
-      'http://cyperinfotech.com/api/apiV2/Inventory/GetItem.php'
+      'http://api.cyperinfotech.com/Inventory/GetItem.php'
     );
   }
 
   CreateInventory(req: any): Observable<any> {
     return this.http.post(
-      'http://cyperinfotech.com/api/apiV2/Inventory/CreateInventory.php',
+      'http://api.cyperinfotech.com/Inventory/CreateInventory.php',
       req
     );
   }
 
   UpdateInventory(req: any): Observable<any> {
     return this.http.post(
-      'http://cyperinfotech.com/api/apiV2/Inventory/UpdateInventory.php',
+      'http://api.cyperinfotech.com/Inventory/UpdateInventory.php',
       req
     );
   }
 
   InventoryDropItem(req: any): Observable<any> {
     return this.http.post(
-      'http://cyperinfotech.com/api/apiV2/Inventory/DropItems.php',
+      'http://api.cyperinfotech.com/Inventory/DropItems.php',
       req
     );
   }
 
   DeleteClientById(req: any): Observable<any> {
     return this.http.post(
-      'http://cyperinfotech.com/api/apiV2/Client/DeleteClient.php',
+      'http://api.cyperinfotech.com/Client/DeleteClient.php',
       req
     );
   }
   DeleteInventory(req: any): Observable<any> {
     return this.http.post(
-      'http://cyperinfotech.com/api/apiV2/Inventory/DeleteInventoryItem.php',
+      'http://api.cyperinfotech.com/Inventory/DeleteInventoryItem.php',
       req
     );
   }
   
   GetAllEmployees(req: any): Observable<any> {
     return this.http.post(
-      'http://cyperinfotech.com/api/apiV2/Employee/GetEmployeeDetails.php',
+      'http://api.cyperinfotech.com/Employee/GetEmployeeDetails.php',
       req
     );
   }
   CreateEmployee(req: any): Observable<any> {
     return this.http.post(
-      'http://cyperinfotech.com/api/apiV2/Employee/CreateEmployeeCred.php',
+      'http://api.cyperinfotech.com/Employee/CreateEmployeeCred.php',
       req
     );
   }
