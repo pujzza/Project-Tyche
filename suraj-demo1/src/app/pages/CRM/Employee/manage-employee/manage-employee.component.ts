@@ -1,4 +1,7 @@
+import { ColumnMode } from '@swimlane/ngx-datatable';
+import { CommonService } from 'src/app/services/common.service';
 import { Component, OnInit } from '@angular/core';
+import { Employee} from 'src/app/entities/EmployeeModel';
 
 @Component({
   selector: 'app-manage-employee',
@@ -6,10 +9,54 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./manage-employee.component.scss']
 })
 export class ManageEmployeeComponent implements OnInit {
+  rows = [
+    { sno: 1, FirstName: 'John', LastName: 'Smith', Email: 'jd@master.com', Contact: '345723947', Address:'Chennai'},
+  ];
+  loadingIndicator = true;
+  reorderable = true;
+  data = [];
+  EmployeeData: any[];
+  isviewEmployee = false;
+  viewEmployee = new Employee();
+  isedit = false;
 
-  constructor() { }
+  columns = [
+    { prop: 'EmployeeID', name: 'ID',width: 50 },
+    { prop: 'EmpFirstName', name: 'First Name',width: 100 },
+    { prop: 'EmpLastName', name: 'Last Name',width: 100 },
+    { prop: 'Email', name: 'Email ID',width: 100 },
+    { prop: 'PhoneNumber', name: 'Contact',width: 70 },
+    { prop: 'Address', name: 'Address',width: 70 },
+    { name: 'Settings',width: 100 },
+  ];
+
+  ColumnMode = ColumnMode;
+   constructor(public service: CommonService) { }
 
   ngOnInit(): void {
+    document.getElementById('ngxtable').style.height = `${
+      screen.height - 170
+    }px`;
+    this.GetAllEmployees();
+  }
+  GetAllEmployees() {
+    this.service.GetAllEmployees('').subscribe((res) => {
+      if (res && res.returncode == 200) {
+        this.EmployeeData = res.returndata;
+      }
+    });
   }
 
+  toViewEmployee(row){
+    this.isviewEmployee = true;
+    this.viewEmployee = row;
+  }
+  
+
+  toEditEmployee(row){
+    this.isviewEmployee = true;
+    this.viewEmployee = row;
+    this.isedit = true;
+
+  }
 }
