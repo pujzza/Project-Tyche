@@ -1,4 +1,5 @@
-[![Build suraj-xerox1](https://github.com/pujzza/Project-Tyche/actions/workflows/AutoBuild-Tyche.yml/badge.svg?branch=dev_main)](https://github.com/pujzza/Project-Tyche/actions/workflows/AutoBuild-Tyche.yml)
+![Build suraj-xerox1](https://github.com/github/docs/actions/workflows/AutoBuild-Tyche.yml/badge.svg)
+
 Instructions to run Angular
 1. Download the zip
 2. Extract it to the folder
