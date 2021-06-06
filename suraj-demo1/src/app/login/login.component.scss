@@ -44,7 +44,7 @@
     width: calc(100% - 10px);
     border: none;
     background-color: inherit;
-    font-family: Poppins-Medium;
+    font-family: Nunito;
     font-size: 15px;
     color: #666666;
 }
@@ -54,7 +54,7 @@
     width: calc(100% - 30px);
     border: none;
     background-color: inherit;
-    font-family: Poppins-Medium;
+    font-family: Nunito;
     font-size: 15px;
     color: #666666;
 }
@@ -98,17 +98,16 @@
 }
 
 .login-label{
-    font-family: Poppins-Bold;
+    font-family: Nunito;
     font-size: 24px;
     color: #333333;
     height: 40px;
     text-align: center;
-    padding: 15px;
 }
 
 .warn-msg{
-    color: #ffcc00;
-    font-family: 'Poppins-Medium';
+    color: #DC143C;
+    font-family: 'Nunito';
     font-size: 14px;
     padding: 5px 10px;
     height: 30px;
