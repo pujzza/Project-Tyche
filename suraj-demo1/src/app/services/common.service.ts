@@ -11,7 +11,7 @@ import { loginModel } from '../entities/LoginModel';
 export class CommonService {
   // Do not edit this Oauth
   Oauth = 'RVn06PJIj36gt40zSAmLwAD742f';
-  screenH
+  screenH;
 
   constructor(private http: HttpClient, private _snackBar: MatSnackBar) {
     this.screenH = window.screen.availHeight;
@@ -110,7 +110,6 @@ export class CommonService {
       req
     );
   }
-  
 
   AddProduct(req: any): Observable<any> {
     return this.http.post(
@@ -127,9 +126,7 @@ export class CommonService {
   }
 
   GetInventory(): Observable<any> {
-    return this.http.get(
-      'http://api.cyperinfotech.com/Inventory/GetItem.php'
-    );
+    return this.http.get('http://api.cyperinfotech.com/Inventory/GetItem.php');
   }
 
   CreateInventory(req: any): Observable<any> {
@@ -165,7 +162,7 @@ export class CommonService {
       req
     );
   }
-  
+
   GetAllEmployees(req: any): Observable<any> {
     return this.http.post(
       'http://api.cyperinfotech.com/Employee/GetEmployeeDetails.php',
@@ -178,7 +175,6 @@ export class CommonService {
       req
     );
   }
-
 
   OpenSnackBar(title, content) {
     this._snackBar.open(title, content, {
