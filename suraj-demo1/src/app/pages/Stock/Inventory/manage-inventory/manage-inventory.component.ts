@@ -23,6 +23,7 @@ data =[];
     { prop: 'ItemId', name: '#',width: 10 },
     { prop: 'ItemName', name: 'Item Name',width: 100 },
     { prop: 'Category', name: 'Category',width: 70 },
+    { prop: 'TotalCount', name: 'Total Count',width: 50 },
     { prop: 'Bundles', name: 'Bundle Count',width: 50 },
     { prop: 'ItemPerBundle', name: 'Per Bundle',width: 50 },
     { name: 'Settings',width: 100 },

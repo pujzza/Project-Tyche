@@ -349,7 +349,7 @@ export class NewSalesInvoiceComponent implements OnInit, AfterViewInit {
         if(prod){
           let postparam = {};
           postparam['ItemId'] = prod[0].ProductId;
-          postparam['Amount'] = item['prodqty'];
+          postparam['Amount'] = item['prodqty'].toString();
           postparam['oauth'] = this.service.Oauth;
           this.service.InventoryDropItem(postparam).subscribe(res => {
             if(res && res.returncode == 200){
