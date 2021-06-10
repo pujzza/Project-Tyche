@@ -1,6 +1,6 @@
 import { ColumnMode } from '@swimlane/ngx-datatable';
 import { CommonService } from 'src/app/services/common.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Employee} from 'src/app/entities/EmployeeModel';
 
 @Component({
@@ -8,7 +8,7 @@ import { Employee} from 'src/app/entities/EmployeeModel';
   templateUrl: './manage-employee.component.html',
   styleUrls: ['./manage-employee.component.scss']
 })
-export class ManageEmployeeComponent implements OnInit {
+export class ManageEmployeeComponent implements OnInit,AfterViewInit {
   rows = [
     { sno: 1, FirstName: 'John', LastName: 'Smith', Email: 'jd@master.com', Contact: '345723947', Address:'Chennai'},
   ];
@@ -19,6 +19,7 @@ export class ManageEmployeeComponent implements OnInit {
   isviewEmployee = false;
   viewEmployee = new Employee();
   isedit = false;
+  @ViewChild('table', { static: false }) table: ElementRef;
 
   columns = [
     { prop: 'EmployeeID', name: 'ID',width: 50 },
@@ -39,6 +40,11 @@ export class ManageEmployeeComponent implements OnInit {
     }px`;
     this.GetAllEmployees();
   }
+
+  ngAfterViewInit(): void {
+    this.table.nativeElement.style.height = `${this.service.screenH}px`;
+  }
+
   GetAllEmployees() {
     this.service.GetAllEmployees('').subscribe((res) => {
       if (res && res.returncode == 200) {
