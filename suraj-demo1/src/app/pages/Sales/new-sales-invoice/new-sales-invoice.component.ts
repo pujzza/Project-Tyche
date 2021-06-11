@@ -348,7 +348,7 @@ export class NewSalesInvoiceComponent implements OnInit, AfterViewInit {
         let prod = this.filerProduct(item['prodname'],item['prodmaterial'],item['prodsize']); 
         if(prod){
           let postparam = {};
-          postparam['ItemId'] = prod[0].ProductRawMaterials;
+          postparam['ItemId'] = prod[0].ProductRawMaterials.toString();
           postparam['Amount'] = item['prodqty'].toString();
           postparam['oauth'] = this.service.Oauth;
           this.service.InventoryDropItem(postparam).subscribe(res => {
