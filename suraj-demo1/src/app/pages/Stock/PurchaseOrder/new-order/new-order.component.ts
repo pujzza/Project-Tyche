@@ -1,4 +1,3 @@
-import { Orders } from './../../../../entities/BillHistoryModel';
 import { CommonService } from 'src/app/services/common.service';
 import { Component, OnInit } from '@angular/core';
 import { Item, PurchaseOrder } from 'src/app/entities/StockModels';
@@ -14,6 +13,8 @@ export class NewOrderComponent implements OnInit {
   itemData = [new Item()];
   rawmaterials = [];
   porder = new PurchaseOrder();
+  errorText = '';
+  isError = false;
 
   ngOnInit(): void {
     this.getItems();
@@ -39,10 +40,24 @@ export class NewOrderComponent implements OnInit {
     });
   }
 
-  save(item) {
-    item.isSave = true;
-    item.isEdit = false;
-    this.calculateTotal();
+  save(item: Item) {
+    if (
+      !item.BundleCount ||
+      item.BundleCount == '' ||
+      !item.ItemName ||
+      item.ItemName == '' ||
+      !item.ItemStatus ||
+      item.ItemStatus == '' ||
+      !item.Price ||
+      item.Price == ''
+    ) {
+      item.errorText = 'Fill all details';
+    } else {
+      item.errorText = '';
+      item.isSave = true;
+      item.isEdit = false;
+      this.calculateTotal();
+    }
   }
 
   edit(item) {
@@ -64,23 +79,44 @@ export class NewOrderComponent implements OnInit {
   calculateTotal() {
     let amt = 0;
     this.itemData.forEach((x) => {
-      if(x.ItemStatus == "Order"){
-      amt = amt + Number(x.Amount ?? '0') ;
+      if (x.ItemStatus == 'Order') {
+        amt = amt + Number(x.Amount ?? '0');
       }
     });
     this.porder.TotalAmount = amt.toString();
   }
 
-  confirmOrder(): any{
+  confirmOrder(): any {
     let finalList;
-    finalList = this.itemData.filter(
-      x => (x.isSave && !x.isEdit)
-    )
+    finalList = this.itemData.filter((x) => x.isSave && !x.isEdit);
     return finalList;
   }
 
-  generateOrder(){
-    this.itemData = this.confirmOrder();
+  generateOrder() {
+    var postData = this.confirmOrder();
     this.porder.oauth = this.servie.Oauth;
+    this.clearData();
+  }
+
+  validate() {
+    if(!this.porder.SupplierContact || this.porder.SupplierContact == '' ||
+    !this.porder.SupplierName || this.porder.SupplierName == ''    
+    ){
+      this.errorText = 'Enter Supplier Details';
+      this.isError = true;
+    }
+    else if (this.itemData.filter((x) => !x.isSave && x.isEdit)?.length > 0) {
+      this.errorText = 'Save all your data';
+      this.isError = true;
+    } else {
+      this.errorText = '';
+      this.isError = false;
+      this.generateOrder();
+    }
+  }
+
+  clearData(){
+    this.porder = new PurchaseOrder();
+    this.itemData = [new Item()];
   }
 }

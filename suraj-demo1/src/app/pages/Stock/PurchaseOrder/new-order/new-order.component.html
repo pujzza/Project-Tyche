@@ -72,17 +72,20 @@
           <div class="save-icon mr-5"    (click)="save(item)" *ngIf="(itemData.length == (i+1) && !item.isSave) || (item.isEdit) || !item.isSave"></div>
           <div class="delete-icon mr-5"  (click)="remove(i)" *ngIf="itemData.length != (i+1) || (itemData.length == (i+1) && item.isSave)"></div>
           <div class="plus-icon mr-5"  (click)="add()" *ngIf="itemData.length == (i+1)"></div>
+          <div class="text-danger text-center m-auto">{{item.errorText}}</div>
         </td>
       </tr>
       <tr>
-        <td colspan="5"></td>
+        <td colspan="5">
+          <div *ngIf="isError" class="text-danger m-auto">{{errorText}}</div>
+        </td>
         <td colspan="1">Grand Total</td>
         <td colspan="1">{{porder.TotalAmount | currency: "&#8377;"}}</td>
       </tr>
       <tr>
         <td colspan="6" style="border: none"></td>
         <td colspan="1" style="border: none">
-          <button class="btn btn-success" (click)="generateOrder()">
+          <button class="btn btn-success" (click)="validate()">
             Generate Order
           </button>
         </td>

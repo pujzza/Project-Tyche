@@ -59,6 +59,7 @@ export class Item {
   Amount?:      string;
   isSave? : boolean;
   isEdit?:boolean;
+  errorText? : string;
 
   constructor() {
     this.isEdit = true;
