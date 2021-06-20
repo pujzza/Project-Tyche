@@ -26,6 +26,7 @@
     "@angular/router": "~10.2.0",
     "@swimlane/ngx-datatable": "^19.0.0",
     "bootstrap": "^4.6.0",
+    "dom-to-image": "^2.6.0",
     "jspdf": "^2.3.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

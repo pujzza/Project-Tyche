@@ -1,3 +1,4 @@
+
 export class ProductsModel {
   oauth?: string;
   ProductCategory: string;
@@ -24,6 +25,7 @@ export class NewWarehouse {
   country: string;
   contactno: string;
   pincode: string;
+
 }
 
 export class SubProducts {
@@ -36,3 +38,32 @@ export class SubProducts {
   ProductCategory? : string;
   ProductId?:string
 }
+
+// ------------ Purchase Order Models -------------- //
+//START
+export class PurchaseOrder {
+  SupplierName?:    string;
+  SupplierContact?: string;
+  Items?:           Item[];
+  OrderDueDate?:    Date;
+  TotalAmount?:     string;
+  oauth?:           string;
+}
+
+export class Item {
+  ItemId?:      string;
+  ItemName?:    string;
+  BundleCount?: string;
+  Price?:       string;
+  ItemStatus?:  string;
+  Amount?:      string;
+  isSave? : boolean;
+  isEdit?:boolean;
+  errorText? : string;
+
+  constructor() {
+    this.isEdit = true;
+    this.isSave = false;;
+  }
+}
+//-------------END----------------------------------------//

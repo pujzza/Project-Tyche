@@ -5,11 +5,24 @@ import {
   ViewChild,
   AfterViewInit,
   TemplateRef,
+  ViewContainerRef,
+  ComponentFactory,
+  ComponentRef,
+  EmbeddedViewRef,
+  Injector,
+  NgModuleRef,
+  ViewRef,
+  ChangeDetectorRef,
+  QueryList,
+  ViewChildren,
 } from '@angular/core';
 import { ColumnMode, DatatableComponent } from '@swimlane/ngx-datatable';
 import { BillHistory, Orders, payAmt } from 'src/app/entities/BillHistoryModel';
 import { MetaProducts } from 'src/app/entities/MetaProducts';
 import { CommonService } from 'src/app/services/common.service';
+import { jsPDF } from 'jspdf';
+import html2canvas from 'html2canvas';
+import domtoimage from 'dom-to-image';
 
 @Component({
   selector: 'app-manage-sales-invoice',
@@ -28,6 +41,7 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
   reorderable = false;
   data = [];
   orders: Orders[];
+  htmlCanva: any;
   width: any;
   isShowBill = false;
   ispayAmt = false;
@@ -35,6 +49,7 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
   filteredList = [];
   TotalAmt;
   DueAmt;
+  isScreenCapture = false;
   columns = [
     { name: 'Sno.', width: 50, headerClass: 'theader1' },
     { prop: 'orderid', name: 'Invoice #', width: 100, headerClass: 'theader1' },
@@ -61,16 +76,22 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
     { name: 'Settings', width: 220, headerClass: 'theader1 text-center' },
   ];
   @ViewChild('table', { static: true }) table: ElementRef;
-  @ViewChild('showBill', { static: true }) showBill: ElementRef;
+  //@ViewChild('showBill' ,{static: true, read: ViewContainerRef}) showBill;
+  @ViewChildren('allTheseThings') things: QueryList<any>;
+  @ViewChild('showBill', { static: false }) showBill: ElementRef;
   @ViewChild(DatatableComponent) ngxTab: DatatableComponent;
   screenH = 0;
 
   ColumnMode = ColumnMode;
   employeeId: string;
   errorText: string;
-  constructor(public service: CommonService) {
+  constructor(
+    public service: CommonService,
+    private changeDetectorRef: ChangeDetectorRef
+  ) {
     this.employeeId = localStorage.getItem('UserId').toString();
   }
+
   ngAfterViewInit(): void {
     this.table.nativeElement.style.height = `${this.service.screenH}px`;
   }
@@ -101,6 +122,10 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
   downloadBill(orderid) {
     const eid = this.employeeId;
     this.service.DownloadBill(eid, orderid);
+    // this.ShowBill(orderid);
+    // this.isShowBill = true;
+    // this.changeDetectorRef.detectChanges();
+    // this.screenCapture();
   }
 
   getRowIndex(row) {
@@ -121,6 +146,7 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
         this.isShowBill = false;
       }
     });
+    this.changeDetectorRef.detectChanges();
   }
 
   ShowBill(orderId) {
@@ -176,4 +202,24 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
         item.firstname.toLowerCase().indexOf(lowerValue) !== -1
     );
   }
+
+
+    public screenCapture()  
+    {  
+      console.log(this.things);
+      var data = document.getElementById('tableCont');
+      
+        html2canvas(data).then(canvas => {  
+        // Few necessary setting options  
+        var imgWidth = 208;   
+        var pageHeight = 295;    
+        var imgHeight = canvas.height * imgWidth / canvas.width;  
+        var heightLeft = imgHeight;  
+        const contentDataURL = canvas.toDataURL("image/png");
+        let pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF  
+        var position = 0;  
+        pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)  
+        pdf.save('MYPdf.pdf'); // Generated PDF   
+        });  
+    }  
 }

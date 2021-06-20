@@ -77,13 +77,13 @@
               {{subs.title}}
           </div>
       </div>
-      <div class="cat-label" (click)="isStockReturn = !isStockReturn">
+      <!-- <div class="cat-label" (click)="isStockReturn = !isStockReturn">
           <div>Stock Return</div>
         <div
           class="push-left"
           [ngClass]="{ 'down-arrow': isStockReturn, 'right-arrow': !isStockReturn }"
         ></div>
-      </div>
+      </div> -->
       <div *ngIf="isStockReturn" class="sub-catg-content">
           <div *ngFor="let subs of StockReturnSub" class="sub-catg" (click)="NavigatePages(subs.route);isSelected=subs.route"
           [ngClass]="{'SelectedLabel':isSelected.includes(subs.route)}">
