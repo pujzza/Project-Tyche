@@ -1,13 +1,34 @@
-<div class="page-header1">Orders</div>
+<div class="d-flex">
+  <div class="col-3" style="padding-top: 10px">
+    <div class="page-header1">Orders</div>
+  </div>
+  <div class="col-5"></div>
+  <div class="col-4" style="padding-top: 10px">
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="searchInventory"
+        placeholder="Search Inventory"
+        (keyup)="SearchInventory()"
+      />
+      <div class="input-group-prepend">
+        <span class="input-group-text search-icon"></span>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="ngxtable" class="float-none table-container" #table>
 <ngx-datatable
-  class="bootstrap"
-  [rows]="rows"
-  [loadingIndicator]="loadingIndicator"
-  [columnMode]="ColumnMode.force"
-  [headerHeight]="50"
-  [footerHeight]="50"
-  rowHeight="auto"
-  style="font-family: Nunito"
+    class="bootstrap fullscreen"
+    [rows]="filteredList"
+    style="font-family: Nunito; height: inherit"
+    [columnMode]="ColumnMode.force"
+    [headerHeight]="50"
+    [footerHeight]="50"
+    [rowHeight]="50"
+    [scrollbarH]="true"
+    [scrollbarV]="true"
 >
   <ngx-datatable-column
     *ngFor="let col of columns"
@@ -27,3 +48,4 @@
     </ng-template>
   </ngx-datatable-column>
 </ngx-datatable>
+</div>

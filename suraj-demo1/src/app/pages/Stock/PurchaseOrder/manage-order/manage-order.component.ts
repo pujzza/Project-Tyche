@@ -11,6 +11,7 @@ export class ManageOrderComponent implements OnInit {
   loadingIndicator = true;
   reorderable = true;
   data = [];
+  filteredList = [];
 
   columns = [
     { prop: 'sno', name: 'Sno.' },
@@ -23,7 +24,19 @@ export class ManageOrderComponent implements OnInit {
   ];
 
   ColumnMode = ColumnMode;
+  searchOrder:any;
   constructor() {}
 
   ngOnInit(): void {}
+
+  SearhOrder() {
+    const lowerValue = this.searchOrder.toLowerCase();
+    this.filteredList = this.data.filter(
+      (item) =>
+        item.ItemId.toString().toLowerCase().indexOf(lowerValue) !== -1 ||
+        !lowerValue ||
+        item.ItemName.toLowerCase().indexOf(lowerValue) !== -1 ||
+        item.Category.toLowerCase().indexOf(lowerValue) !== -1
+    );
+  }
 }
