@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { ColumnMode } from '@swimlane/ngx-datatable';
 import { Clients } from 'src/app/entities/ClientsModel';
+import { DeleteItemModel } from 'src/app/entities/HomeModel';
 
 @Component({
   selector: 'app-manage-clients',
@@ -63,11 +64,12 @@ export class ManageClientsComponent implements OnInit, AfterViewInit {
     this.viewClient = row;
   }
 
-  DeleteClient(row) {
-    let postparam = {};
-    postparam['ID'] = row['id'];
-    postparam['oauth'] = this.service.Oauth;
-    this.service.DeleteClientById(postparam).subscribe(
+  DeleteClient(item) {
+    let postparam = new DeleteItemModel();
+    postparam.oauth = this.service.Oauth;
+    postparam.Table = 'Product';
+    postparam.ID = item.ProductId;
+    this.service.DeleteItem(postparam).subscribe(
       (res) => {
         if (res && res.returncode == 200) {
           this.service.OpenSnackBar('Delete Successfull', 'SUCCESS');
