@@ -163,6 +163,13 @@ export class CommonService {
     );
   }
 
+  DeleteItem(req: any): Observable<any> {
+    return this.http.post(
+      'http://cyperinfotech.com/cyperinfotech/api/Delete.php',
+      req
+    );
+  }
+
   GetAllEmployees(req: any): Observable<any> {
     return this.http.post(
       'http://api.cyperinfotech.com/Employee/GetEmployeeDetails.php',

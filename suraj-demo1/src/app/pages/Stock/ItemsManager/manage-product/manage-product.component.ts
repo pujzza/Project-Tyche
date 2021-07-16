@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { ColumnMode, SortType } from '@swimlane/ngx-datatable';
 import { ProductsModel, SubProducts } from 'src/app/entities/StockModels';
+import { DeleteItemModel } from 'src/app/entities/HomeModel';
 
 @Component({
   selector: 'app-manage-product',
@@ -63,6 +64,26 @@ export class ManageProductComponent implements OnInit, AfterViewInit {
         !lowerValue ||
         item.ProductMaterial.toLowerCase().indexOf(lowerValue) !== -1 ||
         item.ProductSize.toLowerCase().indexOf(lowerValue) !== -1
+    );
+  }
+
+  DeleteItem(item){
+    let postparam = new DeleteItemModel()
+    postparam.oauth = this.service.Oauth;
+    postparam.Table = "Product";
+    postparam.ID = item.ProductId;
+    this.service.DeleteItem(postparam).subscribe(
+      res => {
+        if(res && res.returncode == 200){
+          this.service.OpenSnackBar('Delete Successfull','SUCCESS');
+          this.getAllProducts();
+        } else {
+          this.service.OpenSnackBar(res.returnmessage,'ERROR');
+        }
+      },
+      err => {
+        this.service.OpenSnackBar('Something went wrong','SORRY');
+      }
     );
   }
 }

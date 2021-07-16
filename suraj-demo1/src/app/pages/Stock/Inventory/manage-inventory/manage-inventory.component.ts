@@ -2,6 +2,7 @@ import { InventoryItem } from 'src/app/entities/StockModels';
 import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { ColumnMode, SortType } from '@swimlane/ngx-datatable';
 import { CommonService } from 'src/app/services/common.service';
+import { DeleteItemModel } from 'src/app/entities/HomeModel';
 
 @Component({
   selector: 'app-manage-inventory',
@@ -78,11 +79,13 @@ data =[];
     this.Item = item;
   }
 
+ 
   DeleteInventory(item){
-    let postparam = {};
-    postparam['ItemId'] = item['ItemId'];
-    postparam['oauth'] = this.service.Oauth;
-    this.service.DeleteInventory(postparam).subscribe(
+    let postparam = new DeleteItemModel()
+    postparam.oauth = this.service.Oauth;
+    postparam.Table = "Inventory";
+    postparam.ID = item.ItemId;
+    this.service.DeleteItem(postparam).subscribe(
       res => {
         if(res && res.returncode == 200){
           this.service.OpenSnackBar('Delete Successfull','SUCCESS');
@@ -96,6 +99,7 @@ data =[];
       }
     );
   }
+
   SearchInventory() {
     const lowerValue = this.searchInventory.toLowerCase();
     this.filteredList = this.data.filter(
