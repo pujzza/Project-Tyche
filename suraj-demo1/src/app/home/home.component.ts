@@ -1,3 +1,4 @@
+import { CommonService } from 'src/app/services/common.service';
 import { environment } from './../../environments/environment';
 import { NavigationEnd, Router } from '@angular/router';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
@@ -39,8 +40,8 @@ export class HomeComponent implements OnInit,AfterViewInit {
   EmployeeSub= EmployeeSub;
   InventorySub=InventorySub;
 
-  constructor(private route: Router) {
-
+  constructor(private route: Router,private service: CommonService) {
+this.checkRoutes();
   }
 
   ngOnInit(): void {
@@ -75,44 +76,46 @@ export class HomeComponent implements OnInit,AfterViewInit {
   }
 
   logout(){
+    this.service.isLoggedIn = false;
+    localStorage.clear();
     this.route.navigateByUrl('');
   }
 
-  // checkRoutes(){
-  //   this.isSelected = this.route.url.split('/Home/')[1];
-  //   this.route.events.subscribe(e => {
-  //     this.isSelected = this.route.url.split('/Home/')[1];
-  //     this.loggedInName = localStorage.getItem('UserName');
-  //     if(this.isSelected.includes('ItemManager')){
-  //       this.isItemManager = true
-  //     } else {
-  //       this.isItemManager = false
-  //     }
-  //     if(this.isSelected.includes('Sales')){
-  //       this.isSales = true
-  //     } else {
-  //       this.isSales = false
-  //     }
-  //     if(this.isSelected.includes('Purchase')){
-  //       this.isPurchaseOrder = true
-  //     } else {
-  //       this.isPurchaseOrder = false
-  //     }
-  //     if(this.isSelected.includes('StockReturn')){
-  //       this.isStockReturn = true
-  //     } else {
-  //       this.isStockReturn = false
-  //     }
-  //     if(this.isSelected.includes('Clients')){
-  //       this.isClient = true
-  //     } else {
-  //       this.isClient = false
-  //     }
-  //     if(this.isSelected.includes('Employee')){
-  //       this.isEmployee = true
-  //     } else {
-  //       this.isEmployee = false
-  //     }
-  //   });
-  // }
+  checkRoutes(){
+    this.isSelected = this.route.url.split('/Home/')[1];
+    this.loggedInName = localStorage.getItem('UserName');
+    this.route.events.subscribe(e => {
+      this.isSelected = this.route.url.split('/Home/')[1];
+      if(this.isSelected.includes('ItemManager')){
+        this.isItemManager = true
+      } else {
+        this.isItemManager = false
+      }
+      if(this.isSelected.includes('Sales')){
+        this.isSales = true
+      } else {
+        this.isSales = false
+      }
+      if(this.isSelected.includes('Purchase')){
+        this.isPurchaseOrder = true
+      } else {
+        this.isPurchaseOrder = false
+      }
+      if(this.isSelected.includes('StockReturn')){
+        this.isStockReturn = true
+      } else {
+        this.isStockReturn = false
+      }
+      if(this.isSelected.includes('Clients')){
+        this.isClient = true
+      } else {
+        this.isClient = false
+      }
+      if(this.isSelected.includes('Employee')){
+        this.isEmployee = true
+      } else {
+        this.isEmployee = false
+      }
+    });
+  }
 }
