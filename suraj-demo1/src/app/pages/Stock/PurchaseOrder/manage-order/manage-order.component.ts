@@ -1,6 +1,7 @@
 import { CommonService } from 'src/app/services/common.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ColumnMode } from '@swimlane/ngx-datatable';
+import { DeleteItemModel } from 'src/app/entities/HomeModel';
 
 @Component({
   selector: 'app-manage-order',
@@ -54,5 +55,25 @@ export class ManageOrderComponent implements OnInit {
   viewbill(item) {
     this.bill = item;
     this.isShowBill = true;
+  }
+
+  DeleteItem(item){
+    let postparam = new DeleteItemModel()
+    postparam.oauth = this.service.Oauth;
+    postparam.Table = "PurchaseOrder";
+    postparam.ID = item.OrderID;
+    this.service.DeleteItem(postparam).subscribe(
+      res => {
+        if(res && res.returncode == 200){
+          this.service.OpenSnackBar('Delete Successfull','SUCCESS');
+          this.GetPurchaseOrder();
+        } else {
+          this.service.OpenSnackBar(res.returnmessage,'ERROR');
+        }
+      },
+      err => {
+        this.service.OpenSnackBar('Something went wrong','SORRY');
+      }
+    )
   }
 }
