@@ -19,6 +19,7 @@ import { HomeComponent } from './home/home.component';
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { StockReturnRecordsComponent } from './pages/Stock/StockReturn/stock-return-records/stock-return-records.component';
+import { AuthGuardService } from './services/auth-guard.service';
 
 const routes: Routes = [
   { path: '', redirectTo: 'Login', pathMatch: 'full' },
@@ -26,6 +27,7 @@ const routes: Routes = [
   {
     path: 'Home',
     component: HomeComponent,
+    canActivate : [AuthGuardService],
     children: [
       { path: '', redirectTo: 'Dashboard', pathMatch: 'full' },
       { path: 'Dashboard', component: DashboardComponent },

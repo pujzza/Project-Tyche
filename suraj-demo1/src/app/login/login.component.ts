@@ -42,6 +42,7 @@ export class LoginComponent implements OnInit {
         this.response = res;
         //console.log(this.response);
         if (this.response.returncode == 200) {
+          this.service.isLoggedIn = true;
           localStorage.setItem('UserId', this.response.returndata.id);
           var loggedInName = `${this.response.returndata.firstname} ${this.response.returndata.lastname}`;
           localStorage.setItem('UserName', loggedInName);

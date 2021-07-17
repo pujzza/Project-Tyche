@@ -11,6 +11,7 @@ import { loginModel } from '../entities/LoginModel';
 export class CommonService {
   // Do not edit this Oauth
   Oauth = 'RVn06PJIj36gt40zSAmLwAD742f';
+  isLoggedIn = false;
   screenH;
 
   constructor(private http: HttpClient, private _snackBar: MatSnackBar) {
