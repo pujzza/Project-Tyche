@@ -1,5 +1,5 @@
 import { CommonService } from 'src/app/services/common.service';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { ColumnMode } from '@swimlane/ngx-datatable';
 import { DeleteItemModel } from 'src/app/entities/HomeModel';
 
@@ -8,7 +8,7 @@ import { DeleteItemModel } from 'src/app/entities/HomeModel';
   templateUrl: './manage-order.component.html',
   styleUrls: ['./manage-order.component.scss'],
 })
-export class ManageOrderComponent implements OnInit {
+export class ManageOrderComponent implements OnInit,AfterViewInit {
   rows = [];
   loadingIndicator = true;
   reorderable = true;
@@ -29,10 +29,15 @@ export class ManageOrderComponent implements OnInit {
 
   ColumnMode = ColumnMode;
   searchOrder: any;
+  @ViewChild('table', { static: true }) table: ElementRef;
   constructor(private service: CommonService) {}
 
   ngOnInit(): void {
+    this.table.nativeElement.style.maxheight = `${this.service.screenH}px`;
     this.GetPurchaseOrder();
+  }
+  ngAfterViewInit(): void {
+    this.table.nativeElement.style.maxheight = `${this.service.screenH}px`;
   }
 
   SearhOrder() {

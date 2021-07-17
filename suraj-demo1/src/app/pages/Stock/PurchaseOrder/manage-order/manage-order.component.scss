@@ -1,6 +1,6 @@
 .table-container {
   margin: 10px;
-  height: calc(100% - 100px);
+  height: 100vh;
 }
 .search-icon {
   background: url(../../../../../assets/Icons/searchengin-brands.svg);
@@ -31,11 +31,6 @@
   padding: 20px;
   border: 1px solid #888;
   width: 50%;
-}
-
-.table-container {
-  margin: 10px;
-  height: calc(100% - 100px);
 }
 table {
   width: 100%;

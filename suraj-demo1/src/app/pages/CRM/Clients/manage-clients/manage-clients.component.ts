@@ -40,13 +40,11 @@ export class ManageClientsComponent implements OnInit, AfterViewInit {
   ColumnMode = ColumnMode;
   constructor(public service: CommonService) {}
   ngAfterViewInit(): void {
-    this.table.nativeElement.style.height = `${this.service.screenH}px`;
+    this.table.nativeElement.style.maxheight = `${this.service.screenH}px`;
   }
 
   ngOnInit(): void {
-    document.getElementById(
-      'ngxtable'
-    ).style.height = `${this.service.screenH}px`;
+    this.table.nativeElement.style.maxheight = `${this.service.screenH}px`;
     this.getAllClients();
   }
 

@@ -23,7 +23,7 @@
 
   .table-container{
     margin: 10px;
-    height: calc(100% - 100px);
+    height: 100vh;
   }
   table {
     width: 100%;
@@ -87,5 +87,13 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: 15px;
+    cursor: pointer;
+  }
+
+  .clearDate{
+    position: absolute;
+    right: 55px;
+    font-size: 22px;
+    color: crimson;
     cursor: pointer;
   }
