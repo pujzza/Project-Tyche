@@ -51,29 +51,30 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
   DueAmt;
   isScreenCapture = false;
   columns = [
-    { name: 'Sno.', width: 50, headerClass: 'theader1' },
-    { prop: 'orderid', name: 'Invoice #', width: 100, headerClass: 'theader1' },
-    { prop: 'firstname', name: 'Name', width: 150, headerClass: 'theader1' },
+    { name: 'Sno.', width: 1, headerClass: 'theader1' },
+    { prop: 'orderid', name: 'Invoice #', width: 1, headerClass: 'theader1' },
+    { prop: 'firstname', name: 'Name', width: 1, headerClass: 'theader1' },
     {
       prop: 'phonenumber',
       name: 'Contact #',
-      width: 150,
+      width: 1,
       headerClass: 'theader1',
     },
     {
       prop: 'paidamount',
       name: 'Paid Amount',
-      width: 150,
+      width: 1,
       headerClass: 'theader1',
     },
     {
       prop: 'totalamount',
       name: 'Total Amount',
-      width: 150,
+      width: 1,
       headerClass: 'theader1',
     },
-    // { prop: 'dueAmt', name: 'Due Amount' },
-    { name: 'Settings', width: 220, headerClass: 'theader1 text-center' },
+    { prop: 'orderDate', name: 'Order Date',width: 1,
+    headerClass: 'theader1', },
+    { name: 'Settings', width: 2, headerClass: 'theader1 text-center' },
   ];
   @ViewChild('table', { static: true }) table: ElementRef;
   //@ViewChild('showBill' ,{static: true, read: ViewContainerRef}) showBill;
@@ -110,6 +111,8 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
     };
     this.service.GetOrders(billreq).subscribe((res) => {
       if (res.returncode === 200) {
+        res.orders.forEach(ele => { ele.orderDate = new Date(ele.orderDate).toLocaleDateString();
+        });
         this.orders = res.orders;
         this.filteredList = res.orders;
         this.orders.map((r) => {

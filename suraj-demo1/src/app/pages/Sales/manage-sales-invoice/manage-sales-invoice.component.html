@@ -23,7 +23,7 @@
     class="bootstrap fullscreen"
     [rows]="filteredList"
     style="font-family: Nunito; height: inherit"
-    [columnMode]="ColumnMode.force"
+    [columnMode]="ColumnMode.flex"
     [headerHeight]="50"
     [footerHeight]="50"
     [rowHeight]="50"
@@ -33,7 +33,7 @@
     <ngx-datatable-column
       *ngFor="let col of columns"
       name="{{ col.prop }}"
-      [width]="col.width"
+      [flexGrow]="col.width"
       [headerClass]="col.headerClass"
     >
       <ng-template let-value="value" ngx-datatable-header-template>

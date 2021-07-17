@@ -16,6 +16,7 @@ export class Orders{
     firstname?:string;
     lastname?:string;
     phonenumber?:string;
+    OrderDate?:string;
 }
 
 export class payAmt{
