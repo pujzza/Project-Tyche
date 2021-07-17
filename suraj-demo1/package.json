@@ -4,7 +4,6 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "prebuild": "npm --no-git-tag-version version patch",
     "build": "ng build --prod --aot",
     "test": "ng test",
     "lint": "ng lint",
