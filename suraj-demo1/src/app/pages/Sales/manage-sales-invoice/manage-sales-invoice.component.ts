@@ -53,7 +53,7 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
   columns = [
     { name: 'Sno.', width: 50, headerClass: 'theader1' },
     { prop: 'orderid', name: 'Invoice #', width: 100, headerClass: 'theader1' },
-    { prop: 'firstname', name: 'Name', width: 200, headerClass: 'theader1' },
+    { prop: 'firstname', name: 'Name', width: 150, headerClass: 'theader1' },
     {
       prop: 'phonenumber',
       name: 'Contact #',
