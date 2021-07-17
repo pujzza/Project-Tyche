@@ -23,6 +23,7 @@ import { CommonService } from 'src/app/services/common.service';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import domtoimage from 'dom-to-image';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-manage-sales-invoice',
@@ -30,26 +31,41 @@ import domtoimage from 'dom-to-image';
   styleUrls: ['./manage-sales-invoice.component.scss'],
 })
 export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
+  // Meta
   MetaProducts = MetaProducts;
+  ColumnMode = ColumnMode;
+
+  // Object Variables
   payAmtReq = new payAmt();
-  rows = [
-    { sno: 1, invoiceNo: 1234, date: '2/2/2020', amount: 4000, status: 'paid' },
-  ];
+  bill = new BillHistory();
+
+  // Any Variables
   searchInvoice: any;
+  htmlCanva: any;
+  width: any;
+  TotalAmt: any;
+  datefilter: any;
+  DueAmt: any;
+
+  // Boolean Variables
+  isShowBill = false;
+  ispayAmt = false;
+  isScreenCapture = false;
   loadingIndicator = true;
   disablePay = false;
   reorderable = false;
+
+  // String Variables
+  employeeId: string;
+  errorText: string;
+
+  // Number Variabless
+  screenH = 0;
+
+  // Array Variables
+  filteredList = [];
   data = [];
   orders: Orders[];
-  htmlCanva: any;
-  width: any;
-  isShowBill = false;
-  ispayAmt = false;
-  bill = new BillHistory();
-  filteredList = [];
-  TotalAmt;
-  DueAmt;
-  isScreenCapture = false;
   columns = [
     { name: 'Sno.', width: 1, headerClass: 'theader1' },
     { prop: 'orderid', name: 'Invoice #', width: 1, headerClass: 'theader1' },
@@ -72,20 +88,21 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
       width: 1,
       headerClass: 'theader1',
     },
-    { prop: 'orderDate', name: 'Order Date',width: 1,
-    headerClass: 'theader1', },
+    {
+      prop: 'orderDate',
+      name: 'Order Date',
+      width: 1,
+      headerClass: 'theader1',
+    },
     { name: 'Settings', width: 2, headerClass: 'theader1 text-center' },
   ];
+
+  // ViewChilds
   @ViewChild('table', { static: true }) table: ElementRef;
-  //@ViewChild('showBill' ,{static: true, read: ViewContainerRef}) showBill;
   @ViewChildren('allTheseThings') things: QueryList<any>;
   @ViewChild('showBill', { static: false }) showBill: ElementRef;
   @ViewChild(DatatableComponent) ngxTab: DatatableComponent;
-  screenH = 0;
 
-  ColumnMode = ColumnMode;
-  employeeId: string;
-  errorText: string;
   constructor(
     public service: CommonService,
     private changeDetectorRef: ChangeDetectorRef
@@ -98,12 +115,13 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    if(this.table){
+    if (this.table) {
       this.table.nativeElement.style.maxheight = `${this.service.screenH}px`;
     }
     this.GetOrders();
   }
 
+  // API - To get the list of Orders
   GetOrders() {
     const billreq = {
       oauth: this.service.Oauth,
@@ -111,7 +129,8 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
     };
     this.service.GetOrders(billreq).subscribe((res) => {
       if (res.returncode === 200) {
-        res.orders.forEach(ele => { ele.orderDate = new Date(ele.orderDate).toLocaleDateString();
+        res.orders.forEach((ele) => {
+          ele.orderDate = formatDate(ele.orderDate, 'dd/MM/yyyy', 'en-US');
         });
         this.orders = res.orders;
         this.filteredList = res.orders;
@@ -135,6 +154,7 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
     return this.ngxTab.bodyComponent.getRowIndex(row) + 1;
   }
 
+  // API - To get the invoice details based on OrderID
   GetBill(orderId) {
     let post = {};
     post['oauth'] = this.service.Oauth;
@@ -152,10 +172,6 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
     this.changeDetectorRef.detectChanges();
   }
 
-  ShowBill(orderId) {
-    this.GetBill(orderId);
-  }
-
   getMetaPrice(name) {
     var prod = this.MetaProducts.filter((x) => x.name.includes(name));
     if (prod && prod.length > 0) {
@@ -163,6 +179,12 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
     }
   }
 
+  // View Order Model
+  ShowBill(orderId) {
+    this.GetBill(orderId);
+  }
+
+  // Open Payment model box
   openPayAmt(row) {
     this.ispayAmt = true;
     this.payAmtReq.oauth = this.service.Oauth;
@@ -171,6 +193,7 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
     this.DueAmt = row.dueAmt;
   }
 
+  // To check if the amount entered is more than due amt.
   checkPayAmt() {
     if (Number(this.payAmtReq.paidamount) > this.DueAmt) {
       this.errorText = 'You have entered Amount more than Due';
@@ -181,6 +204,7 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
     }
   }
 
+  // API - Pay due amount
   payDue() {
     this.service.updateAmount(this.payAmtReq).subscribe((res) => {
       if (res.returncode == 200) {
@@ -191,38 +215,52 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
       }
     });
   }
+
+  // To get the Due Value
   getDue(row) {
     if (row) return Number(row['totalamount']) - Number(row['paidamount']);
     else return 0;
   }
 
+  // Search Filter - No date
   SearchInvoice() {
     const lowerValue = this.searchInvoice.toLowerCase();
     this.filteredList = this.orders.filter(
       (item) =>
-        item.orderid.toString().toLowerCase().indexOf(lowerValue) !== -1 ||
+        item.orderid.toString()?.toLowerCase().indexOf(lowerValue) !== -1 ||
         !lowerValue ||
-        item.phonenumber.toLowerCase().indexOf(lowerValue) !== -1 ||
-        item.firstname.toLowerCase().indexOf(lowerValue) !== -1
+        item.phonenumber?.toLowerCase().indexOf(lowerValue) !== -1 ||
+        item.firstname?.toLowerCase().indexOf(lowerValue) !== -1
     );
   }
 
+  // Filter by Date
+  FilterByOrderDate() {
+    let dateObj = formatDate(this.datefilter, 'dd/MM/yyyy', 'en-US');
+    if (this.datefilter != null) {
+      this.filteredList = this.orders.filter(
+        (item) =>
+          item.orderDate.toString().toLowerCase().indexOf(dateObj) !== -1
+      );
+    } else {
+      this.filteredList = this.orders;
+    }
+  }
 
-    public screenCapture()  
-    {  
-      console.log(this.things);
-      var data = document.getElementById('tableCont');
-        html2canvas(data).then(canvas => {  
-        // Few necessary setting options  
-        var imgWidth = 208;   
-        var pageHeight = 295;    
-        var imgHeight = canvas.height * imgWidth / canvas.width;  
-        var heightLeft = imgHeight;  
-        const contentDataURL = canvas.toDataURL("image/png");
-        let pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF  
-        var position = 0;  
-        pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)  
-        pdf.save('MYPdf.pdf'); // Generated PDF   
-        });  
-    }  
+  public screenCapture() {
+    console.log(this.things);
+    var data = document.getElementById('tableCont');
+    html2canvas(data).then((canvas) => {
+      // Few necessary setting options
+      var imgWidth = 208;
+      var pageHeight = 295;
+      var imgHeight = (canvas.height * imgWidth) / canvas.width;
+      var heightLeft = imgHeight;
+      const contentDataURL = canvas.toDataURL('image/png');
+      let pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF
+      var position = 0;
+      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
+      pdf.save('MYPdf.pdf'); // Generated PDF
+    });
+  }
 }
