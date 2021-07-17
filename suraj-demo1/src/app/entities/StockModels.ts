@@ -1,4 +1,3 @@
-
 export class ProductsModel {
   oauth?: string;
   ProductCategory: string;
@@ -7,14 +6,13 @@ export class ProductsModel {
 
 export class InventoryItem {
   oauth?: string;
-  ItemId:        string;
-  ItemName:      string;
-  Category:      string;
-  Bundles:       string;
+  ItemId: string;
+  ItemName: string;
+  Category: string;
+  Bundles: string;
   ItemPerBundle: string;
   AlertQuantity: string;
 }
-
 
 export class NewWarehouse {
   oauth?: string;
@@ -25,7 +23,6 @@ export class NewWarehouse {
   country: string;
   contactno: string;
   pincode: string;
-
 }
 
 export class SubProducts {
@@ -35,35 +32,37 @@ export class SubProducts {
   ProductPrice: string;
   ProductRawMaterials: string[];
   isSaved?: boolean = false;
-  ProductCategory? : string;
-  ProductId?:string
+  ProductCategory?: string;
+  ProductId?: string;
 }
 
 // ------------ Purchase Order Models -------------- //
 //START
 export class PurchaseOrder {
-  SupplierName?:    string;
+  SupplierName?: string;
   SupplierContact?: string;
-  Items?:           Item[];
-  OrderDueDate?:    Date;
-  TotalAmount?:     string;
-  oauth?:           string;
+  SupplierID?: string;
+  Items?: Item[];
+  OrderDueDate?: Date;
+  TotalAmount?: string;
+  OrderID?: string;
+  oauth?: string;
 }
 
 export class Item {
-  ItemId?:      string;
-  ItemName?:    string;
+  ItemId?: string;
+  ItemName?: string;
   BundleCount?: string;
-  Price?:       string;
-  ItemStatus?:  string;
-  Amount?:      string;
-  isSave? : boolean;
-  isEdit?:boolean;
-  errorText? : string;
+  Price?: string;
+  ItemStatus?: string;
+  Amount?: string;
+  isSave?: boolean;
+  isEdit?: boolean;
+  errorText?: string;
 
   constructor() {
     this.isEdit = true;
-    this.isSave = false;;
+    this.isSave = false;
   }
 }
 //-------------END----------------------------------------//

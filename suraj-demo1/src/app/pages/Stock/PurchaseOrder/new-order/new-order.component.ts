@@ -8,7 +8,7 @@ import { Item, PurchaseOrder } from 'src/app/entities/StockModels';
   styleUrls: ['./new-order.component.scss'],
 })
 export class NewOrderComponent implements OnInit {
-  constructor(private servie: CommonService) {}
+  constructor(private service: CommonService) {}
   statusData = ['Order', 'Return', 'Cancel'];
   itemData = [new Item()];
   rawmaterials = [];
@@ -33,7 +33,7 @@ export class NewOrderComponent implements OnInit {
   }
 
   getItems() {
-    this.servie.GetInventory().subscribe((res) => {
+    this.service.GetInventory().subscribe((res) => {
       if (res && res.returncode == 200) {
         this.rawmaterials = res.returndata;
       }
@@ -94,18 +94,34 @@ export class NewOrderComponent implements OnInit {
 
   generateOrder() {
     var postData = this.confirmOrder();
-    this.porder.oauth = this.servie.Oauth;
-    this.clearData();
+    this.porder.oauth = this.service.Oauth;
+    this.porder.Items = postData;
+    this.service.AddPurchaseOrder(this.porder).subscribe(
+      (res) => {
+        if (res && res.returncode == 200) {
+          this.service.OpenSnackBar(res.returnmessage, 'Success');
+          this.clearData();
+        } else {
+          this.service.OpenSnackBar(res.returnmessage, 'Error');
+        }
+      },
+      (error) => {
+        this.service.OpenSnackBar('Something went wrong !', 'Sorry');
+      }
+    );
+    
   }
 
   validate() {
-    if(!this.porder.SupplierContact || this.porder.SupplierContact == '' ||
-    !this.porder.SupplierName || this.porder.SupplierName == ''    
-    ){
+    if (
+      !this.porder.SupplierContact ||
+      this.porder.SupplierContact == '' ||
+      !this.porder.SupplierName ||
+      this.porder.SupplierName == ''
+    ) {
       this.errorText = 'Enter Supplier Details';
       this.isError = true;
-    }
-    else if (this.itemData.filter((x) => !x.isSave && x.isEdit)?.length > 0) {
+    } else if (this.itemData.filter((x) => !x.isSave && x.isEdit)?.length > 0) {
       this.errorText = 'Save all your data';
       this.isError = true;
     } else {
@@ -115,7 +131,7 @@ export class NewOrderComponent implements OnInit {
     }
   }
 
-  clearData(){
+  clearData() {
     this.porder = new PurchaseOrder();
     this.itemData = [new Item()];
   }
