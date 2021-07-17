@@ -94,13 +94,13 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.table.nativeElement.style.height = `${this.service.screenH}px`;
+    this.table.nativeElement.style.maxheight = `${this.service.screenH}px`;
   }
 
   ngOnInit(): void {
-    document.getElementById(
-      'ngxtable'
-    ).style.height = `${this.service.screenH}px`;
+    if(this.table){
+      this.table.nativeElement.style.maxheight = `${this.service.screenH}px`;
+    }
     this.GetOrders();
   }
 
@@ -187,6 +187,7 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
         this.GetOrders();
         this.ispayAmt = false;
       } else {
+        this.payAmtReq = new payAmt();
       }
     });
   }
@@ -211,7 +212,6 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
     {  
       console.log(this.things);
       var data = document.getElementById('tableCont');
-      
         html2canvas(data).then(canvas => {  
         // Few necessary setting options  
         var imgWidth = 208;   

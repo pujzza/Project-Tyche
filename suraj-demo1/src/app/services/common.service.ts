@@ -15,7 +15,7 @@ export class CommonService {
   screenH;
 
   constructor(private http: HttpClient, private _snackBar: MatSnackBar) {
-    this.screenH = window.screen.availHeight;
+    this.screenH = window.screen.height - 100;
   }
 
   ToLogin(req: loginModel): Observable<any> {

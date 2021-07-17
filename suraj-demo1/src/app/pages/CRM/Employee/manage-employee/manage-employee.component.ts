@@ -36,14 +36,14 @@ export class ManageEmployeeComponent implements OnInit,AfterViewInit {
    constructor(public service: CommonService) { }
 
   ngOnInit(): void {
-    document.getElementById('ngxtable').style.height = `${
+    this.table.nativeElement.style.maxheight = `${
       screen.height - 170
     }px`;
     this.GetAllEmployees();
   }
 
   ngAfterViewInit(): void {
-    this.table.nativeElement.style.height = `${this.service.screenH}px`;
+    this.table.nativeElement.style.maxheight = `${this.service.screenH}px`;
   }
 
   GetAllEmployees() {
