@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { NavigationEnd, Router } from '@angular/router';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ClientSub, EmployeeSub, InventorySub, ItemManagerSub, PurchaseSub, SalesSub, StockReturnSub } from './home-constants';
@@ -26,6 +27,7 @@ export class HomeComponent implements OnInit,AfterViewInit {
   isInventory = false;
   isSelected = 'Dashboard';
   appName = 'Project Tyche';
+  appVersion:any;
   loggedInName = '';
 
   //Imports constants
@@ -38,50 +40,18 @@ export class HomeComponent implements OnInit,AfterViewInit {
   InventorySub=InventorySub;
 
   constructor(private route: Router) {
-    this.isSelected = this.route.url.split('/Home/')[1];
-    this.route.events.subscribe(e => {
-      this.isSelected = this.route.url.split('/Home/')[1];
-      this.loggedInName = localStorage.getItem('UserName');
-      if(this.isSelected.includes('ItemManager')){
-        this.isItemManager = true
-      } else {
-        this.isItemManager = false
-      }
-      if(this.isSelected.includes('Sales')){
-        this.isSales = true
-      } else {
-        this.isSales = false
-      }
-      if(this.isSelected.includes('Purchase')){
-        this.isPurchaseOrder = true
-      } else {
-        this.isPurchaseOrder = false
-      }
-      if(this.isSelected.includes('StockReturn')){
-        this.isStockReturn = true
-      } else {
-        this.isStockReturn = false
-      }
-      if(this.isSelected.includes('Clients')){
-        this.isClient = true
-      } else {
-        this.isClient = false
-      }
-      if(this.isSelected.includes('Employee')){
-        this.isEmployee = true
-      } else {
-        this.isEmployee = false
-      }
-    });
+
   }
 
   ngOnInit(): void {
+    this.appVersion = environment.appVersion;
     if (this.isSideNavOpen) {
       this.openNav();
     }
   }
 
   ngAfterViewInit() {
+       
   }
 
   openNav() {
@@ -108,4 +78,42 @@ export class HomeComponent implements OnInit,AfterViewInit {
   logout(){
     this.route.navigateByUrl('');
   }
+
+  // checkRoutes(){
+  //   this.isSelected = this.route.url.split('/Home/')[1];
+  //   this.route.events.subscribe(e => {
+  //     this.isSelected = this.route.url.split('/Home/')[1];
+  //     this.loggedInName = localStorage.getItem('UserName');
+  //     if(this.isSelected.includes('ItemManager')){
+  //       this.isItemManager = true
+  //     } else {
+  //       this.isItemManager = false
+  //     }
+  //     if(this.isSelected.includes('Sales')){
+  //       this.isSales = true
+  //     } else {
+  //       this.isSales = false
+  //     }
+  //     if(this.isSelected.includes('Purchase')){
+  //       this.isPurchaseOrder = true
+  //     } else {
+  //       this.isPurchaseOrder = false
+  //     }
+  //     if(this.isSelected.includes('StockReturn')){
+  //       this.isStockReturn = true
+  //     } else {
+  //       this.isStockReturn = false
+  //     }
+  //     if(this.isSelected.includes('Clients')){
+  //       this.isClient = true
+  //     } else {
+  //       this.isClient = false
+  //     }
+  //     if(this.isSelected.includes('Employee')){
+  //       this.isEmployee = true
+  //     } else {
+  //       this.isEmployee = false
+  //     }
+  //   });
+  // }
 }

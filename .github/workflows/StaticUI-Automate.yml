@@ -6,9 +6,9 @@ name: Build Static App
 on:
   # Triggers the workflow on push or pull request events but only for the Puja branch
   push:
-    branches: [ Puja ]
-  pull_request:
-    branches: [ Puja ]
+    branches: [dev_main]
+    paths: 
+      - './StaticUI/**'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:

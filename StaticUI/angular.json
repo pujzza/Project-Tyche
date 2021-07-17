@@ -37,7 +37,7 @@
           },
           "configurations": {
             "production": {
-              "baseHref": "/billappv6/",
+              "baseHref": "/StaticBillUI/",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",

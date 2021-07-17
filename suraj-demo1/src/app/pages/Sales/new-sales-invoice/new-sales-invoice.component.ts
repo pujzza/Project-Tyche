@@ -82,13 +82,14 @@ export class NewSalesInvoiceComponent implements OnInit, AfterViewInit {
 
   productSelection(product) {
     this.selectProduct = product;
+    this.selectedMaterial = null;
+    this.selectedSize = null;
     this.ProdMaterial = [];
     let material = this.products.filter(item => item.ProductCategory.toLowerCase().includes(this.selectProduct.toLowerCase()));
     if(material){
       this.ProdMaterial = Array.from(new Set(material.map((item) => item.ProductMaterial.toLowerCase())));
-      if(this.ProdMaterial && this.ProdMaterial.length == 1){
-        this.selectedMaterial = this.ProdMaterial[0];
-        let size = this.products.filter(item => (item.ProductCategory.toLowerCase().includes(this.selectProduct.toLowerCase()) && item.ProductMaterial.toLowerCase().includes(this.selectedMaterial.toLowerCase())));
+      if(this.ProdMaterial){
+        let size = this.products.filter(item => (item.ProductCategory.toLowerCase().includes(this.selectProduct.toLowerCase())));
         if(size){
           this.ProdSize = Array.from(new Set(size.map((item) => item.ProductSize.toLowerCase())));
           if(this.ProdSize && this.ProdSize.length == 1){
@@ -200,8 +201,8 @@ export class NewSalesInvoiceComponent implements OnInit, AfterViewInit {
   }
 
   addItem() {
-    this.isMaterialError = this.selectedMaterial == '' ? true : false;
-    this.isSizeError = this.selectedSize == '' ? true : false;
+    this.isMaterialError = this.selectedMaterial == '' || !this.selectedMaterial? true : false;
+    this.isSizeError = this.selectedSize == '' || !this.selectedSize ? true : false;
     if (this.isSizeError || this.isMaterialError) {
       return;
     } else {
@@ -347,8 +348,8 @@ export class NewSalesInvoiceComponent implements OnInit, AfterViewInit {
         let prod = this.filerProduct(item['prodname'],item['prodmaterial'],item['prodsize']); 
         if(prod){
           let postparam = {};
-          postparam['ItemId'] = prod[0].ProductId;
-          postparam['Amount'] = item['prodqty'];
+          postparam['ItemId'] = prod[0].ProductRawMaterials.toString();
+          postparam['Amount'] = item['prodqty'].toString();
           postparam['oauth'] = this.service.Oauth;
           this.service.InventoryDropItem(postparam).subscribe(res => {
             if(res && res.returncode == 200){

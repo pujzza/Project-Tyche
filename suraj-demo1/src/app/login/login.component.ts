@@ -48,9 +48,9 @@ export class LoginComponent implements OnInit {
         }
       });
     }
-    this.router.navigateByUrl('Home');
-    // this.authService.login = true;
-    // this.router.navigateByUrl('Home/Customer');
+    // this.router.navigateByUrl('Home');
+    // // this.authService.login = true;
+    // // this.router.navigateByUrl('Home/Customer');
   }
 
   validateLogin(): boolean {

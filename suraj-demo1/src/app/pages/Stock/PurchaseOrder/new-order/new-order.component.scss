@@ -1,0 +1,64 @@
+*{
+    font-family: Nunito;
+  }
+
+  
+  .table-container{
+    margin: 10px;
+  }
+  table {
+    width: 100%;
+  }
+  td,th{
+    padding: 0px 10px;
+    height: 50px;
+    width: 250px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space:nowrap;
+    font-size: 14px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  
+  .plus-icon{
+    height: inherit;
+    width: 15px;
+    background: url(../../../../../assets/Icons/plus-solid.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 15px;
+    cursor: pointer;
+
+  }
+  
+  .delete-icon{
+    height: inherit;
+    width: 15px;
+    background: url(../../../../../assets/Icons/trash-alt-regular.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 15px;
+    cursor: pointer;
+
+  }
+  .edit-icon{
+    height: inherit;
+    width: 15px;
+    background: url(../../../../../assets/Icons/pen-solid.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 15px;
+    cursor: pointer;
+
+  }
+  
+  .save-icon{
+    height: inherit;
+    width: 15px;
+    background: url(../../../../../assets/Icons/save-regular.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 15px;
+    cursor: pointer;
+  }

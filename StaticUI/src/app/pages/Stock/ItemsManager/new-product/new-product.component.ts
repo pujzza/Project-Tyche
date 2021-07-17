@@ -35,11 +35,11 @@ export class NewProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.service.GetInventory().subscribe((res) => {
-    //   if (res && res.returncode == 200) {
-    //     this.itemList = res.returndata;
-    //   }
-    // });
+    this.service.GetInventory().subscribe((res) => {
+      if (res && res.returncode == 200) {
+        this.itemList = res.returndata;
+      }
+    });
   }
 
   AddProduct() {
@@ -65,7 +65,7 @@ export class NewProductComponent implements OnInit {
       //     this.service.OpenSnackBar('Something went wrong !','Sorry');
       //   }
       // );
-
+      this.service.OpenSnackBar('Product Created','Success');
     }
   }
 

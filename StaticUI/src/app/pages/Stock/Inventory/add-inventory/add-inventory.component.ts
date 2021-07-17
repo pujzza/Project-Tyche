@@ -31,6 +31,7 @@ export class AddInventoryComponent implements OnInit {
     //     this.service.OpenSnackBar('Something went wrong','SORRY');
     //   }
     // );
+    this.service.OpenSnackBar('Inventory Created!','SUCCESS');
   }
 
 }

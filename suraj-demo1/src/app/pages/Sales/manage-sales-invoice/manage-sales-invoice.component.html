@@ -18,7 +18,7 @@
     </div>
   </div>
 </div>
-<div id="ngxtable" class="table-container">
+<div id="ngxtable" class="table-container" #table>
   <ngx-datatable
     class="bootstrap fullscreen"
     [rows]="filteredList"
@@ -78,34 +78,36 @@
   </ngx-datatable>
 </div>
 
-<div #showBill *ngIf="isShowBill" class="checkoutModel">
-  <div class="checkoutModel-content">
-    <div class="float-right cursor-pointer" (click)="isShowBill = !isShowBill">
-      X
-    </div>
-    <!-- <div class="d-flex">
-      <div class="col-6"> Order #
+
+  <div  class="checkoutModel" *ngIf="isShowBill" #showBill>
+    <div class="checkoutModel-content">
+      <div class="float-right cursor-pointer" (click)="isShowBill = !isShowBill">
+        X
       </div>
-      <div class="col-6">{{bill.orderid}}</div>
-    </div> -->
-    <table class="table-container">
-      <tr>
-        <th colspan="1">Product</th>
-        <th colspan="1">Material</th>
-        <th colspan="1">Size</th>
-        <th colspan="1">Qty</th>
-        <th colspan="1">Amount</th>
-      </tr>
-      <tr *ngFor="let prod of bill.products">
-        <td>{{ prod.product }}</td>
-        <td>{{ prod.material }}</td>
-        <td>{{ prod.size }}</td>
-        <td>{{ prod.count }} X {{ getMetaPrice(prod.product) }}</td>
-        <td>{{ prod.price }}</td>
-      </tr>
-    </table>
-  </div>
-</div>
+      <!-- <div class="d-flex">
+        <div class="col-6"> Order #
+        </div>
+        <div class="col-6">{{bill.orderid}}</div>
+      </div> -->
+      <table class="table-container" id="tableCont">
+        <tr>
+          <th colspan="1">Product</th>
+          <th colspan="1">Material</th>
+          <th colspan="1">Size</th>
+          <th colspan="1">Qty</th>
+          <th colspan="1">Amount</th>
+        </tr>
+        <tr #allTheseThings *ngFor="let prod of bill.products" >
+          <td>{{ prod.product }}</td>
+          <td>{{ prod.material }}</td>
+          <td>{{ prod.size }}</td>
+          <td>{{ prod.count }} X {{ getMetaPrice(prod.product) }}</td>
+          <td>{{ prod.price }}</td>
+        </tr>
+      </table>
+    </div>
+  </div>  
+
 
 <div #payAmt *ngIf="ispayAmt" class="checkoutModel">
   <div class="checkoutModel-content">

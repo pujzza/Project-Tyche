@@ -16,7 +16,7 @@
     </div>
   </div>
 </div>
-<div id="ngxtable" class="table-container">
+<div id="ngxtable" class="table-container" #table>
   <ngx-datatable
     class="bootstrap fullscreen"
     [rows]="filteredList"
@@ -44,7 +44,7 @@
         <div *ngIf="col.name.includes('Settings')">
           <div class="d-flex" style="height: 30px">
             <div class="col-2 edit-icon"></div>
-            <div class="col-2 delete-icon"></div>
+            <div class="col-2 delete-icon" (click)="DeleteItem(row)"></div>
           </div>
         </div>
       </ng-template>

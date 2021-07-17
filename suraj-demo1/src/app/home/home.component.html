@@ -2,7 +2,10 @@
   <div class="header d-flex-rev">
     <div class="user-down-arrow" (click) = "isprofclicked = !isprofclicked"></div>
     <div class="user-icon"></div>
-    <div class="appname">{{appName}}</div>
+    <div class="appname flex-column">
+      <div>{{appName}} </div>
+      <sup>v{{appVersion}}</sup>
+    </div>
   </div>
   <div class="d-flex pagecontainer">
   <div id="mySidebar" class="sidebar" #sidenav>
@@ -74,13 +77,13 @@
               {{subs.title}}
           </div>
       </div>
-      <div class="cat-label" (click)="isStockReturn = !isStockReturn">
+      <!-- <div class="cat-label" (click)="isStockReturn = !isStockReturn">
           <div>Stock Return</div>
         <div
           class="push-left"
           [ngClass]="{ 'down-arrow': isStockReturn, 'right-arrow': !isStockReturn }"
         ></div>
-      </div>
+      </div> -->
       <div *ngIf="isStockReturn" class="sub-catg-content">
           <div *ngFor="let subs of StockReturnSub" class="sub-catg" (click)="NavigatePages(subs.route);isSelected=subs.route"
           [ngClass]="{'SelectedLabel':isSelected.includes(subs.route)}">
@@ -125,7 +128,7 @@
   </div>
   </div>
   
-  <div class="logout-content" *ngIf="isprofclicked">
+  <div class="logout-content" *ngIf="isprofclicked" id="logoutDom">
     <div (click)="logout()">Logout</div>
   </div>  
 </div>

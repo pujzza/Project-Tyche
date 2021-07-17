@@ -1,5 +1,5 @@
 import { InventoryItem } from 'src/app/entities/StockModels';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { ColumnMode, SortType } from '@swimlane/ngx-datatable';
 import { CommonService } from 'src/app/services/common.service';
 
@@ -8,9 +8,10 @@ import { CommonService } from 'src/app/services/common.service';
   templateUrl: './manage-inventory.component.html',
   styleUrls: ['./manage-inventory.component.scss']
 })
-export class ManageInventoryComponent implements OnInit {
+export class ManageInventoryComponent implements OnInit,AfterViewInit {
 data =[];
   loadingIndicator = true;
+  @ViewChild('table', { static: true }) table: ElementRef;
   reorderable = true;
   ColumnMode = ColumnMode;
   SortType = SortType;
@@ -28,20 +29,24 @@ data =[];
   Item = new InventoryItem();
   constructor(public service: CommonService) {
   }
+  ngAfterViewInit(): void {
+    this.table.nativeElement.style.height = `${this.service.screenHeight}px`;
+  }
 
   ngOnInit(): void {
+    document.getElementById('ngxtable').style.height = `${this.service.screenHeight}px`;
     this.GetData();
   }
 
   GetData(){
-    // this.service.GetInventory().subscribe(
-    //   res => {
-    //     if(res && res.returncode == 200){
-    //       this.data = res.returndata;
-    //       this.filteredList = res.returndata;
-    //     }
-    //   }
-    // );
+    this.service.GetInventory().subscribe(
+      res => {
+        if(res && res.returncode == 200){
+          this.data = res.returndata;
+          this.filteredList = res.returndata;
+        }
+      }
+    );
   }
 
   UpdateInventory(){
@@ -58,6 +63,7 @@ data =[];
     //     this.service.OpenSnackBar('Something went wrong','SORRY');
     //   }
     // )
+    this.service.OpenSnackBar('Inventory Updated', 'SUCCESS');
     this.closeDialog();
   }
 
