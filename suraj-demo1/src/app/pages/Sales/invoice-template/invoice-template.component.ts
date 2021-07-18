@@ -1,7 +1,8 @@
 import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { CommonService } from 'src/app/services/common.service';
-
+import { jsPDF } from 'jspdf';
+import html2canvas from 'html2canvas';
 @Component({
   selector: 'app-invoice-template',
   templateUrl: './invoice-template.component.html',
@@ -25,7 +26,23 @@ export class InvoiceTemplateComponent implements OnInit {
     this.currentdate = new Date().toLocaleDateString();
   }
 
-  Download() {}
+  Download() {
+    var data = document.getElementById('downloadBody');
+    html2canvas(data).then((canvas) => {
+      // Few necessary setting options
+      var imgWidth = 208;
+      var pageHeight = 295;
+      var imgHeight = (canvas.height * imgWidth) / canvas.width;
+      var heightLeft = imgHeight;
+
+      const contentDataURL = canvas.toDataURL('image/png');
+      let pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF
+      var position = 0;
+      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
+      pdf.save('MYPdf.pdf'); // Generated PDF
+    });
+  }
+
   GetBill(orderId) {
     let post = {};
     post['oauth'] = this.service.Oauth;
