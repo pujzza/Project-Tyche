@@ -19,8 +19,9 @@
     </div>
   </div>
 </div>
+<div *ngIf="isLoading"><loader></loader></div>
 
-<div id="ngxtable" class="float-none table-container" #table>
+<div id="ngxtable" class="float-none table-container" #table *ngIf="!isLoading">
   <ngx-datatable
     class="bootstrap fullscreen"
     [rows]="filteredList"
