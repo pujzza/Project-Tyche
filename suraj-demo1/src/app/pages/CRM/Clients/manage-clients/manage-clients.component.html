@@ -14,71 +14,82 @@
       />
       <div class="input-group-prepend">
         <span *ngIf="!searchClient" class="input-group-text search-icon"></span>
-        <span  class="input-group-text clearSearch" *ngIf="searchClient" (click)="searchClient='';SearchClient()">x</span>
-
+        <span
+          class="input-group-text clearSearch"
+          *ngIf="searchClient"
+          (click)="searchClient = ''; SearchClient()"
+          >x</span
+        >
       </div>
     </div>
   </div>
 </div>
-<div id="ngxtable" class="table-container" #table>
+<div *ngIf="isLoading"><loader></loader></div>
+<div id="ngxtable" class="table-container" #table *ngIf="!isLoading">
   <ngx-datatable
-  class="bootstrap fullscreen"
-  [rows]="filteredList"
-  style="font-family: Nunito; height: inherit"
-  [columnMode]="ColumnMode.force"
-  [headerHeight]="50"
-  [footerHeight]="50"
-  [rowHeight]="50"
-  [scrollbarH]="true"
-  [scrollbarV]="true"
->
-  <ngx-datatable-column
-    *ngFor="let col of columns"
-    name="{{ col.prop }}"
-    [width]="col.width"
+    class="bootstrap fullscreen"
+    [rows]="filteredList"
+    style="font-family: Nunito; height: inherit"
+    [columnMode]="ColumnMode.force"
+    [headerHeight]="50"
+    [footerHeight]="50"
+    [rowHeight]="50"
+    [scrollbarH]="true"
+    [scrollbarV]="true"
   >
-    <ng-template let-value="value" ngx-datatable-header-template>
-      <span class="theader1">{{ col.name }}</span>
-    </ng-template>
-    <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
-      <div *ngIf="!col.name.includes('Settings')" [title]="row[col.prop]">{{ row[col.prop] }}</div>
-      <div *ngIf="col.name.includes('Settings')"><div class="d-flex" style="height: 30px;">
-        <div class="col-2 view-icon" (click)="toViewClient(row)"></div>
-        <div class="col-2 edit-icon"></div>
-        <div class="col-2 delete-icon" (click)="DeleteClient(row)"></div>
-      </div></div>
-    </ng-template>
-  </ngx-datatable-column>
-</ngx-datatable>
+    <ngx-datatable-column
+      *ngFor="let col of columns"
+      name="{{ col.prop }}"
+      [width]="col.width"
+    >
+      <ng-template let-value="value" ngx-datatable-header-template>
+        <span class="theader1">{{ col.name }}</span>
+      </ng-template>
+      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+        <div *ngIf="!col.name.includes('Settings')" [title]="row[col.prop]">
+          {{ row[col.prop] }}
+        </div>
+        <div *ngIf="col.name.includes('Settings')">
+          <div class="d-flex" style="height: 30px">
+            <div class="col-2 view-icon" (click)="toViewClient(row)"></div>
+            <div class="col-2 edit-icon"></div>
+            <div class="col-2 delete-icon" (click)="DeleteClient(row)"></div>
+          </div>
+        </div>
+      </ng-template>
+    </ngx-datatable-column>
+  </ngx-datatable>
 </div>
-
 
 <div #ViewClient *ngIf="isviewClient" class="checkoutModel">
   <div class="checkoutModel-content">
     <div class="d-flex">
       <div class="col-3">Name:</div>
-      <div class="col-9">{{viewClient.OrgName}}</div>
+      <div class="col-9">{{ viewClient.OrgName }}</div>
     </div>
     <div class="d-flex">
       <div class="col-3">Contact No:</div>
-      <div class="col-9">{{viewClient.BillingPhone}}</div>
+      <div class="col-9">{{ viewClient.BillingPhone }}</div>
     </div>
     <div class="d-flex">
       <div class="col-3">Address:</div>
-      <div class="col-9">{{viewClient.BillingAddress}}, {{viewClient.BillingCity}},{{viewClient.BillingCountry}},{{viewClient.BillingPostBox}}</div>
+      <div class="col-9">
+        {{ viewClient.BillingAddress }}, {{ viewClient.BillingCity }},{{
+          viewClient.BillingCountry
+        }},{{ viewClient.BillingPostBox }}
+      </div>
     </div>
     <div class="d-flex">
       <div class="col-3">Email ID:</div>
-      <div class="col-9">{{viewClient.BillingEmail}}</div>
+      <div class="col-9">{{ viewClient.BillingEmail }}</div>
     </div>
     <div class="d-flex">
       <div class="col-3">Tax ID:</div>
-      <div class="col-9">{{viewClient.BillingTaxId}}</div>
+      <div class="col-9">{{ viewClient.BillingTaxId }}</div>
     </div>
-    <hr>
-    <div align='center'>
+    <hr />
+    <div align="center">
       <div class="btn btn-danger" (click)="isviewClient = false">Close</div>
     </div>
   </div>
-
 </div>
