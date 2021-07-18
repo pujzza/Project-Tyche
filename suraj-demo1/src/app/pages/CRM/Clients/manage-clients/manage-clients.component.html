@@ -13,7 +13,9 @@
         (keyup)="SearchClient()"
       />
       <div class="input-group-prepend">
-        <span class="input-group-text search-icon"></span>
+        <span *ngIf="!searchClient" class="input-group-text search-icon"></span>
+        <span  class="input-group-text clearSearch" *ngIf="searchClient" (click)="searchClient='';SearchClient()">x</span>
+
       </div>
     </div>
   </div>

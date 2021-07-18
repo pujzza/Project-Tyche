@@ -45,7 +45,7 @@ export class NewSalesInvoiceComponent implements OnInit, AfterViewInit {
   isMaterialError = false;
   isSizeError = false;
   currentOrderId: any;
-  paidAmt: number;
+  paidAmt: number = 0;
   isClient = false;
   isNewCustomer = false;
   createCustomerError: boolean = false;

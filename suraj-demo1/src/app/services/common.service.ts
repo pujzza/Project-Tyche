@@ -11,15 +11,19 @@ import { loginModel } from '../entities/LoginModel';
 export class CommonService {
   // Do not edit this Oauth
   Oauth = 'RVn06PJIj36gt40zSAmLwAD742f';
+  isLoggedIn = false;
   screenH;
   downloadOrder:any;
 
   constructor(private http: HttpClient, private _snackBar: MatSnackBar) {
-    this.screenH = window.screen.availHeight;
+    this.screenH = window.screen.height - 100;
   }
 
   ToLogin(req: loginModel): Observable<any> {
-    return this.http.post('http://www.cyperinfotech.com/cyperinfotech/login.php', req);
+    return this.http.post(
+      'http://www.cyperinfotech.com/cyperinfotech/login.php',
+      req
+    );
   }
 
   CustomerValidate(req: any): Observable<any> {
@@ -151,19 +155,6 @@ export class CommonService {
     );
   }
 
-  DeleteClientById(req: any): Observable<any> {
-    return this.http.post(
-      'http://api.cyperinfotech.com/Client/DeleteClient.php',
-      req
-    );
-  }
-  DeleteInventory(req: any): Observable<any> {
-    return this.http.post(
-      'http://api.cyperinfotech.com/Inventory/DeleteInventoryItem.php',
-      req
-    );
-  }
-
   DeleteItem(req: any): Observable<any> {
     return this.http.post(
       'http://cyperinfotech.com/cyperinfotech/api/Delete.php',
@@ -180,6 +171,19 @@ export class CommonService {
   CreateEmployee(req: any): Observable<any> {
     return this.http.post(
       'http://api.cyperinfotech.com/Employee/CreateEmployeeCred.php',
+      req
+    );
+  }
+
+  GetPurchaseOrders(): Observable<any> {
+    return this.http.get(
+      'http://cyperinfotech.com/cyperinfotech/api/Purchase/GetOrderDetails.php'
+    );
+  }
+
+  AddPurchaseOrder(req: any): Observable<any> {
+    return this.http.post(
+      'http://cyperinfotech.com/cyperinfotech/api/Purchase/CreateOrder.php',
       req
     );
   }

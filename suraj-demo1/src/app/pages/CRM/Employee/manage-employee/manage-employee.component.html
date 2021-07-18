@@ -1,8 +1,28 @@
-<div class="page-header1">Employees</div>
+<div class="d-flex">
+  <div class="col-3" style="padding-top: 10px">
+    <div class="page-header1">Employees</div>
+  </div>
+  <div class="col-5"></div>
+  <div class="col-4" style="padding-top: 10px">
+    <div class="input-group">
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="searchEmployee"
+        placeholder="Search Employee"
+        (keyup)="SearchEmployeeMethod()"
+      />
+      <div class="input-group-prepend">
+        <span *ngIf="!searchEmployee" class="input-group-text search-icon"></span>
+        <span  class="input-group-text clearSearch" *ngIf="searchEmployee" (click)="searchEmployee='';SearchEmployeeMethod()">x</span>
+      </div>
+    </div>
+  </div>
+</div>
 <div id="ngxtable" class="table-container" #table>
   <ngx-datatable
   class="bootstrap fullscreen"
-  [rows]="EmployeeData"
+  [rows]="filteredList"
   style="font-family: Nunito; height: inherit"
   [columnMode]="ColumnMode.force"
   [headerHeight]="50"

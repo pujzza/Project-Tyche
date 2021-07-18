@@ -2,8 +2,18 @@
   <div class="col-3" style="padding-top: 10px">
     <div class="page-header1">Invoices</div>
   </div>
-  <div class="col-5"></div>
-  <div class="col-4" style="padding-top: 10px">
+  <div class="col-3"></div>
+  <div class="col-3 d-flex" style="padding-top: 10px">
+      <input
+        type="date"
+        class="form-control"
+        [(ngModel)]="datefilter"
+        placeholder="Filter by Date"
+        (change)="FilterByOrderDate()"
+      />
+      <span class="clearDate" *ngIf="datefilter" (click)="datefilter=null;FilterByOrderDate()">x</span>
+  </div>
+  <div class="col-3" style="padding-top: 10px">
     <div class="input-group">
       <input
         type="text"
@@ -13,17 +23,18 @@
         (keyup)="SearchInvoice()"
       />
       <div class="input-group-prepend">
-        <span class="input-group-text search-icon"></span>
+        <span *ngIf="!searchInvoice" class="input-group-text search-icon"></span>
+        <span  class="input-group-text clearSearch" *ngIf="searchInvoice" (click)="searchInvoice='';SearchInvoice()">x</span>
       </div>
     </div>
   </div>
 </div>
 <div id="ngxtable" class="table-container" #table>
   <ngx-datatable
-    class="bootstrap fullscreen"
+    class="bootstrap"
     [rows]="filteredList"
     style="font-family: Nunito; height: inherit"
-    [columnMode]="ColumnMode.force"
+    [columnMode]="ColumnMode.flex"
     [headerHeight]="50"
     [footerHeight]="50"
     [rowHeight]="50"
@@ -33,7 +44,7 @@
     <ngx-datatable-column
       *ngFor="let col of columns"
       name="{{ col.prop }}"
-      [width]="col.width"
+      [flexGrow]="col.width"
       [headerClass]="col.headerClass"
     >
       <ng-template let-value="value" ngx-datatable-header-template>
@@ -44,7 +55,9 @@
         <div
           *ngIf="!col.name.includes('Settings') && !col.name.includes('Sno.')"
         >
-          {{ value }}
+        <span *ngIf="col.name.includes('orderDate')">{{ value | date: 'dd/MM/yy' }}</span>
+        <span *ngIf="!col.name.includes('orderDate')">{{ value }}</span>
+          
         </div>
         <div *ngIf="col.name.includes('Settings')">
           <div class="d-flex" style="height: 30px">

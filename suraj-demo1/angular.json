@@ -39,7 +39,7 @@
           },
           "configurations": {
             "production": {
-              "baseHref": "/billappv6/",
+              "baseHref": "./",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",

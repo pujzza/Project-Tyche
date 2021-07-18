@@ -9,7 +9,7 @@
     </div>
     <div class="col-4">
       <label class="form-label">Supplier Contact</label>
-      <input class="form-control" type="tel" [(ngModel)]="porder.SupplierContact" maxlength="10"/>
+      <input class="form-control" type="number" [(ngModel)]="porder.SupplierContact" maxlength="10"/>
     </div>
     <div class="col-4">
       <label class="form-label">Order Due Date</label>
@@ -47,7 +47,7 @@
         <td>
           <div *ngIf="!item.isEdit && item.isSave">{{item.BundleCount}}</div>
           <div *ngIf="item.isEdit && !item.isSave">
-            <input class="form-control" [(ngModel)]="item.BundleCount"/>
+            <input class="form-control" [(ngModel)]="item.BundleCount" type="number"/>
           </div>
         </td>
         <td>
@@ -61,7 +61,7 @@
         <td>
           <div *ngIf="!item.isEdit && item.isSave">{{item.Price}}</div>
           <div *ngIf="item.isEdit && !item.isSave">
-            <input class="form-control" [(ngModel)]="item.Price"/>
+            <input class="form-control" [(ngModel)]="item.Price" type="number"/>
           </div>
         </td>
         <td>
