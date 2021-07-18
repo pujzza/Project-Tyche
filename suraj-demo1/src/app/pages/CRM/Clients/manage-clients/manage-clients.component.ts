@@ -16,19 +16,13 @@ import { DeleteItemModel } from 'src/app/entities/HomeModel';
   styleUrls: ['./manage-clients.component.scss'],
 })
 export class ManageClientsComponent implements OnInit, AfterViewInit {
+  // Meta
+  ColumnMode = ColumnMode;
+
+  // Array Variables
   rows = [
     { sno: 1, name: 'John Doe', email: 'jd@master.com', phoneno: 345723947 },
   ];
-  loadingIndicator = true;
-  reorderable = true;
-  data = [];
-  clientData: Clients[];
-  isviewClient = false;
-  viewClient = new Clients();
-  filteredList = [];
-  searchClient: any;
-  @ViewChild('table', { static: false }) table: ElementRef;
-
   columns = [
     { prop: 'id', name: 'Client ID', width: 50 },
     { prop: 'OrgName', name: 'Client Name', width: 100 },
@@ -36,8 +30,24 @@ export class ManageClientsComponent implements OnInit, AfterViewInit {
     { prop: 'BillingPhone', name: 'Contact No.', width: 70 },
     { name: 'Settings', width: 100 },
   ];
+  data = [];
+  clientData: Clients[];
+  filteredList = [];
 
-  ColumnMode = ColumnMode;
+  // Boolean Variables
+  isLoading = true;
+  reorderable = true;
+  isviewClient = false;
+
+  //Object Variables
+  viewClient = new Clients();
+
+  //Any Variabls
+  searchClient: any;
+
+  //View Childs/ DOM Elements
+  @ViewChild('table', { static: false }) table: ElementRef;
+
   constructor(public service: CommonService) {}
   ngAfterViewInit(): void {
     this.table.nativeElement.style.maxheight = `${this.service.screenH}px`;
@@ -50,13 +60,22 @@ export class ManageClientsComponent implements OnInit, AfterViewInit {
     this.getAllClients();
   }
 
+  // API- GET Data
   getAllClients() {
-    this.service.GetAllClients('').subscribe((res) => {
-      if (res && res.returncode == 200) {
-        this.clientData = res.returndata;
-        this.filteredList = res.returndata;
+    this.service.GetAllClients('').subscribe(
+      (res) => {
+        if (res && res.returncode == 200) {
+          this.clientData = res.returndata;
+          this.filteredList = res.returndata;
+          this.isLoading = false;
+        } else {
+          this.isLoading = false;
+        }
+      },
+      (err) => {
+        this.isLoading = false;
       }
-    });
+    );
   }
 
   toViewClient(row) {
@@ -64,6 +83,7 @@ export class ManageClientsComponent implements OnInit, AfterViewInit {
     this.viewClient = row;
   }
 
+  //Delete Client
   DeleteClient(item) {
     let postparam = new DeleteItemModel();
     postparam.oauth = this.service.Oauth;
@@ -84,6 +104,7 @@ export class ManageClientsComponent implements OnInit, AfterViewInit {
     );
   }
 
+  // Search Client
   SearchClient() {
     const lowerValue = this.searchClient.toLowerCase();
     this.filteredList = this.clientData.filter(

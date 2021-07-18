@@ -32,6 +32,7 @@ import { AddInventoryComponent } from './pages/Stock/Inventory/add-inventory/add
 import { ManageInventoryComponent } from './pages/Stock/Inventory/manage-inventory/manage-inventory.component';
 import {LocationStrategy, HashLocationStrategy} from '@angular/common';
 import { InvoiceTemplateComponent } from './pages/Sales/invoice-template/invoice-template.component';
+import { LoaderComponent } from './loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { InvoiceTemplateComponent } from './pages/Sales/invoice-template/invoice
     ManageEmployeeComponent,
     AddInventoryComponent,
     ManageInventoryComponent,
-    InvoiceTemplateComponent
+    InvoiceTemplateComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,

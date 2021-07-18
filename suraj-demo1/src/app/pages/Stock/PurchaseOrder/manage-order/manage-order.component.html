@@ -14,13 +14,19 @@
       />
       <div class="input-group-prepend">
         <span *ngIf="!searchOrder" class="input-group-text search-icon"></span>
-        <span  class="input-group-text clearSearch" *ngIf="searchOrder" (click)="searchOrder='';SearchOrder()">x</span>
+        <span
+          class="input-group-text clearSearch"
+          *ngIf="searchOrder"
+          (click)="searchOrder = ''; SearchOrder()"
+          >x</span
+        >
       </div>
     </div>
   </div>
 </div>
-<div id="ngxtable" class="float-none table-container" #table>
-<ngx-datatable
+<div *ngIf="isLoading"><loader></loader>></div>
+<div id="ngxtable" class="float-none table-container" #table *ngIf="!isLoading">
+  <ngx-datatable
     class="bootstrap fullscreen"
     [rows]="filteredList"
     style="font-family: Nunito; height: inherit"
@@ -30,36 +36,46 @@
     [rowHeight]="50"
     [scrollbarH]="true"
     [scrollbarV]="true"
->
-  <ngx-datatable-column
-    *ngFor="let col of columns"
-    name="{{ col.prop }}"
-    [width]="150"
-    headerClass="theader1"
   >
-    <ng-template let-value="value" ngx-datatable-header-template>
-      <span>{{ col.name }}</span>
-    </ng-template>
-    <ng-template let-value="value" let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
-      <div *ngIf="!col.name.includes('Settings') && !col.name.includes('Sno.')" [title]="row[col.prop]">
-        {{ row[col.prop] }}
-      </div>
-      <div *ngIf="col.name.includes('Sno.')">
-        {{rowIndex+1}}
-      </div>
-      <div *ngIf="col.name.includes('Settings') && !col.name.includes('Sno.')">
-        <div class="d-flex" style="height: 30px">
-          <div class="col-2 view-icon" (click)="viewbill(row)"></div>
-          <div class="col-2 edit-icon"></div>
-          <div class="col-2 delete-icon" (click)="DeleteItem(row)"></div>
+    <ngx-datatable-column
+      *ngFor="let col of columns"
+      name="{{ col.prop }}"
+      [width]="150"
+      headerClass="theader1"
+    >
+      <ng-template let-value="value" ngx-datatable-header-template>
+        <span>{{ col.name }}</span>
+      </ng-template>
+      <ng-template
+        let-value="value"
+        let-row="row"
+        let-rowIndex="rowIndex"
+        ngx-datatable-cell-template
+      >
+        <div
+          *ngIf="!col.name.includes('Settings') && !col.name.includes('Sno.')"
+          [title]="row[col.prop]"
+        >
+          {{ row[col.prop] }}
         </div>
-      </div>
-    </ng-template>
-  </ngx-datatable-column>
-</ngx-datatable>
+        <div *ngIf="col.name.includes('Sno.')">
+          {{ rowIndex + 1 }}
+        </div>
+        <div
+          *ngIf="col.name.includes('Settings') && !col.name.includes('Sno.')"
+        >
+          <div class="d-flex" style="height: 30px">
+            <div class="col-2 view-icon" (click)="viewbill(row)"></div>
+            <div class="col-2 edit-icon"></div>
+            <div class="col-2 delete-icon" (click)="DeleteItem(row)"></div>
+          </div>
+        </div>
+      </ng-template>
+    </ngx-datatable-column>
+  </ngx-datatable>
 </div>
 
-<div  class="checkoutModel" *ngIf="isShowBill" #showBill>
+<div class="checkoutModel" *ngIf="isShowBill" #showBill>
   <div class="checkoutModel-content">
     <div class="float-right cursor-pointer" (click)="isShowBill = !isShowBill">
       X
@@ -77,7 +93,7 @@
         <th colspan="1">Item Status</th>
         <th colspan="1">Amount</th>
       </tr>
-      <tr #allTheseThings *ngFor="let prod of bill.Items" >
+      <tr #allTheseThings *ngFor="let prod of bill.Items">
         <td>{{ prod.ItemName }}</td>
         <td>{{ prod.BundleCount }}</td>
         <td>{{ prod.Price }}</td>
@@ -86,4 +102,4 @@
       </tr>
     </table>
   </div>
-</div>  
+</div>

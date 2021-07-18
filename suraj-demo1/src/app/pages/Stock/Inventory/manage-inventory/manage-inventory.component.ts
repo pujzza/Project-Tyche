@@ -23,6 +23,7 @@ export class ManageInventoryComponent implements OnInit, AfterViewInit {
   SortType = SortType;
   editQty = false;
   filteredList = [];
+  isLoading = true;
   searchInventory: any;
   @ViewChild('table', { static: false }) table: ElementRef;
 
@@ -53,6 +54,7 @@ export class ManageInventoryComponent implements OnInit, AfterViewInit {
       if (res && res.returncode == 200) {
         this.data = res.returndata;
         this.filteredList = res.returndata;
+        this.isLoading = false;
       }
     });
   }

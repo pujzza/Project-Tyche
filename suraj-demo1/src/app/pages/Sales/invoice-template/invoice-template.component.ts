@@ -56,6 +56,7 @@ export class InvoiceTemplateComponent implements OnInit {
         console.log(res);
         this.bill = res;
         this.bill.orderid = this.bill.products[0].orderid;
+        this.bill['DueAmount'] = Number(this.bill.totalamount??'0') - Number(this.bill.paidamount??'0');
       }
     });
   }
