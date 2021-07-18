@@ -44,7 +44,9 @@ export class ManageClientsComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.table.nativeElement.style.maxheight = `${this.service.screenH}px`;
+    if (this.table) {
+      this.table.nativeElement.style.maxheight = `${this.service.screenH}px`;
+    }
     this.getAllClients();
   }
 

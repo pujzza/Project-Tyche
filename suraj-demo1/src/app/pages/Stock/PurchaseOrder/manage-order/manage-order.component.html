@@ -9,11 +9,12 @@
         type="text"
         class="form-control"
         [(ngModel)]="searchOrder"
-        placeholder="Search Inventory"
-        (keyup)="SearhOrder()"
+        placeholder="Search Orders"
+        (keyup)="SearchOrder()"
       />
       <div class="input-group-prepend">
-        <span class="input-group-text search-icon"></span>
+        <span *ngIf="!searchOrder" class="input-group-text search-icon"></span>
+        <span  class="input-group-text clearSearch" *ngIf="searchOrder" (click)="searchOrder='';SearchOrder()">x</span>
       </div>
     </div>
   </div>

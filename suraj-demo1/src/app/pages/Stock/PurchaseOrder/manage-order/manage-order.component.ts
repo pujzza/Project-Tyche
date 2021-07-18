@@ -40,7 +40,7 @@ export class ManageOrderComponent implements OnInit,AfterViewInit {
     this.table.nativeElement.style.maxheight = `${this.service.screenH}px`;
   }
 
-  SearhOrder() {
+  SearchOrder() {
     const lowerValue = this.searchOrder.toLowerCase();
     this.filteredList = this.data.filter(
       (item) =>

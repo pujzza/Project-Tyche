@@ -13,7 +13,8 @@
         (keyup)="SearchInventory()"
       />
       <div class="input-group-prepend">
-        <span class="input-group-text search-icon"></span>
+        <span *ngIf="!searchInventory" class="input-group-text search-icon"></span>
+        <span  class="input-group-text clearSearch" *ngIf="searchInventory" (click)="searchInventory='';SearchInventory()">x</span>
       </div>
     </div>
   </div>
