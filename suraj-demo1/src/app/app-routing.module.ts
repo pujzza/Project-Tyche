@@ -19,6 +19,7 @@ import { HomeComponent } from './home/home.component';
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { StockReturnRecordsComponent } from './pages/Stock/StockReturn/stock-return-records/stock-return-records.component';
+import { InvoiceTemplateComponent } from './pages/Sales/invoice-template/invoice-template.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'Login', pathMatch: 'full' },
@@ -45,6 +46,7 @@ const routes: Routes = [
       { path: 'Employee/ManageEmployee', component: ManageEmployeeComponent },
       { path: 'Inventory/NewInventory', component: AddInventoryComponent },
       { path: 'Inventory/ManageInventory', component: ManageInventoryComponent },
+      { path: 'Sales/InvoiceTemplate/:id', component: InvoiceTemplateComponent},
     ],
   },
 ];

@@ -23,6 +23,7 @@ import { CommonService } from 'src/app/services/common.service';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import domtoimage from 'dom-to-image';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-manage-sales-invoice',
@@ -87,7 +88,7 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
   errorText: string;
   constructor(
     public service: CommonService,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,private route: Router
   ) {
     this.employeeId = localStorage.getItem('UserId').toString();
   }
@@ -119,9 +120,12 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
     });
   }
 
-  downloadBill(orderid) {
+  downloadBill(order) {
     const eid = this.employeeId;
-    this.service.DownloadBill(eid, orderid);
+    this.service.downloadOrder=order;
+    // this.service.DownloadBill(eid, orderid);
+    this.route.navigateByUrl(`Home/Sales/InvoiceTemplate/${order.orderid}`);
+    // this.route.navigateByUrl('' , orderid);
     // this.ShowBill(orderid);
     // this.isShowBill = true;
     // this.changeDetectorRef.detectChanges();
@@ -149,8 +153,11 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
     this.changeDetectorRef.detectChanges();
   }
 
-  ShowBill(orderId) {
-    this.GetBill(orderId);
+  ShowBill(order) {
+    const eid = this.employeeId;
+    this.service.downloadOrder=order;
+    // this.service.DownloadBill(eid, orderid);
+    this.route.navigateByUrl(`Home/Sales/InvoiceTemplate/${order.orderid}`);
   }
 
   getMetaPrice(name) {

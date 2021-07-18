@@ -1,6 +1,7 @@
 export const SalesSub = [
   { id: 1, title: 'New Invoice', route: 'Sales/NewInvoice' },
   { id: 2, title: 'Manage Invoice', route: 'Sales/ManageInvoice' },
+  // {  id: 2, title: 'InvoiceTemplate', route: 'Sales/InvoiceTemplate'}
 ];
 
 export const ItemManagerSub = [

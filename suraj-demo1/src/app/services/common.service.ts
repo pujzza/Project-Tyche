@@ -12,6 +12,7 @@ export class CommonService {
   // Do not edit this Oauth
   Oauth = 'RVn06PJIj36gt40zSAmLwAD742f';
   screenH;
+  downloadOrder:any;
 
   constructor(private http: HttpClient, private _snackBar: MatSnackBar) {
     this.screenH = window.screen.availHeight;
