@@ -56,6 +56,7 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
   loadingIndicator = true;
   disablePay = false;
   reorderable = false;
+  isloading = true;
 
   // String Variables
   employeeId: string;
@@ -139,6 +140,7 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
         this.orders.map((r) => {
           r.dueAmt = Number(r.totalamount) - Number(r.paidamount);
         });
+        this.isloading = false;
       }
     });
   }

@@ -29,7 +29,8 @@
     </div>
   </div>
 </div>
-<div id="ngxtable" class="table-container" #table>
+<div *ngIf="isloading"><loader></loader></div>
+<div id="ngxtable" class="table-container" #table *ngIf="!isloading">
   <ngx-datatable
     class="bootstrap"
     [rows]="filteredList"
@@ -50,8 +51,8 @@
       <ng-template let-value="value" ngx-datatable-header-template>
         <span>{{ col.name }}</span>
       </ng-template>
-      <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
-        <div *ngIf="col.name.includes('Sno.')">{{ getRowIndex(row) }}</div>
+      <ng-template let-value="value" let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+        <div *ngIf="col.name.includes('Sno.')">{{ rowIndex+1 }}</div>
         <div
           *ngIf="!col.name.includes('Settings') && !col.name.includes('Sno.')"
         >
