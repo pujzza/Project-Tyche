@@ -16,13 +16,21 @@ import { DeleteItemModel } from 'src/app/entities/HomeModel';
   styleUrls: ['./manage-product.component.scss'],
 })
 export class ManageProductComponent implements OnInit, AfterViewInit {
-  loadingIndicator = true;
-  reorderable = true;
-  data: SubProducts[] = [];
+  //Meta
   ColumnMode = ColumnMode;
   SortType = SortType;
+
+  //Boolean Variables
+  loadingIndicator = true;
+  reorderable = true;
+  isLoading = true;
+
+  // Any Variables
+  searchProduct: any;
+
+  //Array Variabls
+  data: SubProducts[] = [];
   filteredList = [];
-  searchProduct;
   columns = [
     { prop: 'ProductId', name: '#', width: 10 },
     { prop: 'ProductCode', name: 'Code', width: 50 },
@@ -32,6 +40,8 @@ export class ManageProductComponent implements OnInit, AfterViewInit {
     { prop: 'ProductSize', name: 'Size', width: 50 },
     { name: 'Settings', width: 100 },
   ];
+
+  //View Childs / DOM Elements
   @ViewChild('table', { static: false }) table: ElementRef;
 
   constructor(public service: CommonService) {}
@@ -41,21 +51,31 @@ export class ManageProductComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    if(this.table){
+    if (this.table) {
       this.table.nativeElement.style.maxheight = `${this.service.screenH}px`;
     }
     this.getAllProducts();
   }
 
+  // API - GET Products
   getAllProducts() {
-    this.service.GetAllProducts().subscribe((res) => {
-      if (res && res.returncode == 200) {
-        this.data = res.returndata;
-        this.filteredList = res.returndata;
+    this.service.GetAllProducts().subscribe(
+      (res) => {
+        if (res && res.returncode == 200) {
+          this.data = res.returndata;
+          this.filteredList = res.returndata;
+          this.isLoading = false;
+        } else {
+          this.isLoading = false;
+        }
+      },
+      (err) => {
+        this.isLoading = false;
       }
-    });
+    );
   }
 
+  // Search Products
   SearchProduct() {
     const lowerValue = this.searchProduct.toLowerCase();
     this.filteredList = this.data.filter(
@@ -67,22 +87,23 @@ export class ManageProductComponent implements OnInit, AfterViewInit {
     );
   }
 
-  DeleteItem(item){
-    let postparam = new DeleteItemModel()
+  // Delete Items - API
+  DeleteItem(item) {
+    let postparam = new DeleteItemModel();
     postparam.oauth = this.service.Oauth;
-    postparam.Table = "Product";
+    postparam.Table = 'Product';
     postparam.ID = item.ProductId;
     this.service.DeleteItem(postparam).subscribe(
-      res => {
-        if(res && res.returncode == 200){
-          this.service.OpenSnackBar('Delete Successfull','SUCCESS');
+      (res) => {
+        if (res && res.returncode == 200) {
+          this.service.OpenSnackBar('Delete Successfull', 'SUCCESS');
           this.getAllProducts();
         } else {
-          this.service.OpenSnackBar(res.returnmessage,'ERROR');
+          this.service.OpenSnackBar(res.returnmessage, 'ERROR');
         }
       },
-      err => {
-        this.service.OpenSnackBar('Something went wrong','SORRY');
+      (err) => {
+        this.service.OpenSnackBar('Something went wrong', 'SORRY');
       }
     );
   }
