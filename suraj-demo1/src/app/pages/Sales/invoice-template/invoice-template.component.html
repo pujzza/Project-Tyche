@@ -46,7 +46,8 @@
         <th>Materials</th>
         <th>Size</th>
         <th>Qty</th>
-        <th>Price</th>
+        <th>Per Price</th>
+        <th>Total</th>
       </tr>
       <tr *ngFor="let product of bill.products; let i = index">
         <td>{{ i + 1 }}.</td>
@@ -55,9 +56,10 @@
         <td>{{ product.size }}</td>
         <td>{{ product.count }}</td>
         <td>{{ product.price | currency: "&#8377;"  }}</td>
+        <td>{{ (product.count*product.price)| currency: "&#8377;"  }}</td>
       </tr>
       <tr style="border: none">
-        <td colspan="4" style="border: none"></td>
+        <td colspan="5" style="border: none"></td>
         <td class="border-0 font-weight-bolder text-right">Total</td>
         <td class="border-0">{{ bill.totalamount | currency: "&#8377;"  }}</td>
       </tr>
@@ -66,15 +68,20 @@
       <td class="border-0 font-weight-bolder text-right">Tax</td>
       <td class="border-0"></td>
     </tr> -->
+    <tr style="border: none">
+      <td colspan="5" style="border: none"></td>
+      <td class="border-0 font-weight-bolder text-right">Amount Paid</td>
+      <td class="border-0 bold">{{ bill.paidamount | currency: "&#8377;"  }}</td>
+    </tr>
+    <tr style="border: none" *ngIf="bill.DueAmount && bill.DueAmount!=0">
+      <td colspan="5" style="border: none"></td>
+      <td class="border-0 font-weight-bolder text-right">Due Amount</td>
+      <td class="border-0">{{ bill.DueAmount | currency: "&#8377;"  }}</td>
+    </tr>
       <tr style="border: none">
-        <td colspan="4" style="border: none"></td>
+        <td colspan="5" style="border: none"></td>
         <td class="border-0 font-weight-bolder text-right">Grand Total</td>
         <td class="border-0">{{ bill.totalamount | currency: "&#8377;"  }}</td>
-      </tr>
-      <tr style="border: none">
-        <td colspan="4" style="border: none"></td>
-        <td class="border-0 font-weight-bolder text-right">Amount Paid</td>
-        <td class="border-0">{{ bill.paidamount | currency: "&#8377;"  }}</td>
       </tr>
     </table>
   </div>
