@@ -7,7 +7,7 @@ export const ItemManagerSub = [
   { id: 1, title: 'New Product', route: 'ItemManager/NewProduct' },
   { id: 2, title: 'Manage Products', route: 'ItemManager/ManageProduct' },
   // { id: 3, title: 'Product Categories', route: 'ItemManager/ManageProduct' },
-  //{ id: 4, title: 'Warehouses', route: 'ItemManager/Warehouses' },
+  { id: 4, title: 'Warehouses', route: 'ItemManager/Warehouses' },
   // { id: 5, title: 'Stock Transfer', route: 'ItemManager/StockTransfer' },
 ];
 
