@@ -11,7 +11,8 @@
         (keyup)="SearchProduct()"
       />
       <div class="input-group-prepend">
-        <span class="input-group-text search-icon"></span>
+        <span *ngIf="!searchProduct" class="input-group-text search-icon"></span>
+        <span  class="input-group-text clearSearch" *ngIf="searchProduct" (click)="searchProduct='';SearchProduct()">x</span>
       </div>
     </div>
   </div>
