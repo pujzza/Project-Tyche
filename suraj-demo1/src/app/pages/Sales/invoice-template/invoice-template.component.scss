@@ -1,0 +1,55 @@
+.template-header {
+  text-align: center;
+  font-size: 35px;
+  font-family: Nunito;
+}
+.template-details {
+  // text-align: left;
+  font-size: 15px;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  font-family: Nunito;
+  font-weight: bolder;
+}
+.unbold {
+  font-weight: 100;
+}
+
+.table-container {
+  margin: 10px;
+}
+table {
+  width: 100%;
+}
+td,
+th {
+  padding: 0px 10px;
+  height: 50px;
+  width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
+  border-bottom: 1px solid #ddd;
+}
+
+.template-address {
+  display: flex;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-family: Nunito;
+  border-top: 5px solid navy;
+}
+.address-block {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+}
+
+.tr-header{
+    background-color: rgb(120, 224, 116);
+}
+
+#downloadBody{
+    margin: 10px 15px;
+}

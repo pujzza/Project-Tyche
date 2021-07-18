@@ -23,7 +23,9 @@ import { CommonService } from 'src/app/services/common.service';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import domtoimage from 'dom-to-image';
+import { Router } from '@angular/router';
 import { formatDate } from '@angular/common';
+
 
 @Component({
   selector: 'app-manage-sales-invoice',
@@ -94,7 +96,7 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
       width: 1,
       headerClass: 'theader1',
     },
-    { name: 'Settings', width: 2, headerClass: 'theader1 text-center' },
+    { name: 'Settings', width: 1, headerClass: 'theader1 text-center' },
   ];
 
   // ViewChilds
@@ -105,7 +107,7 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
 
   constructor(
     public service: CommonService,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,private route: Router
   ) {
     this.employeeId = localStorage.getItem('UserId').toString();
   }
@@ -141,9 +143,12 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
     });
   }
 
-  downloadBill(orderid) {
+  downloadBill(order) {
     const eid = this.employeeId;
-    this.service.DownloadBill(eid, orderid);
+    this.service.downloadOrder=order;
+    // this.service.DownloadBill(eid, orderid);
+    this.route.navigateByUrl(`Home/Sales/InvoiceTemplate/${order.orderid}`);
+    // this.route.navigateByUrl('' , orderid);
     // this.ShowBill(orderid);
     // this.isShowBill = true;
     // this.changeDetectorRef.detectChanges();
@@ -172,6 +177,13 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
     this.changeDetectorRef.detectChanges();
   }
 
+  // To view Download bill
+  ShowBill(order) {
+    const eid = this.employeeId;
+    this.service.downloadOrder=order;
+    this.route.navigateByUrl(`Home/Sales/InvoiceTemplate/${order.orderid}`);
+  }
+
   getMetaPrice(name) {
     var prod = this.MetaProducts.filter((x) => x.name.includes(name));
     if (prod && prod.length > 0) {
@@ -179,10 +191,6 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
     }
   }
 
-  // View Order Model
-  ShowBill(orderId) {
-    this.GetBill(orderId);
-  }
 
   // Open Payment model box
   openPayAmt(row) {

@@ -31,6 +31,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { AddInventoryComponent } from './pages/Stock/Inventory/add-inventory/add-inventory.component';
 import { ManageInventoryComponent } from './pages/Stock/Inventory/manage-inventory/manage-inventory.component';
 import {LocationStrategy, HashLocationStrategy} from '@angular/common';
+import { InvoiceTemplateComponent } from './pages/Sales/invoice-template/invoice-template.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import {LocationStrategy, HashLocationStrategy} from '@angular/common';
     AddEmployeeComponent,
     ManageEmployeeComponent,
     AddInventoryComponent,
-    ManageInventoryComponent
+    ManageInventoryComponent,
+    InvoiceTemplateComponent
   ],
   imports: [
     BrowserModule,
