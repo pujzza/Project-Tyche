@@ -96,7 +96,7 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
       width: 1,
       headerClass: 'theader1',
     },
-    { name: 'Settings', width: 2, headerClass: 'theader1 text-center' },
+    { name: 'Settings', width: 1, headerClass: 'theader1 text-center' },
   ];
 
   // ViewChilds

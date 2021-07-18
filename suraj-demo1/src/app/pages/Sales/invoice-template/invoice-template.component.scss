@@ -1,12 +1,12 @@
 .template-header {
   text-align: center;
-  font-size: 45px;
+  font-size: 35px;
   font-family: Nunito;
 }
 .template-details {
   // text-align: left;
   font-size: 15px;
-  margin-top: 50px;
+  margin-top: 15px;
   margin-bottom: 10px;
   font-family: Nunito;
   font-weight: bolder;
@@ -38,9 +38,18 @@ th {
   margin-top: 10px;
   margin-bottom: 10px;
   font-family: Nunito;
+  border-top: 5px solid navy;
 }
 .address-block {
   text-align: right;
   display: flex;
   flex-direction: column;
+}
+
+.tr-header{
+    background-color: rgb(120, 224, 116);
+}
+
+#downloadBody{
+    margin: 10px 15px;
 }

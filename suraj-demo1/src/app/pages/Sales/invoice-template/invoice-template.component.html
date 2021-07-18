@@ -1,79 +1,81 @@
 <div>
-  <div class="btn btn-danger m-2">Cancel</div>
-  <div class="btn btn-primary btn-md float-right m-2">Email</div>
-  <div class="btn btn-success btn-md float-right m-2" (click)="Download()">Download</div>
+  <div class="btn btn-danger m-2" (click)="CancelView()">Cancel</div>
+  <!-- <div class="btn btn-primary btn-md float-right m-2">Email</div> -->
+  <div class="btn btn-success btn-md float-right m-2" (click)="Download()">
+    Download
+  </div>
 </div>
 <div id="downloadBody">
-<div class="template-header">SURAJ XEROX BILLING</div>
-<div class="template-address">
-  <div class="col-4">
-    <div class="template-details">CUSTOMER DETAILS</div>
-    <div>{{orderdata.firstname}}</div>
-    <div>{{orderdata.phonenumber}}</div>
-    <div>vishaalsuriya@gmail.com</div>
-  </div>
-  <div class="col-4"></div>
-  <div class="col-4 address-block">
-    <div class="template-details">ADDRESS</div>
-    <div>598/1A2,Jamal SANA HOMES,Flat-1D,</div>
-    <div>Trunk Road,Karayanchavadi,Poonamallee,</div>
-    <div>Chennai - 600056</div>
-  </div>
-</div>
-<div class="template-address">
-  <div class="col-4">
-    <div class="template-details">
-      INVOICE: <span class="unbold">{{orderid}}</span>
+  <div class="template-header">SURAJ XEROX BILLING</div>
+  <div class="template-address">
+    <div class="col-4">
+      <div class="template-details">CUSTOMER DETAILS</div>
+      <div>{{ orderdata.firstname }}</div>
+      <div>{{ orderdata.phonenumber }}</div>
+      <div>vishaalsuriya@gmail.com</div>
+    </div>
+    <div class="col-4"></div>
+    <div class="col-4 address-block">
+      <div class="template-details">ADDRESS</div>
+      <div>598/1A2,Jamal SANA HOMES,Flat-1D,</div>
+      <div>Trunk Road,Karayanchavadi,Poonamallee,</div>
+      <div>Chennai - 600056</div>
     </div>
   </div>
-  <div class="col-4"></div>
-  <div class="col-4 address-block">
-    <div class="template-details">
-      DATE: <span class="unbold">{{currentdate}}</span>
+  <div class="template-address">
+    <div class="col-4">
+      <div class="template-details">
+        DATE: <span class="unbold">{{ orderdata.orderDate }}</span>
+      </div>
+    </div>
+    <div class="col-4"></div>
+    <div class="col-4 address-block">
+      <div class="template-details">
+        INVOICE: <span class="unbold">{{ orderid }}</span>
+      </div>
     </div>
   </div>
-</div>
-<!-- 
+  <!-- 
 ##############INVOICE TABELE################### -->
 
-<div class="table-container">
-  <table>
-    <tr>
-      <th>S.NO</th>
-      <th>Products</th>
-      <th>MAterials</th>
-      <th>Size</th>
-      <th>Qty</th>
-      <th>Price</th>
-    </tr>
-    <tr *ngFor="let product of bill.products; let i = index">
-      <td>{{i+1}}.</td>
-      <td>{{product.product}}</td>
-      <td>{{product.material}}</td>
-      <td>{{product.size}}</td>
-      <td>{{product.count}}</td>
-      <td>{{product.price}}</td>
-    </tr>
-    <tr style="border: none">
-      <td colspan="4" style="border: none"></td>
-      <td class="border-0 font-weight-bolder text-right">Total</td>
-      <td class="border-0">{{bill.totalamount}}</td>
-    </tr>
-    <!-- <tr style="border: none" >
+  <div class="table-container">
+    <table>
+      <tr class="tr-header">
+        <th>S.NO</th>
+        <th>Products</th>
+        <th>Materials</th>
+        <th>Size</th>
+        <th>Qty</th>
+        <th>Price</th>
+      </tr>
+      <tr *ngFor="let product of bill.products; let i = index">
+        <td>{{ i + 1 }}.</td>
+        <td>{{ product.product }}</td>
+        <td>{{ product.material }}</td>
+        <td>{{ product.size }}</td>
+        <td>{{ product.count }}</td>
+        <td>{{ product.price | currency: "&#8377;"  }}</td>
+      </tr>
+      <tr style="border: none">
+        <td colspan="4" style="border: none"></td>
+        <td class="border-0 font-weight-bolder text-right">Total</td>
+        <td class="border-0">{{ bill.totalamount | currency: "&#8377;"  }}</td>
+      </tr>
+      <!-- <tr style="border: none" >
       <td colspan="4" style="border: none"></td>
       <td class="border-0 font-weight-bolder text-right">Tax</td>
       <td class="border-0"></td>
     </tr> -->
-    <tr style="border: none">
-      <td colspan="4" style="border: none"></td>
-      <td class="border-0 font-weight-bolder text-right">Grand Total</td>
-      <td class="border-0">{{bill.totalamount}}</td>
-    </tr>
-    <tr style="border: none">
-      <td colspan="4" style="border: none"></td>
-      <td class="border-0 font-weight-bolder text-right">Amount Paid</td>
-      <td class="border-0">{{bill.paidamount}}</td>
-    </tr>
-  </table>
-</div>
+      <tr style="border: none">
+        <td colspan="4" style="border: none"></td>
+        <td class="border-0 font-weight-bolder text-right">Grand Total</td>
+        <td class="border-0">{{ bill.totalamount | currency: "&#8377;"  }}</td>
+      </tr>
+      <tr style="border: none">
+        <td colspan="4" style="border: none"></td>
+        <td class="border-0 font-weight-bolder text-right">Amount Paid</td>
+        <td class="border-0">{{ bill.paidamount | currency: "&#8377;"  }}</td>
+      </tr>
+    </table>
+  </div>
 </div>

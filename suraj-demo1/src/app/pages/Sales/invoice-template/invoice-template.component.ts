@@ -1,8 +1,9 @@
-import { ActivatedRoute, ActivatedRouteSnapshot } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonService } from 'src/app/services/common.service';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
+
 @Component({
   selector: 'app-invoice-template',
   templateUrl: './invoice-template.component.html',
@@ -14,8 +15,11 @@ export class InvoiceTemplateComponent implements OnInit {
   orderid: any;
   orderdata: any;
   currentdate: any;
+  
+  @ViewChild('table', { static: true }) table: ElementRef;
+  
 
-  constructor(private service: CommonService, private route: ActivatedRoute) {
+  constructor(private service: CommonService, private route: ActivatedRoute, private router: Router) {
     this.orderid = this.route.snapshot.paramMap.get('id');
     this.employeeId = localStorage.getItem('UserId').toString();
   }
@@ -34,12 +38,11 @@ export class InvoiceTemplateComponent implements OnInit {
       var pageHeight = 295;
       var imgHeight = (canvas.height * imgWidth) / canvas.width;
       var heightLeft = imgHeight;
-
       const contentDataURL = canvas.toDataURL('image/png');
       let pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF
       var position = 0;
       pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
-      pdf.save('MYPdf.pdf'); // Generated PDF
+      pdf.save(`Order_${this.orderid}.pdf`); // Generated PDF
     });
   }
 
@@ -55,5 +58,9 @@ export class InvoiceTemplateComponent implements OnInit {
         this.bill.orderid = this.bill.products[0].orderid;
       }
     });
+  }
+
+  CancelView(){
+    this.router.navigateByUrl("Home/Sales/ManageInvoice")
   }
 }

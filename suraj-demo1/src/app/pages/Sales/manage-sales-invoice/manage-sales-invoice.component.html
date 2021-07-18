@@ -55,8 +55,9 @@
         <div
           *ngIf="!col.name.includes('Settings') && !col.name.includes('Sno.')"
         >
-        <span *ngIf="col.name.includes('orderDate')">{{ value | date: 'dd/MM/yy' }}</span>
-        <span *ngIf="!col.name.includes('orderDate')">{{ value }}</span>
+        <span *ngIf="col.name.includes('orderDate') && !col.name.includes('paidamount') && !col.name.includes('totalamount')">{{ value | date: 'dd/MM/yy' }}</span>
+        <span *ngIf="!col.name.includes('orderDate')&& !col.name.includes('paidamount') && !col.name.includes('totalamount')">{{ value }}</span>
+        <span *ngIf="col.name.includes('paidamount') || col.name.includes('totalamount')">{{ value | currency: "&#8377;" }}</span>
           
         </div>
         <div *ngIf="col.name.includes('Settings')">
