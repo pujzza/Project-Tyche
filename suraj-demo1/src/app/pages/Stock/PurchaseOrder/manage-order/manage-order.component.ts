@@ -1,5 +1,11 @@
 import { CommonService } from 'src/app/services/common.service';
-import { Component, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+  AfterViewInit,
+} from '@angular/core';
 import { ColumnMode } from '@swimlane/ngx-datatable';
 import { DeleteItemModel } from 'src/app/entities/HomeModel';
 
@@ -8,16 +14,24 @@ import { DeleteItemModel } from 'src/app/entities/HomeModel';
   templateUrl: './manage-order.component.html',
   styleUrls: ['./manage-order.component.scss'],
 })
-export class ManageOrderComponent implements OnInit,AfterViewInit {
-  rows = [];
+export class ManageOrderComponent implements OnInit, AfterViewInit {
+  //Meta
+  ColumnMode = ColumnMode;
+
+  //Boolean Variables
   loadingIndicator = true;
   reorderable = true;
-  data = [];
   isShowBill = false;
-  bill: any;
-  @ViewChild('showBill', { static: false }) showBill: ElementRef;
-  filteredList = [];
+  isLoading = true;
 
+  //Any Variable
+  bill: any;
+  searchOrder: any;
+
+  //Array Variables
+  filteredList = [];
+  rows = [];
+  data = [];
   columns = [
     { prop: 'sno', name: 'Sno.' },
     { prop: 'OrderID', name: 'Order #' },
@@ -27,9 +41,10 @@ export class ManageOrderComponent implements OnInit,AfterViewInit {
     { name: 'Settings' },
   ];
 
-  ColumnMode = ColumnMode;
-  searchOrder: any;
+  //Viewchilds/ DOM ELements
   @ViewChild('table', { static: true }) table: ElementRef;
+  @ViewChild('showBill', { static: false }) showBill: ElementRef;
+
   constructor(private service: CommonService) {}
 
   ngOnInit(): void {
@@ -40,6 +55,7 @@ export class ManageOrderComponent implements OnInit,AfterViewInit {
     this.table.nativeElement.style.maxheight = `${this.service.screenH}px`;
   }
 
+  //Search
   SearchOrder() {
     const lowerValue = this.searchOrder.toLowerCase();
     this.filteredList = this.data.filter(
@@ -50,35 +66,39 @@ export class ManageOrderComponent implements OnInit,AfterViewInit {
     );
   }
 
+  //API- GET Orders
   GetPurchaseOrder() {
     this.service.GetPurchaseOrders().subscribe((res) => {
       this.data = res['returndata'];
       this.filteredList = this.data;
-    });
+      this.isLoading = false;
+    }, err => {this.isLoading = false;});
   }
 
+  //View Bill
   viewbill(item) {
     this.bill = item;
     this.isShowBill = true;
   }
 
-  DeleteItem(item){
-    let postparam = new DeleteItemModel()
+  //Delete Item
+  DeleteItem(item) {
+    let postparam = new DeleteItemModel();
     postparam.oauth = this.service.Oauth;
-    postparam.Table = "PurchaseOrder";
+    postparam.Table = 'PurchaseOrder';
     postparam.ID = item.OrderID;
     this.service.DeleteItem(postparam).subscribe(
-      res => {
-        if(res && res.returncode == 200){
-          this.service.OpenSnackBar('Delete Successfull','SUCCESS');
+      (res) => {
+        if (res && res.returncode == 200) {
+          this.service.OpenSnackBar('Delete Successfull', 'SUCCESS');
           this.GetPurchaseOrder();
         } else {
-          this.service.OpenSnackBar(res.returnmessage,'ERROR');
+          this.service.OpenSnackBar(res.returnmessage, 'ERROR');
         }
       },
-      err => {
-        this.service.OpenSnackBar('Something went wrong','SORRY');
+      (err) => {
+        this.service.OpenSnackBar('Something went wrong', 'SORRY');
       }
-    )
+    );
   }
 }
