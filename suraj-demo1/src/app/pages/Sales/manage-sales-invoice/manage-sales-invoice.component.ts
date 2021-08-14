@@ -114,13 +114,13 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.table.nativeElement.style.maxheight = `${this.service.screenH}px`;
+    // this.table.nativeElement.style.maxheight = `${this.service.screenH}px`;
   }
 
   ngOnInit(): void {
-    if (this.table) {
-      this.table.nativeElement.style.maxheight = `${this.service.screenH}px`;
-    }
+    // if (this.table) {
+    //   this.table.nativeElement.style.maxheight = `${this.service.screenH}px`;
+    // }
     this.GetOrders();
   }
 
@@ -142,6 +142,9 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
         });
         this.isloading = false;
       }
+    },
+    (err) => {this.isloading = false;
+    this.service.OpenSnackBar('ERROR','Something went wrong!')
     });
   }
 

@@ -23,7 +23,6 @@
 
   .table-container{
     margin: 10px;
-    height: 100vh;
   }
   table {
     width: 100%;
@@ -75,12 +74,13 @@
   }
 
   .badge{
+    display: flex;
     border-radius: 10px !important;
-    height: 25px !important;
-    width: auto !important;
-    line-height: 1;
-    margin-right: 3px;
+    width: 50px;
     font-size: 12px;
+    justify-content: center;
+    align-self: center;
+    padding: 5px;
   }
 
   .search-icon {

@@ -1,5 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 @import "../node_modules/@swimlane/ngx-datatable/themes/bootstrap.scss";
+@import "../node_modules/@swimlane/ngx-datatable/themes/bootstrap.css";
+@import "../node_modules/@swimlane/ngx-datatable/themes/material.scss";
+@import "../node_modules/@swimlane/ngx-datatable/themes/material.css";
+@import "../node_modules/@swimlane/ngx-datatable/assets/icons.css";
 body {
   margin: 0px;
   height: 100vh;

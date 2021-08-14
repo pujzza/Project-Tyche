@@ -72,9 +72,9 @@ export class ManageClientsComponent implements OnInit, AfterViewInit {
           this.isLoading = false;
         }
       },
-      (err) => {
-        this.isLoading = false;
-      }
+      (err) => {this.isLoading = false;
+        this.service.OpenSnackBar('ERROR','Something went wrong!')
+        }
     );
   }
 
