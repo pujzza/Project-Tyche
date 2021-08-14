@@ -1,13 +1,14 @@
 .template-header {
   text-align: center;
-  font-size: 35px;
+  font-size: 15mm;
   font-family: Nunito;
+  margin: 10mm 0mm;
 }
 .template-details {
   // text-align: left;
-  font-size: 15px;
-  margin-top: 15px;
-  margin-bottom: 10px;
+  font-size: 5mm;
+  margin-top: 10mm;
+  margin-bottom: 10mm;
   font-family: Nunito;
   font-weight: bolder;
 }
@@ -24,21 +25,22 @@ table {
 td,
 th {
   padding: 0px 10px;
-  height: 50px;
-  width: 250px;
+  height: 14mm;
+  width: 62mm;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: 14px;
-  border-bottom: 1px solid #ddd;
+  font-size: 4mm;
+  border-bottom: 1mm solid #ddd;
 }
 
 .template-address {
   display: flex;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 10mm;
+  margin-bottom: 10mm;
   font-family: Nunito;
-  border-top: 5px solid navy;
+  border-top: 3mm solid navy;
+  padding: 5mm 0mm;
 }
 .address-block {
   text-align: right;
@@ -50,6 +52,18 @@ th {
     background-color: rgb(120, 224, 116);
 }
 
-#downloadBody{
-    margin: 10px 15px;
+// #downloadBody{
+//     margin: 10mm 15mm;
+// }
+
+.print-border{
+  margin: 10mm 10mm;
+ // border: 0.5mm solid gray;
+  padding: 3mm;
+}
+
+.footer-style{
+  font-family: Nunito;
+  font-size: 5mm;
+  text-align: center;
 }
