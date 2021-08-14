@@ -4,13 +4,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 import { BillModel, CustomerDetails } from '../entities/ClientsModel';
 import { loginModel } from '../entities/LoginModel';
+export const Oauth = 'RVn06PJIj36gt40zSAmLwAD742f';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CommonService {
   // Do not edit this Oauth
-  Oauth = 'RVn06PJIj36gt40zSAmLwAD742f';
+  Oauth = Oauth;
   isLoggedIn = false;
   screenH;
   downloadOrder:any;
@@ -184,6 +185,26 @@ export class CommonService {
   AddPurchaseOrder(req: any): Observable<any> {
     return this.http.post(
       'http://cyperinfotech.com/cyperinfotech/api/Purchase/CreateOrder.php',
+      req
+    );
+  }
+
+  GetWareHouse(): Observable<any> {
+    return this.http.get(
+      'http://cyperinfotech.com/cyperinfotech/api/Warehouse/GetWarehouseDetails.php'
+    );
+  }
+
+  AddWarehouse(req: any): Observable<any> {
+    return this.http.post(
+      'http://cyperinfotech.com/cyperinfotech/api/Warehouse/AddWarehouse.php',
+      req
+    );
+  }
+
+  UpdateWarehouse(req: any): Observable<any> {
+    return this.http.post(
+      'http://cyperinfotech.com/cyperinfotech/api/Warehouse/UpdateWarehouse.php',
       req
     );
   }

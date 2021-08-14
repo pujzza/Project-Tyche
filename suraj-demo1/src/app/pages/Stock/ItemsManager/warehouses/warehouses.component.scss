@@ -1,4 +1,12 @@
 .table-container {
   margin: 10px;
-  height: 100vh;
+  //height: 100vh;
+}
+
+.search-icon {
+  background: url(../../../../../assets/Icons/searchengin-brands.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 15px;
+  cursor: pointer;
 }

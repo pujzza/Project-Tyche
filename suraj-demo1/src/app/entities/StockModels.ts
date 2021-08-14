@@ -1,3 +1,4 @@
+import { Oauth } from './../services/common.service';
 export class ProductsModel {
   oauth?: string;
   ProductCategory: string;
@@ -12,17 +13,6 @@ export class InventoryItem {
   Bundles: string;
   ItemPerBundle: string;
   AlertQuantity: string;
-}
-
-export class NewWarehouse {
-  oauth?: string;
-  warehouseid?: string;
-  warehousename: string;
-  address: string;
-  city: string;
-  country: string;
-  contactno: string;
-  pincode: string;
 }
 
 export class SubProducts {
@@ -66,3 +56,17 @@ export class Item {
   }
 }
 //-------------END----------------------------------------//
+export class WarehouseModel {
+  WarehouseId?: string;
+  WareHouseName?: string;
+  Country?: string;
+  ContactNo?: string;
+  City?: string;
+  Address?: string;
+  Pincode?: string;
+  oauth?: string;
+
+  constructor(){
+    this.oauth = Oauth;
+  }
+}
