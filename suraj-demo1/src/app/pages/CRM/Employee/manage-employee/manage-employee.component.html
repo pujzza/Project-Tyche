@@ -42,7 +42,7 @@
       <div *ngIf="!col.name.includes('Settings')" [title]="row[col.prop]">{{ row[col.prop] }}</div>
       <div *ngIf="col.name.includes('Settings')"><div class="d-flex" style="height: 30px;">
         <div class="col-2 view-icon" (click)="toViewEmployee(row)"></div>
-        <div class="col-2 edit-icon" (click)="toEditEmployee(row)"></div>
+        <!-- <div class="col-2 edit-icon" (click)="toEditEmployee(row)"></div> -->
         <div class="col-2 delete-icon" (click)="DeleteItem(row)"></div>
       </div></div>
     </ng-template>
@@ -79,8 +79,8 @@
     </div>
     <hr>
     <div align='center' class="d-flex">
-      <div class="m-1 btn btn-danger" (click)="isviewEmployee = false; isedit= false">Close</div>
-      <div class="m-1 btn btn-success" *ngIf="isedit"  (click)="isviewEmployee = false; isedit= false">Update</div>
+      <div class="m-1 btn btn-danger" (click)="CloseViewModal()">Close</div>
+      <div class="m-1 btn btn-success" *ngIf="isedit"  (click)="SaveEdit()">Update</div>
     </div>
   </div>
 

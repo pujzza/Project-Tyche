@@ -1,3 +1,4 @@
+import { UpdateEmployeeReq } from './../entities/EmployeeModel';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -105,7 +106,7 @@ export class CommonService {
 
   UpdateClient(req: any): Observable<any> {
     return this.http.post(
-      'http://api.cyperinfotech.com/Client/updateclient.php',
+      'http://cyperinfotech.com/cyperinfotech/api/Client/updateclient.php',
       req
     );
   }
@@ -144,7 +145,7 @@ export class CommonService {
 
   UpdateInventory(req: any): Observable<any> {
     return this.http.post(
-      'http://api.cyperinfotech.com/Inventory/UpdateInventory.php',
+      'http://cyperinfotech.com/cyperinfotech/api/Inventory/UpdateInventory.php',
       req
     );
   }
@@ -205,6 +206,13 @@ export class CommonService {
   UpdateWarehouse(req: any): Observable<any> {
     return this.http.post(
       'http://cyperinfotech.com/cyperinfotech/api/Warehouse/UpdateWarehouse.php',
+      req
+    );
+  }
+
+  UpdateEmployee(req: any): Observable<any> {
+    return this.http.post(
+      'http://cyperinfotech.com/cyperinfotech/api/Employee/updateEmployee.php',
       req
     );
   }
