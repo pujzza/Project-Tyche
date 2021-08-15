@@ -1,3 +1,4 @@
+import { Oauth } from './../services/common.service';
 
 export class CreateEmployeeReq{
     oauth: string;
@@ -54,5 +55,10 @@ export class Employee {
     EmpEmailID:string;
     EmpPassword:string;
     EmployeeID: string;
+    oauth: string;
+
+    constructor(){
+        this.oauth = Oauth;
+    }
 
 }

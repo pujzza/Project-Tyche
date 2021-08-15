@@ -89,7 +89,8 @@ export class ManageEmployeeComponent implements OnInit, AfterViewInit {
   // To Edit Employee
   toEditEmployee(row) {
     this.isviewEmployee = true;
-    this.viewEmployee = row;
+    let obj = this.EmployeeData.find(x => x.EmployeeID == row?.EmployeeID);
+    Object.assign(this.viewEmployee,obj);
     this.isedit = true;
   }
 
@@ -126,5 +127,28 @@ export class ManageEmployeeComponent implements OnInit, AfterViewInit {
         item.EmpLastName?.toLowerCase().indexOf(lowerValue) !== -1 ||
         item.Email?.toLowerCase().indexOf(lowerValue) !== -1
     );
+  }
+
+  SaveEdit(){
+    this.service.UpdateEmployee(this.viewEmployee).subscribe(
+      (res) => {
+        if (res.returncode == 200) {
+          this.GetAllEmployees();
+          this.service.OpenSnackBar('SUCCESS', res.returnmessage);
+        } else {
+          this.service.OpenSnackBar('ERROR', res.returnmessage);
+        }
+      },
+      (err) => {
+        this.service.OpenSnackBar('ERROR', err);
+      }
+    );
+    this.CloseViewModal();
+  }
+
+  CloseViewModal(){
+    this.isviewEmployee = false; 
+    this.isedit= false;
+    this.viewEmployee = new Employee();
   }
 }
