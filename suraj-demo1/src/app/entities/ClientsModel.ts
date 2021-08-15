@@ -1,3 +1,4 @@
+import { Oauth } from './../services/common.service';
 export class CustomerValidateResponse{
     returncode:number|undefined;
     returnmessage: string|undefined;
@@ -44,64 +45,6 @@ export class BillModel{
     products:Products[]|undefined;
 }
 
-
-export class CreateClientReq {
-    oauth:          string;
-    OrgName:        string;
-    BillingPhone:   string;
-    BillingAddress: string;
-    BillingCity:    string;
-    BillingCountry: string;
-    BillingEmail:   string;
-    BillingPostBox: string;
-    BillingTaxID:   string;
-}
-
-export class CreateClientReturndata {
-    oauth:          string;
-    OrgName:        string;
-    BillingPhone:   string;
-    BillingAddress: string;
-    BillingCity:    string;
-    BillingCountry: string;
-    BillingEmail:   string;
-    BillingPostBox: string;
-    BillingTaxId:   string;
-    Client_ID: string;
-    BillingContact: string;
-
-}
-
-
-export class CreateClientRes {
-    returnmessage: string;
-    returncode:    number;
-    returndata:    CreateClientReturndata;
-}
-
-export class UpdateClientReq {
-    oauth:          string;
-    OrgName:        string;
-    ID:             string;
-    BillingPhone:   string;
-    BillingAddress: string;
-    BillingCity:    string;
-    BillingCountry: string;
-    BillingEmail:   string;
-    BillingTaxId:   string;
-    BillingPostBox: string;
-    BillingContact: string;
-    Client_ID: string;
-
-}
-
-
-export class UpdateClientRes {
-    returnmessage: string;
-    returncode:    number;
-    returndata:    UpdateClientReq;
-}
-
 export class Clients {
     OrgName:        string;
     id:             string;
@@ -112,4 +55,9 @@ export class Clients {
     BillingEmail:   string;
     BillingTaxId:   string;
     BillingPostBox: string;
+    oauth:          string;
+
+    constructor(){
+        this.oauth = Oauth;
+    }
 }

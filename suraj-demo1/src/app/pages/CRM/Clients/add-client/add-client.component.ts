@@ -1,6 +1,6 @@
 import { CommonService } from 'src/app/services/common.service';
 import { Component, OnInit } from '@angular/core';
-import { CreateClientReq } from 'src/app/entities/ClientsModel';
+import { Clients } from 'src/app/entities/ClientsModel';
 
 @Component({
   selector: 'app-add-client',
@@ -10,7 +10,7 @@ import { CreateClientReq } from 'src/app/entities/ClientsModel';
 export class AddClientComponent implements OnInit {
   isclientcreated = false;
 
-client: CreateClientReq = new CreateClientReq();
+client: Clients = new Clients();
   constructor(public service: CommonService) { }
 
   ngOnInit(): void {
@@ -21,7 +21,7 @@ client: CreateClientReq = new CreateClientReq();
       if(res.returncode == 200){
         this.isclientcreated = true;
         this.service.OpenSnackBar('Client Created!','SUCCESS');
-        this.client = new CreateClientReq();
+        this.client = new Clients();
       } else {
         this.isclientcreated = false;
         this.service.OpenSnackBar('Client Not Created!','FAILED');
