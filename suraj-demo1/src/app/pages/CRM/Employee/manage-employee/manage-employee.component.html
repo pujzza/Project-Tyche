@@ -53,8 +53,9 @@
 
 <div #ViewEmployee *ngIf="isviewEmployee" class="checkoutModel">
   <div class="checkoutModel-content">
-    <div class="d-flex m-1" >
-      <div class="col-3">Name:</div>
+    <div class="modalTitle mb-2">Employee #{{viewEmployee.EmployeeID}}</div>
+    <div class="d-flex mb-2" >
+      <div class="col-3 p-0">Name:</div>
       <div class="col-9" >{{viewEmployee.EmpFirstName}} {{viewEmployee.EmpLastName}}</div>
      
     </div>
@@ -62,18 +63,18 @@
         <div class="col-3">LastName:</div>
         <div class="col-9">{{viewEmployee.EmpLastName}}</div>
       </div> -->
-    <div class="d-flex m-1">
-      <div class="col-3">Contact</div>
+    <div class="d-flex mb-2">
+      <div class="col-3 p-0">Contact:</div>
       <div class="col-9" *ngIf="!isedit">{{viewEmployee.PhoneNumber}}</div>
       <div class="col-9" *ngIf="isedit"><input class="form-control" type="text" [(ngModel)]="viewEmployee.PhoneNumber"/></div>
     </div>
-    <div class="d-flex m-1">
-      <div class="col-3">Address:</div>
+    <div class="d-flex mb-2">
+      <div class="col-3 p-0">Address:</div>
       <div class="col-9" *ngIf="!isedit">{{viewEmployee.Address}}</div>
       <div class="col-9" *ngIf="isedit"><input class="form-control" type="text" [(ngModel)]="viewEmployee.Address"/></div>
     </div>
-    <div class="d-flex m-1">
-      <div class="col-3">EmailID:</div>
+    <div class="d-flex mb-2">
+      <div class="col-3 p-0">EmailID:</div>
       <div class="col-9"*ngIf="!isedit">{{viewEmployee.Email}}</div>
       <div class="col-9" *ngIf="isedit"><input class="form-control" type="text" [(ngModel)]="viewEmployee.Email"/></div>
     </div>
