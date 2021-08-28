@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  appVersion: 10,
+  appVersion: 11,
   production: false
 };
 

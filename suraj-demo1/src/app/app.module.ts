@@ -1,3 +1,4 @@
+import { DeleteConfirmComponent } from './Common/DeleteConfirm.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -34,6 +35,7 @@ import {LocationStrategy, HashLocationStrategy} from '@angular/common';
 import { InvoiceTemplateComponent } from './pages/Sales/invoice-template/invoice-template.component';
 import { LoaderComponent } from './loader/loader.component';
 import { InvoiceQueueComponent } from './pages/Sales/invoice-queue/invoice-queue.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -60,7 +62,8 @@ import { InvoiceQueueComponent } from './pages/Sales/invoice-queue/invoice-queue
     ManageInventoryComponent,
     InvoiceTemplateComponent,
     LoaderComponent,
-    InvoiceQueueComponent
+    InvoiceQueueComponent,
+    DeleteConfirmComponent
   ],
   imports: [
     BrowserModule,
@@ -71,7 +74,8 @@ import { InvoiceQueueComponent } from './pages/Sales/invoice-queue/invoice-queue
     BrowserAnimationsModule,
     MatSnackBarModule,
     MatSelectModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy},AuthGuardService],
   bootstrap: [AppComponent]

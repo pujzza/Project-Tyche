@@ -9,6 +9,8 @@ import {
 import { ColumnMode, SortType } from '@swimlane/ngx-datatable';
 import { ProductsModel, SubProducts } from 'src/app/entities/StockModels';
 import { DeleteItemModel } from 'src/app/entities/HomeModel';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteConfirmComponent } from 'src/app/Common/DeleteConfirm.component';
 
 @Component({
   selector: 'app-manage-product',
@@ -44,7 +46,7 @@ export class ManageProductComponent implements OnInit, AfterViewInit {
   //View Childs / DOM Elements
   @ViewChild('table', { static: false }) table: ElementRef;
 
-  constructor(public service: CommonService) {}
+  constructor(public service: CommonService,private dialog: MatDialog) {}
 
   ngAfterViewInit(): void {
     this.table.nativeElement.style.maxheight = `${this.service.screenH}px`;
@@ -106,5 +108,18 @@ export class ManageProductComponent implements OnInit, AfterViewInit {
         this.service.OpenSnackBar('Something went wrong', 'SORRY');
       }
     );
+  }
+
+  openDelete(row){
+    const dialogRef = this.dialog.open(DeleteConfirmComponent, {
+      width: '400px',height: '200px',direction: 'ltr',
+      data: false
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.DeleteItem(row);
+      }
+    });
   }
 }

@@ -1,3 +1,4 @@
+import { MatDialog } from '@angular/material/dialog';
 import { ColumnMode } from '@swimlane/ngx-datatable';
 import { CommonService } from 'src/app/services/common.service';
 import {
@@ -9,6 +10,7 @@ import {
 } from '@angular/core';
 import { Employee } from 'src/app/entities/EmployeeModel';
 import { DeleteItemModel } from 'src/app/entities/HomeModel';
+import { DeleteConfirmComponent } from 'src/app/Common/DeleteConfirm.component';
 
 @Component({
   selector: 'app-manage-employee',
@@ -57,7 +59,7 @@ export class ManageEmployeeComponent implements OnInit, AfterViewInit {
   // View Childs / DOM Elemetns
   @ViewChild('table', { static: false }) table: ElementRef;
 
-  constructor(public service: CommonService) {}
+  constructor(public service: CommonService,private dialog: MatDialog) {}
 
   ngOnInit(): void {
     if (this.table) {
@@ -150,5 +152,18 @@ export class ManageEmployeeComponent implements OnInit, AfterViewInit {
     this.isviewEmployee = false; 
     this.isedit= false;
     this.viewEmployee = new Employee();
+  }
+
+  openDelete(row){
+    const dialogRef = this.dialog.open(DeleteConfirmComponent, {
+      width: '400px',height: '200px',direction: 'ltr',
+      data: false
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.DeleteItem(row);
+      }
+    });
   }
 }

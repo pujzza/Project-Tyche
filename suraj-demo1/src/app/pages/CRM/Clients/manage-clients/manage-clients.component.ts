@@ -1,3 +1,4 @@
+import { DeleteConfirmComponent } from './../../../../Common/DeleteConfirm.component';
 import { CommonService } from 'src/app/services/common.service';
 import {
   Component,
@@ -9,6 +10,7 @@ import {
 import { ColumnMode } from '@swimlane/ngx-datatable';
 import { Clients } from 'src/app/entities/ClientsModel';
 import { DeleteItemModel } from 'src/app/entities/HomeModel';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-manage-clients',
@@ -49,7 +51,7 @@ export class ManageClientsComponent implements OnInit, AfterViewInit {
   //View Childs/ DOM Elements
   @ViewChild('table', { static: false }) table: ElementRef;
 
-  constructor(public service: CommonService) {}
+  constructor(public service: CommonService,public dialog: MatDialog) {}
   ngAfterViewInit(): void {
     this.table.nativeElement.style.maxheight = `${this.service.screenH}px`;
   }
@@ -147,5 +149,18 @@ export class ManageClientsComponent implements OnInit, AfterViewInit {
     this.isEditClient = false;
     this.isviewClient = false;
     this.viewClient = new Clients();
+  }
+
+  openDelete(row){
+    const dialogRef = this.dialog.open(DeleteConfirmComponent, {
+      width: '400px',height: '200px',direction: 'ltr',
+      data: false
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.DeleteClient(row);
+      }
+    });
   }
 }

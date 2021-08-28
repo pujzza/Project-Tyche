@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  appVersion: 10,
+  appVersion: 11,
 }
