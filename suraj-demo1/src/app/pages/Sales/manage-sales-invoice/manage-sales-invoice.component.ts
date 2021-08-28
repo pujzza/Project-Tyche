@@ -4,14 +4,6 @@ import {
   OnInit,
   ViewChild,
   AfterViewInit,
-  TemplateRef,
-  ViewContainerRef,
-  ComponentFactory,
-  ComponentRef,
-  EmbeddedViewRef,
-  Injector,
-  NgModuleRef,
-  ViewRef,
   ChangeDetectorRef,
   QueryList,
   ViewChildren,
@@ -22,7 +14,6 @@ import { MetaProducts } from 'src/app/entities/MetaProducts';
 import { CommonService } from 'src/app/services/common.service';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
-import domtoimage from 'dom-to-image';
 import { Router } from '@angular/router';
 import { formatDate } from '@angular/common';
 
@@ -114,13 +105,13 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.table.nativeElement.style.maxheight = `${this.service.screenH}px`;
+    // this.table.nativeElement.style.maxheight = `${this.service.screenH}px`;
   }
 
   ngOnInit(): void {
-    if (this.table) {
-      this.table.nativeElement.style.maxheight = `${this.service.screenH}px`;
-    }
+    // if (this.table) {
+    //   this.table.nativeElement.style.maxheight = `${this.service.screenH}px`;
+    // }
     this.GetOrders();
   }
 
@@ -142,6 +133,9 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
         });
         this.isloading = false;
       }
+    },
+    (err) => {this.isloading = false;
+    this.service.OpenSnackBar('ERROR','Something went wrong!')
     });
   }
 

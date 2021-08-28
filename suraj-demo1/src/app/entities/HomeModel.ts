@@ -1,3 +1,4 @@
+import { Oauth } from './../services/common.service';
 export const NavMenu = [
   {
     name: 'Dashboard',
@@ -25,4 +26,8 @@ export class DeleteItemModel {
   ID: string;
   Table: string;
   oauth: string;
+
+  constructor(){
+    this.oauth = Oauth;
+  }
 }

@@ -149,7 +149,7 @@
   </div>
   <div class="col-lg-3 col-md-3 col-sm-1">
     <div
-      class="font-weight-bolder border text-center"
+      class="font-weight-bolder border text-center "
       [ngStyle]="
         isMaterialError
           ? { 'background-color': 'red', color: 'white' }
@@ -273,28 +273,28 @@
       <td class="border-0 font-weight-bolder text-right">Total</td>
       <td class="border-0">{{ getTotal() | currency: "&#8377;" }}</td>
     </tr>
-    <tr style="border: none" *ngIf="TaxNeed">
+    <!-- <tr style="border: none" *ngIf="TaxNeed">
       <td colspan="4" style="border: none"></td>
       <td class="border-0 font-weight-bolder text-right">Tax</td>
       <td class="border-0">{{ taxcost | currency: "&#8377;" }} (14%)</td>
-    </tr>
-    <tr style="border: none">
+    </tr> -->
+    <!-- <tr style="border: none">
       <td colspan="4" style="border: none"></td>
       <td class="border-0 font-weight-bolder text-right">Grand Total</td>
       <td class="border-0">{{ getGrandTotal() | currency: "&#8377;" }}</td>
-    </tr>
-    <tr style="border: none">
+    </tr> -->
+    <!-- <tr style="border: none">
       <td colspan="4" style="border: none"></td>
       <td class="border-0 font-weight-bolder text-right">Amount Paid</td>
       <td class="border-0">
         <input type="number" id="paidAmt" [(ngModel)]="paidAmt" />
       </td>
-    </tr>
+    </tr> -->
     <tr>
       <td colspan="5" style="border: none"></td>
       <td colspan="1" style="border: none">
         <button class="btn btn-success" (click)="generateInvoice()">
-          Generate Invoice
+         Add to Queue
         </button>
       </td>
     </tr>
@@ -318,16 +318,17 @@
           {{ checkOutErrorMsg }}
         </div>
         <div *ngIf="!checkoutError">
-          <div>Invoice Generated Successfully</div>
+          <!-- <div>Invoice Generated Successfully</div> -->
+          <div>Invoice Successfully added to queue</div>
         </div>
       </div>
-      <div class="col-1">
+      <!-- <div class="col-1">
         <div
           class="float-right print-icon"
           *ngIf="!checkoutError"
           (click)="printGenerate()"
         ></div>
-      </div>
+      </div> -->
       <div class="col-1">
         <div class="float-right cursor-pointer" (click)="closeCheckout()">
           X

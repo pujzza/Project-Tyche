@@ -48,11 +48,11 @@ export class ManageOrderComponent implements OnInit, AfterViewInit {
   constructor(private service: CommonService) {}
 
   ngOnInit(): void {
-    this.table.nativeElement.style.maxheight = `${this.service.screenH}px`;
+   // this.table.nativeElement.style.maxheight = `${this.service.screenH}px`;
     this.GetPurchaseOrder();
   }
   ngAfterViewInit(): void {
-    this.table.nativeElement.style.maxheight = `${this.service.screenH}px`;
+   // this.table.nativeElement.style.maxheight = `${this.service.screenH}px`;
   }
 
   //Search

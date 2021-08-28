@@ -56,7 +56,9 @@ export class ManageInventoryComponent implements OnInit, AfterViewInit {
         this.filteredList = res.returndata;
         this.isLoading = false;
       }
-    });
+    },(err) => {this.isLoading = false;
+      this.service.OpenSnackBar('ERROR','Something went wrong!')
+      });
   }
 
   UpdateInventory() {

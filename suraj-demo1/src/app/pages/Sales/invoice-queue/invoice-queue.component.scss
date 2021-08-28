@@ -1,4 +1,6 @@
-.checkoutModel {
+.table-container{
+    margin: 10px;
+  }.checkoutModel {
     display: block; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -12,17 +14,28 @@
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
     display: flex;
   }
+
+  .tr-header{
+    background-color: rgb(120, 224, 116);
+}
   
   .checkoutModel-content {
     background-color: white;
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 50%;
+    width: 70%;
+    max-height: 95%;
   }
 
   .table-container{
     margin: 10px;
+  }
+
+  .table-scroll{
+    overflow-y: scroll;
+    overflow-x: hidden;
+    max-height: 300px;
   }
   table {
     width: 100%;
@@ -58,7 +71,9 @@
     cursor: pointer;
   }
   .pay-amt-title {
-    font-family: "Poppins-Medium";
+    padding: 15px 10px;
+    font-weight: 900;
+    text-align: center;
   }
   .pay-amt-container {
     width: 500px;
@@ -99,3 +114,5 @@
     color: crimson;
     cursor: pointer;
   }
+
+  

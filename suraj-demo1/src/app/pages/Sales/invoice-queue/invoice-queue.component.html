@@ -1,46 +1,46 @@
 <div class="d-flex">
   <div class="col-3" style="padding-top: 10px">
-    <div class="page-header1">Invoices</div>
+    <div class="page-header1">Invoice Queue</div>
   </div>
   <div class="col-3"></div>
-  <div class="col-3 d-flex" style="padding-top: 10px">
-    <input
-      type="date"
-      class="form-control"
-      [(ngModel)]="datefilter"
-      placeholder="Filter by Date"
-      (change)="FilterByOrderDate()"
-    />
-    <span
-      class="clearDate"
-      *ngIf="datefilter"
-      (click)="datefilter = null; FilterByOrderDate()"
-      >x</span
-    >
-  </div>
-  <div class="col-3" style="padding-top: 10px">
-    <div class="input-group">
+  <!-- <div class="col-3 d-flex" style="padding-top: 10px">
       <input
-        type="text"
+        type="date"
         class="form-control"
-        [(ngModel)]="searchInvoice"
-        placeholder="Search Invoice"
-        (keyup)="SearchInvoice()"
+        [(ngModel)]="datefilter"
+        placeholder="Filter by Date"
+        (change)="FilterByOrderDate()"
       />
-      <div class="input-group-prepend">
-        <span
-          *ngIf="!searchInvoice"
-          class="input-group-text search-icon"
-        ></span>
-        <span
-          class="input-group-text clearSearch"
-          *ngIf="searchInvoice"
-          (click)="searchInvoice = ''; SearchInvoice()"
-          >x</span
-        >
+      <span
+        class="clearDate"
+        *ngIf="datefilter"
+        (click)="datefilter = null; FilterByOrderDate()"
+        >x</span
+      >
+    </div> -->
+  <!-- <div class="col-3" style="padding-top: 10px">
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="searchInvoice"
+          placeholder="Search Invoice"
+          (keyup)="SearchInvoice()"
+        />
+        <div class="input-group-prepend">
+          <span
+            *ngIf="!searchInvoice"
+            class="input-group-text search-icon"
+          ></span>
+          <span
+            class="input-group-text clearSearch"
+            *ngIf="searchInvoice"
+            (click)="searchInvoice = ''; SearchInvoice()"
+            >x</span
+          >
+        </div>
       </div>
-    </div>
-  </div>
+    </div> -->
 </div>
 <div *ngIf="isloading"><loader></loader></div>
 <div id="ngxtable" class="table-container" #table *ngIf="!isloading">
@@ -99,24 +99,17 @@
           >
         </div>
         <div *ngIf="col.name.includes('Settings')" class="d-flex">
-          <div>
+          <div class="m-auto">
             <div
-            class="badge btn-primary"
-              *ngIf="getDue(row) == 0"
-              color="primary"
-            >
-              Paid
-          </div>
-            <div
-            class="badge btn-danger"
+              class="badge btn-danger"
               *ngIf="getDue(row) != 0"
               color="warn"
               (click)="openPayAmt(row)"
             >
-              Due
-        </div>
+              Pay
+            </div>
           </div>
-          <div class="col-2 view-icon ml-2" (click)="ShowBill(row)"></div>
+          <!-- <div class="col-2 view-icon ml-2" (click)="ShowBill(row)"></div> -->
         </div>
       </ng-template>
     </ngx-datatable-column>
@@ -129,10 +122,10 @@
       X
     </div>
     <!-- <div class="d-flex">
-        <div class="col-6"> Order #
-        </div>
-        <div class="col-6">{{bill.orderid}}</div>
-      </div> -->
+          <div class="col-6"> Order #
+          </div>
+          <div class="col-6">{{bill.orderid}}</div>
+        </div> -->
     <table class="table-container" id="tableCont">
       <tr>
         <th colspan="1">Product</th>
@@ -154,20 +147,44 @@
 
 <div #payAmt *ngIf="ispayAmt" class="checkoutModel">
   <div class="checkoutModel-content">
-    <div class="pay-amt-title">Order Id : {{ payAmtReq.orderid }}</div>
     <div class="pay-amt-content">
+      <div class="amt-container">Order Id : {{ payAmtReq.orderid }}</div>
       <div class="amt-container">Total Amount: {{ TotalAmt }}</div>
       <div class="amt-container">Customer Due: {{ DueAmt }}</div>
     </div>
-    <div>Amount Paid Now:</div>
-    <div>
-      <input
-        type="number"
-        [(ngModel)]="payAmtReq.paidamount"
-        class="form-control text-center"
-        (keyup)="checkPayAmt()"
-      />
+
+    <div class="table-scroll">
+      <table class="table-container" id="tableCont">
+        <tr class="tr-header">
+          <th colspan="1">Product</th>
+          <th colspan="1">Material</th>
+          <th colspan="1">Size</th>
+          <th colspan="1">Qty</th>
+          <th colspan="1">Amount</th>
+        </tr>
+        <tr #allTheseThings *ngFor="let prod of bill.products">
+          <td class="text-capitalize">{{ prod.product }}</td>
+          <td class="text-capitalize">{{ prod.material }}</td>
+          <td class="text-capitalize">{{ prod.size }}</td>
+          <td class="text-capitalize">{{ prod.count }}</td>
+          <td class="text-capitalize">{{ prod.price }}</td>
+        </tr>
+      </table>
     </div>
+
+    <div class="d-flex mt-3">
+        <div class="col-4 pay-amt-title">Pay Amount</div>
+        <div class="col-8">
+            <input
+              type="number"
+              [(ngModel)]="payAmtReq.paidamount"
+              class="form-control text-center"
+              (keyup)="checkPayAmt()"
+            />
+          </div>
+    </div>
+
+
     <br />
     <div class="errorText">{{ errorText }}</div>
     <div align="center">

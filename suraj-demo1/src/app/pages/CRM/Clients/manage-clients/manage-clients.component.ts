@@ -38,6 +38,7 @@ export class ManageClientsComponent implements OnInit, AfterViewInit {
   isLoading = true;
   reorderable = true;
   isviewClient = false;
+  isEditClient = false;
 
   //Object Variables
   viewClient = new Clients();
@@ -74,6 +75,7 @@ export class ManageClientsComponent implements OnInit, AfterViewInit {
       },
       (err) => {
         this.isLoading = false;
+        this.service.OpenSnackBar('ERROR', 'Something went wrong!');
       }
     );
   }
@@ -87,8 +89,8 @@ export class ManageClientsComponent implements OnInit, AfterViewInit {
   DeleteClient(item) {
     let postparam = new DeleteItemModel();
     postparam.oauth = this.service.Oauth;
-    postparam.Table = 'Product';
-    postparam.ID = item.ProductId;
+    postparam.Table = 'Client';
+    postparam.ID = item.id;
     this.service.DeleteItem(postparam).subscribe(
       (res) => {
         if (res && res.returncode == 200) {
@@ -115,5 +117,35 @@ export class ManageClientsComponent implements OnInit, AfterViewInit {
         item.OrgName.toLowerCase().indexOf(lowerValue) !== -1 ||
         item.id.toLowerCase().indexOf(lowerValue) !== -1
     );
+  }
+
+  OpenEditModal(row) {
+    this.isEditClient = true;
+    this.isviewClient = true;
+    let obj = this.clientData.find((x) => x.id == row?.id);
+    Object.assign(this.viewClient, obj);
+  }
+
+  SaveEdit() {
+    this.service.UpdateClient(this.viewClient).subscribe(
+      (res) => {
+        if (res.returncode == 200) {
+          this.getAllClients();
+          this.service.OpenSnackBar('SUCCESS', res.returnmessage);
+        } else {
+          this.service.OpenSnackBar('ERROR', res.returnmessage);
+        }
+      },
+      (err) => {
+        this.service.OpenSnackBar('ERROR', err);
+      }
+    );
+    this.CloseModal();
+  }
+
+  CloseModal() {
+    this.isEditClient = false;
+    this.isviewClient = false;
+    this.viewClient = new Clients();
   }
 }

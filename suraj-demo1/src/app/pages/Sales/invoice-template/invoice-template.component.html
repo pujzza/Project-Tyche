@@ -1,11 +1,13 @@
 <div>
   <div class="btn btn-danger m-2" (click)="CancelView()">Cancel</div>
   <!-- <div class="btn btn-primary btn-md float-right m-2">Email</div> -->
-  <div class="btn btn-success btn-md float-right m-2" (click)="Download()">
-    Download
+  <div class="btn btn-success btn-md float-right m-2 d-flex" (click)="Download()">
+    <div class="download-icon mr-1"></div>
+   <div>Download</div>
   </div>
 </div>
-<div id="downloadBody">
+<div id="downloadBody" >
+<div class="print-border">
   <div class="template-header">SURAJ XEROX BILLING</div>
   <div class="template-address">
     <div class="col-4">
@@ -51,12 +53,12 @@
       </tr>
       <tr *ngFor="let product of bill.products; let i = index">
         <td>{{ i + 1 }}.</td>
-        <td>{{ product.product }}</td>
-        <td>{{ product.material }}</td>
-        <td>{{ product.size }}</td>
-        <td>{{ product.count }}</td>
-        <td>{{ product.price | currency: "&#8377;"  }}</td>
-        <td>{{ (product.count*product.price)| currency: "&#8377;"  }}</td>
+        <td class="text-capitalize">{{ product.product }}</td>
+        <td class="text-capitalize">{{ product.material }}</td>
+        <td class="text-capitalize">{{ product.size }}</td>
+        <td class="text-capitalize">{{ product.count }}</td>
+        <td class="text-capitalize">{{ product.price | currency: "&#8377;"  }}</td>
+        <td class="text-capitalize">{{ (product.count*product.price)| currency: "&#8377;"  }}</td>
       </tr>
       <tr style="border: none">
         <td colspan="5" style="border: none"></td>
@@ -85,4 +87,7 @@
       </tr>
     </table>
   </div>
+  <hr>
+  <div class="footer-style">-- Thank you. Visit Again --</div>
+</div>
 </div>

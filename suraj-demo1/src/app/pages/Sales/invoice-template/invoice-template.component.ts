@@ -34,10 +34,9 @@ export class InvoiceTemplateComponent implements OnInit {
     var data = document.getElementById('downloadBody');
     html2canvas(data).then((canvas) => {
       // Few necessary setting options
-      var imgWidth = 208;
-      var pageHeight = 295;
+      var imgWidth = 210 ;
       var imgHeight = (canvas.height * imgWidth) / canvas.width;
-      var heightLeft = imgHeight;
+     // var imgHeight = canvas.height;
       const contentDataURL = canvas.toDataURL('image/png');
       let pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF
       var position = 0;

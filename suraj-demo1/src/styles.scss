@@ -1,5 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 @import "../node_modules/@swimlane/ngx-datatable/themes/bootstrap.scss";
+@import "../node_modules/@swimlane/ngx-datatable/themes/bootstrap.css";
+@import "../node_modules/@swimlane/ngx-datatable/themes/material.scss";
+@import "../node_modules/@swimlane/ngx-datatable/themes/material.css";
+@import "../node_modules/@swimlane/ngx-datatable/assets/icons.css";
 body {
   margin: 0px;
   height: 100vh;
@@ -12,7 +16,8 @@ body {
   src: url(assets/font/Nunito/Nunito-Light.ttf) format("truetype");
 }
 
-.form-control,.form-select {
+.form-control,
+.form-select {
   box-shadow: none !important;
 }
 
@@ -200,8 +205,14 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 .checkoutModel {
   display: block; /* Hidden by default */
@@ -226,11 +237,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   width: 50%;
 }
 
-.pagecontainer{
-  height: calc(100vh) ;
+.pagecontainer {
+  height: calc(100vh);
 }
 
-.clearSearch{
+.clearSearch {
   color: crimson !important;
   font: 22px !important;
   background: white !important;
@@ -238,7 +249,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 // LOADER
-.loader-5 span{
+.loader-5 span {
   display: block;
   position: absolute;
   left: calc(50% - 20px);
@@ -248,27 +259,28 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   background-color: #2d3450;
 }
 
-.loader-5 span:nth-child(2){
+.loader-5 span:nth-child(2) {
   animation: moveanimation1 1s ease-in-out infinite;
 }
 
-.loader-5 span:nth-child(3){
+.loader-5 span:nth-child(3) {
   animation: moveanimation2 1s ease-in-out infinite;
 }
 
-.loader-5 span:nth-child(4){
+.loader-5 span:nth-child(4) {
   animation: moveanimation3 1s ease-in-out infinite;
 }
 
-@keyframes moveanimation1{
-  0%, 100%{
+@keyframes moveanimation1 {
+  0%,
+  100% {
     -webkit-transform: translateX(0px);
     -ms-transform: translateX(0px);
     -o-transform: translateX(0px);
     transform: translateX(0px);
   }
 
-  75%{
+  75% {
     -webkit-transform: translateX(30px);
     -ms-transform: translateX(30px);
     -o-transform: translateX(30px);
@@ -276,15 +288,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   }
 }
 
-@keyframes moveanimation2{
-  0%, 100%{
+@keyframes moveanimation2 {
+  0%,
+  100% {
     -webkit-transform: translateY(0px);
     -ms-transform: translateY(0px);
     -o-transform: translateY(0px);
     transform: translateY(0px);
   }
 
-  75%{
+  75% {
     -webkit-transform: translateY(30px);
     -ms-transform: translateY(30px);
     -o-transform: translateY(30px);
@@ -292,15 +305,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   }
 }
 
-@keyframes moveanimation3{
-  0%, 100%{
+@keyframes moveanimation3 {
+  0%,
+  100% {
     -webkit-transform: translate(0px, 0px);
     -ms-transform: translate(0px, 0px);
     -o-transform: translate(0px, 0px);
     transform: translate(0px, 0px);
   }
 
-  75%{
+  75% {
     -webkit-transform: translate(30px, 30px);
     -ms-transform: translate(30px, 30px);
     -o-transform: translate(30px, 30px);
@@ -308,3 +322,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   }
 }
 //LOADER ENDS
+
+.txt-camelcase {
+  text-transform: capitalize;
+}
