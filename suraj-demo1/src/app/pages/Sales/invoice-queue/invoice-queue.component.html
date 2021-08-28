@@ -163,11 +163,11 @@
           <th colspan="1">Amount</th>
         </tr>
         <tr #allTheseThings *ngFor="let prod of bill.products">
-          <td>{{ prod.product }}</td>
-          <td>{{ prod.material }}</td>
-          <td>{{ prod.size }}</td>
-          <td>{{ prod.count }}</td>
-          <td>{{ prod.price }}</td>
+          <td class="text-capitalize">{{ prod.product }}</td>
+          <td class="text-capitalize">{{ prod.material }}</td>
+          <td class="text-capitalize">{{ prod.size }}</td>
+          <td class="text-capitalize">{{ prod.count }}</td>
+          <td class="text-capitalize">{{ prod.price }}</td>
         </tr>
       </table>
     </div>
