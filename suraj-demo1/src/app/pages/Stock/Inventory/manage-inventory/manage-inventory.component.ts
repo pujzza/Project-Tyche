@@ -9,6 +9,8 @@ import {
 import { ColumnMode, SortType } from '@swimlane/ngx-datatable';
 import { CommonService } from 'src/app/services/common.service';
 import { DeleteItemModel } from 'src/app/entities/HomeModel';
+import { DeleteConfirmComponent } from 'src/app/Common/DeleteConfirm.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-manage-inventory',
@@ -37,7 +39,7 @@ export class ManageInventoryComponent implements OnInit, AfterViewInit {
     { name: 'Settings', width: 100 },
   ];
   Item = new InventoryItem();
-  constructor(public service: CommonService) {}
+  constructor(public service: CommonService,private dialog: MatDialog) {}
   ngAfterViewInit(): void {
     this.table.nativeElement.style.maxheight = `${this.service.screenH}px`;
   }
@@ -116,5 +118,18 @@ export class ManageInventoryComponent implements OnInit, AfterViewInit {
         item.ItemName.toLowerCase().indexOf(lowerValue) !== -1 ||
         item.Category.toLowerCase().indexOf(lowerValue) !== -1
     );
+  }
+
+  openDelete(row){
+    const dialogRef = this.dialog.open(DeleteConfirmComponent, {
+      width: '400px',height: '200px',direction: 'ltr',
+      data: false
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.DeleteInventory(row);
+      }
+    });
   }
 }

@@ -1,3 +1,4 @@
+import { MatDialog } from '@angular/material/dialog';
 import { CommonService } from 'src/app/services/common.service';
 import {
   Component,
@@ -8,6 +9,7 @@ import {
 } from '@angular/core';
 import { ColumnMode } from '@swimlane/ngx-datatable';
 import { DeleteItemModel } from 'src/app/entities/HomeModel';
+import { DeleteConfirmComponent } from 'src/app/Common/DeleteConfirm.component';
 
 @Component({
   selector: 'app-manage-order',
@@ -45,7 +47,7 @@ export class ManageOrderComponent implements OnInit, AfterViewInit {
   @ViewChild('table', { static: true }) table: ElementRef;
   @ViewChild('showBill', { static: false }) showBill: ElementRef;
 
-  constructor(private service: CommonService) {}
+  constructor(private service: CommonService,private dialog: MatDialog) {}
 
   ngOnInit(): void {
    // this.table.nativeElement.style.maxheight = `${this.service.screenH}px`;
@@ -100,5 +102,18 @@ export class ManageOrderComponent implements OnInit, AfterViewInit {
         this.service.OpenSnackBar('Something went wrong', 'SORRY');
       }
     );
+  }
+
+  openDelete(row){
+    const dialogRef = this.dialog.open(DeleteConfirmComponent, {
+      width: '400px',height: '200px',direction: 'ltr',
+      data: false
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.DeleteItem(row);
+      }
+    });
   }
 }

@@ -1,8 +1,10 @@
+import { MatDialog } from '@angular/material/dialog';
 import { WarehouseModel } from './../../../../entities/StockModels';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ColumnMode, SortType } from '@swimlane/ngx-datatable';
 import { CommonService } from 'src/app/services/common.service';
 import { DeleteItemModel } from 'src/app/entities/HomeModel';
+import { DeleteConfirmComponent } from 'src/app/Common/DeleteConfirm.component';
 
 @Component({
   selector: 'app-warehouses',
@@ -35,7 +37,7 @@ export class WarehousesComponent implements OnInit {
   searchWarehouse: any;
 
   warehouse = new WarehouseModel();
-  constructor(public service: CommonService) {}
+  constructor(public service: CommonService,private dialog: MatDialog) {}
 
   ngAfterViewInit(): void {
     this.table.nativeElement.style.maxheight = `${this.service.screenH}px`;
@@ -142,5 +144,18 @@ export class WarehousesComponent implements OnInit {
         this.service.OpenSnackBar('Something went wrong', 'SORRY');
       }
     );
+  }
+
+  openDelete(row){
+    const dialogRef = this.dialog.open(DeleteConfirmComponent, {
+      width: '400px',height: '200px',direction: 'ltr',
+      data: false
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.DeleteWarehouse(row);
+      }
+    });
   }
 }
