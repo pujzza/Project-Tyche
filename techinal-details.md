@@ -6,7 +6,7 @@ description: >-
 
 # Techinal Details
 
-### Tech Stack
+## Tech Stack
 
 * PHP
 * Angular 9+

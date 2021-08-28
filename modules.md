@@ -4,13 +4,13 @@ description: A module is a separate unit of software or hardware
 
 # Modules
 
-### Sales
+## Sales
 
 * Add New Sale Invoice
 * Manage Invoices
 * Invoice Queue
 
-### Stock Management
+## Stock Management
 
 * Item Manager
   * Add New product
@@ -23,7 +23,7 @@ description: A module is a separate unit of software or hardware
   * Add Inventory
   * Manage Inventory
 
-### CRM - Customer Relationship Management
+## CRM - Customer Relationship Management
 
 * Clients
   * Add New Clients
@@ -31,6 +31,4 @@ description: A module is a separate unit of software or hardware
 * Employee
   * Add Employee
   * Manage Employee
-
-
 

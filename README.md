@@ -6,14 +6,10 @@ description: Tyche means 'Luck' in greek.
 
 Project Tyche is an Invoice generating and managing web application for a store.
 
-#### Team Members
+## Team Members
 
 * Puja Shree
 * Rajarajeshwari
 * Roop Sagar
 * Vishaal
-
-
-
-
 
