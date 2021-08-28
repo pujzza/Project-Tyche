@@ -4,8 +4,8 @@ export class CreateEmployeeReq{
     oauth: string;
     EmpFirstName: string;
     EmpLastName: string;
-    EmpAddress: string;
-    EmpPhoneNumber: string;
+    Address: string;
+    PhoneNumber: string;
     EmpEmailID:string;
     EmpPassword:string;
     Employee_ID: string;

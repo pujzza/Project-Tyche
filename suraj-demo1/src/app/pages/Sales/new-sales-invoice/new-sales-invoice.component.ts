@@ -174,6 +174,7 @@ export class NewSalesInvoiceComponent implements OnInit, AfterViewInit {
       total += d['prodprice'] ?? 0;
     });
     this.productTotal = total;
+    this.getGrandTotal();
     return total;
   }
 

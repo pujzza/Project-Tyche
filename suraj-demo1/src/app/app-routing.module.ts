@@ -1,3 +1,4 @@
+import { InvoiceQueueComponent } from './pages/Sales/invoice-queue/invoice-queue.component';
 import { ManageInventoryComponent } from './pages/Stock/Inventory/manage-inventory/manage-inventory.component';
 import { AddInventoryComponent } from './pages/Stock/Inventory/add-inventory/add-inventory.component';
 import { ManageEmployeeComponent } from './pages/CRM/Employee/manage-employee/manage-employee.component';
@@ -50,6 +51,7 @@ const routes: Routes = [
       { path: 'Inventory/NewInventory', component: AddInventoryComponent },
       { path: 'Inventory/ManageInventory', component: ManageInventoryComponent },
       { path: 'Sales/InvoiceTemplate/:id', component: InvoiceTemplateComponent},
+      { path: 'Sales/InvoiceQueue', component: InvoiceQueueComponent},
     ],
   },
 ];

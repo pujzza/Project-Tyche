@@ -16,9 +16,14 @@ export class CommonService {
   isLoggedIn = false;
   screenH;
   downloadOrder:any;
+  userRole = 2; // Employee
 
   constructor(private http: HttpClient, private _snackBar: MatSnackBar) {
     this.screenH = window.screen.height - 100;
+  }
+
+  isEmployee(){
+    return (this.userRole == 2 ? 0 : 1);
   }
 
   ToLogin(req: loginModel): Observable<any> {
