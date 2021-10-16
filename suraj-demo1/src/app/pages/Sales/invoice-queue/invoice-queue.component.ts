@@ -61,9 +61,10 @@ export class InvoiceQueueComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.GetOrders();
+    this.GetQueuedInvoices();
   }
 
+  // Depreciated
   GetOrders() {
     const billreq = {
       oauth: this.service.Oauth,
@@ -81,6 +82,26 @@ export class InvoiceQueueComponent implements OnInit {
           this.orders.map((r) => {
             r.dueAmt = Number(r.totalamount) - Number(r.paidamount);
           });
+          this.isloading = false;
+        }
+      },
+      (err) => {
+        this.isloading = false;
+        this.service.OpenSnackBar('ERROR', 'Something went wrong!');
+      }
+    );
+  }
+
+  GetQueuedInvoices() {
+    
+    this.service.GetQueueInvoice().subscribe(
+      (res) => {
+        if (res.returncode === 200) {
+          this.orders = res.orders;
+          this.filteredList = res.orders;
+          // this.orders.map((r) => {
+          //   r.dueAmt = Number(r.totalamount) - Number(r.paidamount);
+          // });
           this.isloading = false;
         }
       },

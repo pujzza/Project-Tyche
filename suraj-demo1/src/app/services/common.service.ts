@@ -222,6 +222,12 @@ export class CommonService {
     );
   }
 
+  GetQueueInvoice(): Observable<any> {
+    return this.http.get(
+      'http://cyperinfotech.com/cyperinfotech/api/Product/read_inqueue_order.php'
+    );
+  }
+
   OpenSnackBar(title, content) {
     this._snackBar.open(title, content, {
       duration: 5000,
