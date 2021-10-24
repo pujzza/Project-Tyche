@@ -6,7 +6,7 @@ description: Tyche known As the Goddess of Luck, Fortune and Chance, Tyche has a
 
 # About
 
-Project Tyche is an Invoice generating and managing web application for a store.
+Project Tyche is a POS Tool includes Invoice generating and managing web application for a store.
 
 ## Team Members
 
@@ -14,4 +14,7 @@ Project Tyche is an Invoice generating and managing web application for a store.
 * Rajarajeshwari
 * Roop Sagar
 * Vishaal
+* Kharan
+* Uthrakumar
+* Manohar
 
