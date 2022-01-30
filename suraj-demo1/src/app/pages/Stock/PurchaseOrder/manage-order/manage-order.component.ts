@@ -91,7 +91,7 @@ export class ManageOrderComponent implements OnInit, AfterViewInit {
     postparam.ID = item.OrderID;
     this.service.DeleteItem(postparam).subscribe(
       (res) => {
-        if (res && res.returncode == 200) {
+        if (res) {
           this.service.OpenSnackBar('Delete Successfull', 'SUCCESS');
           this.GetPurchaseOrder();
         } else {

@@ -104,7 +104,7 @@ export class ManageEmployeeComponent implements OnInit, AfterViewInit {
     postparam.ID = item.EmployeeID;
     this.service.DeleteItem(postparam).subscribe(
       (res) => {
-        if (res && res.returncode == 200) {
+        if (res) {
           this.service.OpenSnackBar('Delete Successfull', 'SUCCESS');
           this.GetAllEmployees();
         } else {
@@ -149,7 +149,7 @@ export class ManageEmployeeComponent implements OnInit, AfterViewInit {
   }
 
   CloseViewModal(){
-    this.isviewEmployee = false; 
+    this.isviewEmployee = false;
     this.isedit= false;
     this.viewEmployee = new Employee();
   }

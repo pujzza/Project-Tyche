@@ -33,29 +33,55 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  onLogin() {
+  onLogin(role: any) {
     if (this.validateLogin()) {
       this.requestBody.email = this.empId;
       this.requestBody.password = this.password;
       this.requestBody.oauth = this.service.Oauth;
-      this.service.ToLogin(this.requestBody).subscribe((res) => {
-        this.response = res;
-        //console.log(this.response);
-        if (this.response.returncode == 200) {
-          this.service.isLoggedIn = true;
-          localStorage.setItem('UserId', this.response.returndata.id);
-          var loggedInName = `${this.response.returndata.firstname} ${this.response.returndata.lastname}`;
-          localStorage.setItem('UserName', loggedInName);
-          this.authService.login = true;
-          this.router.navigateByUrl('Home');
-        } else {
-          this.errorText = 'Login Failed. Recheck Credentials';
-        }
-      });
+      if(role == 1)
+      this.AdminLogin();
+      else
+      this.EmployeeLogin();
     }
     // this.router.navigateByUrl('Home');
     // // this.authService.login = true;
     // // this.router.navigateByUrl('Home/Customer');
+  }
+
+  AdminLogin(){
+    this.service.ToLogin(this.requestBody).subscribe((res) => {
+      this.response = res;
+      //console.log(this.response);
+      if (this.response.returncode == 200) {
+        this.service.isLoggedIn = true;
+        localStorage.setItem('UserId', this.response.returndata.id);
+        var loggedInName = `${this.response.returndata.firstname} ${this.response.returndata.lastname}`;
+        localStorage.setItem('UserName', loggedInName);
+        localStorage.setItem('UserRole', 'Admin');
+        this.authService.login = true;
+        this.router.navigateByUrl('Home');
+      } else {
+        this.errorText = 'Login Failed. Recheck Credentials';
+      }
+    });
+  }
+
+  EmployeeLogin(){
+    this.service.ToLoginEmployee(this.requestBody).subscribe((res) => {
+      this.response = res;
+      //console.log(this.response);
+      if (this.response.returncode == 200) {
+        this.service.isLoggedIn = true;
+        localStorage.setItem('UserId', this.response.returndata.id);
+        var loggedInName = `${this.response.returndata.firstname} ${this.response.returndata.lastname}`;
+        localStorage.setItem('UserName', 'John Doe');
+        localStorage.setItem('UserRole', this.response.returndata.role);
+        this.authService.login = true;
+        this.router.navigateByUrl('Home');
+      } else {
+        this.errorText = 'Login Failed. Recheck Credentials';
+      }
+    });
   }
 
   validateLogin(): boolean {

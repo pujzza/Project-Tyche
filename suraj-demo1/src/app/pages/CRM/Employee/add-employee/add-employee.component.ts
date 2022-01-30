@@ -11,6 +11,7 @@ export class AddEmployeeComponent implements OnInit {
   isemployeecreated = false;
 
   Employee: CreateEmployeeReq = new CreateEmployeeReq();
+  roles = ['Accountant','Employee']
 
   constructor(public service: CommonService) {}
 

@@ -12,7 +12,8 @@ export class loginResponse{
 
 export class LoginReturnData{
     id: string|undefined;
-    firstname: string|undefined; 
+    firstname: string|undefined;
     lastname: string|undefined;
-    email: string|undefined; 
+    email: string|undefined;
+    role:  string|undefined;
 }

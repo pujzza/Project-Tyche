@@ -133,7 +133,7 @@ export class WarehousesComponent implements OnInit {
     postparam.ID = item.WarehouseId;
     this.service.DeleteItem(postparam).subscribe(
       (res) => {
-        if (res && res.returncode == 200) {
+        if (res) {
           this.service.OpenSnackBar('Delete Successfull', 'SUCCESS');
           this.GetAllWareHouse();
         } else {
