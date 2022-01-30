@@ -60,7 +60,7 @@ export class NewSalesInvoiceComponent implements OnInit, AfterViewInit {
   ProdSize :any[] = [];
   @ViewChild('addClient', { static: true }) addclient: ElementRef;
   @ViewChild('checkoutDialog', { static: true }) checkoutDialog: ElementRef;
-  
+
 
 
   constructor(public service: CommonService) {
@@ -153,18 +153,18 @@ export class NewSalesInvoiceComponent implements OnInit, AfterViewInit {
     const length = this.prodtableData.length;
     if (index == -2) {
       this.cost = 0;
-      let cost = this.filerProduct(this.selectProduct,this.selectedMaterial,this.selectedSize); 
+      let cost = this.filerProduct(this.selectProduct,this.selectedMaterial,this.selectedSize);
       if(cost){
         this.cost = Number(cost[0].ProductPrice) * this.qty;
       }
     } else {
       let prod = this.prodtableData[index];
-      let cost = this.filerProduct(prod['prodname'],prod['prodmaterial'],prod['prodsize']); 
+      let cost = this.filerProduct(prod['prodname'],prod['prodmaterial'],prod['prodsize']);
       if(cost){
         this.prodtableData[index]['prodprice'] =
         Number(cost[0].ProductPrice) * this.prodtableData[index]['prodqty'];
       }
-      
+
     }
   }
 
@@ -261,7 +261,7 @@ export class NewSalesInvoiceComponent implements OnInit, AfterViewInit {
     postParameter.paidamount = this.paidAmt.toString();
     this.service.CreateBill(postParameter).subscribe(res => {
       if(res && res.returncode == 200){
-        this.reduceMaterials();
+        //this.reduceMaterials();
         this.currentOrderId = postParameter.orderid;
         this.isCheckout = true;
         this.checkoutError = false;
@@ -346,7 +346,7 @@ export class NewSalesInvoiceComponent implements OnInit, AfterViewInit {
   reduceMaterials(){
     this.prodtableData.forEach(
       item => {
-        let prod = this.filerProduct(item['prodname'],item['prodmaterial'],item['prodsize']); 
+        let prod = this.filerProduct(item['prodname'],item['prodmaterial'],item['prodsize']);
         if(prod){
           let postparam = {};
           postparam['ItemId'] = prod[0].ProductRawMaterials.toString();

@@ -1,6 +1,6 @@
 <div class="cntr">
     <div class="form-cntr">
-        <div class="login-label">Employee Login</div>
+        <div class="login-label">Login</div>
         <div class="warn-msg">{{errorText}}</div>
         <div >
             <div class="inp-wrap">
@@ -14,8 +14,14 @@
             </div>
         </div>
         <br><br>
-        <div class="login-btn" (click)="onLogin()">
-            <div class="txt-field">Login</div>
+        <div class = "d-flex">
+          <div class="login-btn m-1" (click)="onLogin(1)">
+            <div class="txt-field">Admin Login</div>
         </div>
+        <div class="login-btn m-1" (click)="onLogin(2)">
+          <div class="txt-field">Employee Login</div>
+      </div>
+        </div>
+
     </div>
 </div>

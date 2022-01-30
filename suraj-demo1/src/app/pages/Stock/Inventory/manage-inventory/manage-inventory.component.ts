@@ -96,7 +96,7 @@ export class ManageInventoryComponent implements OnInit, AfterViewInit {
     postparam.ID = item.ItemId;
     this.service.DeleteItem(postparam).subscribe(
       (res) => {
-        if (res && res.returncode == 200) {
+        if (res) {
           this.service.OpenSnackBar('Delete Successfull', 'SUCCESS');
           this.GetData();
         } else {

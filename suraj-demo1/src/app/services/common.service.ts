@@ -33,6 +33,13 @@ export class CommonService {
     );
   }
 
+  ToLoginEmployee(req: loginModel): Observable<any> {
+    return this.http.post(
+      'http://api.cyperinfotech.com/Employee/EmployeeLogin.php',
+      req
+    );
+  }
+
   CustomerValidate(req: any): Observable<any> {
     return this.http.post(
       'http://api.cyperinfotech.com/Customer/validate_customers.php',
@@ -171,13 +178,13 @@ export class CommonService {
 
   GetAllEmployees(req: any): Observable<any> {
     return this.http.post(
-      'http://api.cyperinfotech.com/Employee/GetEmployeeDetails.php',
+      'http://cyperinfotech.com/cyperinfotech/api/Employee/GetEmployeeDetails.php',
       req
     );
   }
   CreateEmployee(req: any): Observable<any> {
     return this.http.post(
-      'http://api.cyperinfotech.com/Employee/CreateEmployeeCred.php',
+      'http://cyperinfotech.com/cyperinfotech/api/Employee/CreateEmployeeCred.php',
       req
     );
   }

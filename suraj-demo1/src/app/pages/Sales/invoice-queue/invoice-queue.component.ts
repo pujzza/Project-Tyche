@@ -93,15 +93,14 @@ export class InvoiceQueueComponent implements OnInit {
   }
 
   GetQueuedInvoices() {
-    
     this.service.GetQueueInvoice().subscribe(
       (res) => {
-        if (res.returncode === 200) {
+        if (res && res.returncode === 200) {
           this.orders = res.orders;
           this.filteredList = res.orders;
-          // this.orders.map((r) => {
-          //   r.dueAmt = Number(r.totalamount) - Number(r.paidamount);
-          // });
+          this.orders.map((r) => {
+            r.dueAmt = Number(r.totalamount) - Number(r.paidamount);
+          });
           this.isloading = false;
         }
       },
@@ -122,14 +121,15 @@ export class InvoiceQueueComponent implements OnInit {
   payDue() {
     this.service.updateAmount(this.payAmtReq).subscribe((res) => {
       if (res.returncode == 200) {
-        this.GetOrders();
+        this.GetQueuedInvoices();
         this.ispayAmt = false;
+        this.service.OpenSnackBar('ERROR', res.message);
       } else {
         this.payAmtReq = new payAmt();
       }
     });
   }
-  
+
    // To check if the amount entered is more than due amt.
    checkPayAmt() {
     if (Number(this.payAmtReq.paidamount) > this.DueAmt) {
@@ -155,17 +155,15 @@ export class InvoiceQueueComponent implements OnInit {
    GetBill(orderId) {
     let post = {};
     post['oauth'] = this.service.Oauth;
-    post['eid'] = this.employeeId;
+   // post['eid'] = this.employeeId;
     post['orderid'] = orderId.toString();
     this.service.GetBillByOrderId(post).subscribe((res) => {
       if (res.returncode == 200) {
         this.bill = res;
         this.bill.orderid = this.bill.products[0].orderid;
-       // this.isShowBill = true;
-      } else {
-        //this.isShowBill = false;
+        this.bill['DueAmount'] = Number(this.bill.totalamount??'0') - Number(this.bill.paidamount??'0');
       }
     });
   }
-  
+
 }

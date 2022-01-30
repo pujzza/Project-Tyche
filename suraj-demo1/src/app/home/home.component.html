@@ -15,8 +15,8 @@
         <div class="profile-potrait"></div>
         <div class="username">{{loggedInName}}</div>
       </div>
-     
-      <div class="main-catg" (click)="NavigatePages('Dashboard');isSelected='Dashboard'" 
+
+      <div class="main-catg" (click)="NavigatePages('Dashboard');isSelected='Dashboard'"
       [ngClass]="{'SelectedLabel':isSelected.includes('Dashboard')}"
       style="cursor: pointer;">DASHBOARD</div>
       <br>
@@ -37,8 +37,8 @@
           </div>
       </div>
       <br>
-      <div class="main-catg">STOCK</div>
-      <div class="cat-label" (click)="isItemManager = !isItemManager">
+      <div class="main-catg" *ngIf="userRole==1 || userRole== 2">STOCK</div>
+      <div class="cat-label" (click)="isItemManager = !isItemManager" *ngIf="userRole==1">
           <div>Item Manager</div>
         <div
           class="push-left"
@@ -51,7 +51,7 @@
               {{subs.title}}
           </div>
       </div>
-      <div class="cat-label" (click)="isInventory = !isInventory">
+      <div class="cat-label" (click)="isInventory = !isInventory" *ngIf="userRole==1 || userRole== 2">
         <div>Inventory</div>
       <div
         class="push-left"
@@ -64,7 +64,7 @@
             {{subs.title}}
         </div>
     </div>
-      <div class="cat-label" (click)="isPurchaseOrder = !isPurchaseOrder">
+      <div class="cat-label" (click)="isPurchaseOrder = !isPurchaseOrder" *ngIf="userRole==1">
           <div>Purchase Order</div>
         <div
           class="push-left"
@@ -91,8 +91,8 @@
           </div>
       </div>
       <br>
-      <div class="main-catg">CRM</div>
-      <div class="cat-label" (click)="isClient = !isClient">
+      <div class="main-catg" *ngIf="userRole==1">CRM</div>
+      <div class="cat-label" (click)="isClient = !isClient" *ngIf="userRole==1">
         <div>Client</div>
         <div
           class="push-left"
@@ -105,7 +105,7 @@
               {{subs.title}}
           </div>
       </div>
-      <!-- <div class="cat-label" (click)="isEmployee = !isEmployee">
+      <div class="cat-label" (click)="isEmployee = !isEmployee" *ngIf="userRole==1">
         <div>Employee</div>
         <div
           class="push-left"
@@ -117,7 +117,7 @@
           [ngClass]="{'SelectedLabel':isSelected.includes(subs.route)}">
               {{subs.title}}
           </div>
-      </div> -->
+      </div>
     </div>
     <div *ngIf="!isSideNavOpen">
       <div class="menu-icon openbtn" (click)="openNav()"></div>
@@ -127,8 +127,8 @@
       <router-outlet></router-outlet>
   </div>
   </div>
-  
+
   <div class="logout-content" *ngIf="isprofclicked" id="logoutDom">
     <div (click)="logout()">Logout</div>
-  </div>  
+  </div>
 </div>

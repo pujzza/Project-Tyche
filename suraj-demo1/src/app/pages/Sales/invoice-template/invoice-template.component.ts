@@ -15,9 +15,9 @@ export class InvoiceTemplateComponent implements OnInit {
   orderid: any;
   orderdata: any;
   currentdate: any;
-  
+
   @ViewChild('table', { static: true }) table: ElementRef;
-  
+
 
   constructor(private service: CommonService, private route: ActivatedRoute, private router: Router) {
     this.orderid = this.route.snapshot.paramMap.get('id');
@@ -48,7 +48,7 @@ export class InvoiceTemplateComponent implements OnInit {
   GetBill(orderId) {
     let post = {};
     post['oauth'] = this.service.Oauth;
-    post['eid'] = this.employeeId;
+   // post['eid'] = this.employeeId;
     post['orderid'] = orderId.toString();
     this.service.GetBillByOrderId(post).subscribe((res) => {
       if (res.returncode == 200) {

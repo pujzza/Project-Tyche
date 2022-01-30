@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit,AfterViewInit {
 
   @ViewChild('sidenav', { static: true }) sidenav: ElementRef;
   @ViewChild('main', { static: true }) main: ElementRef;
-  
+
   //Boolean variables
   isSideNavOpen = true;
   isStockOpen = false;
@@ -39,12 +39,15 @@ export class HomeComponent implements OnInit,AfterViewInit {
   ClientSub=ClientSub;
   EmployeeSub= EmployeeSub;
   InventorySub=InventorySub;
+  userRole: any;
 
   constructor(private route: Router,private service: CommonService) {
 this.checkRoutes();
+//this.userRole = localStorage.getItem('UserRole');
   }
 
   ngOnInit(): void {
+    this.filterNav();
     this.appVersion = environment.appVersion;
     if (this.isSideNavOpen) {
       this.openNav();
@@ -52,6 +55,22 @@ this.checkRoutes();
   }
 
   ngAfterViewInit() {
+  }
+
+  filterNav(){
+    let role = localStorage.getItem('UserRole');
+    if(role == 'Employee'){
+      this.userRole = 2;
+      this.SalesSub = SalesSub.filter(r => r.roles.includes(role));
+      this.InventorySub = InventorySub.filter(r => r.roles.includes(role));
+    } else if(role == 'Accountant'){
+      this.userRole = 3
+      this.SalesSub = SalesSub.filter(r => r.roles.includes(role));
+    } else{
+      this.userRole = 1;
+      this.SalesSub = SalesSub.filter(r => r.roles.includes(role));
+      this.InventorySub = InventorySub.filter(r => r.roles.includes(role));
+    }
   }
 
   openNav() {

@@ -9,6 +9,8 @@ export class CreateEmployeeReq{
     EmpEmailID:string;
     EmpPassword:string;
     Employee_ID: string;
+    Role: string;
+    EmpPhoneNumber: string;
 }
 
 export class CreateEmployeeReturndata {
@@ -19,8 +21,9 @@ export class CreateEmployeeReturndata {
     EmpPhoneNumber: string;
     EmpEmailID:string;
     EmpPassword:string;
+    Role: string;
     Employee_ID: string;
-    
+
 }
 
 export class CreateEmployeeRes {
@@ -38,6 +41,7 @@ export class UpdateEmployeeReq{
     EmpEmailID:string;
     EmpPassword:string;
     Employee_ID: string;
+    Role: string;
 }
 
 export class UpdateEmployeeRes {
@@ -47,7 +51,6 @@ export class UpdateEmployeeRes {
 }
 
 export class Employee {
-    
     EmpFirstName: string;
     EmpLastName: string;
     EmpAddress: string;
@@ -55,6 +58,7 @@ export class Employee {
     EmpEmailID:string;
     EmpPassword:string;
     EmployeeID: string;
+    Role: string;
     oauth: string;
 
     constructor(){

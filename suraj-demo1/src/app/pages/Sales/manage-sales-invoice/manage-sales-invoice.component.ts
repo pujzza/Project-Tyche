@@ -132,6 +132,9 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
           r.dueAmt = Number(r.totalamount) - Number(r.paidamount);
         });
         this.isloading = false;
+      } else {
+        this.isloading = false;
+    this.service.OpenSnackBar('ERROR',res.message)
       }
     },
     (err) => {this.isloading = false;
@@ -159,7 +162,7 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
   GetBill(orderId) {
     let post = {};
     post['oauth'] = this.service.Oauth;
-    post['eid'] = this.employeeId;
+    //post['eid'] = this.employeeId;
     post['orderid'] = orderId.toString();
     this.service.GetBillByOrderId(post).subscribe((res) => {
       if (res.returncode == 200) {
