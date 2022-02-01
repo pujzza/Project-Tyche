@@ -37,11 +37,13 @@ export class ManageEmployeeComponent implements OnInit, AfterViewInit {
     { prop: 'EmpFirstName', name: 'First Name', width: 100 },
     { prop: 'EmpLastName', name: 'Last Name', width: 100 },
     { prop: 'Email', name: 'Email ID', width: 100 },
+    { prop: 'Role', name: 'Role', width: 70 },
     { prop: 'PhoneNumber', name: 'Contact', width: 70 },
     { prop: 'Address', name: 'Address', width: 70 },
     { name: 'Settings', width: 100 },
   ];
   EmployeeData: any[];
+  roles = ['Accountant','Employee']
   filteredList = [];
 
   // Boolean Variables
