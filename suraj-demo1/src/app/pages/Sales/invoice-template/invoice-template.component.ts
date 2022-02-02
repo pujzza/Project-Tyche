@@ -3,6 +3,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonService } from 'src/app/services/common.service';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
+import { Clients } from 'src/app/entities/ClientsModel';
 
 @Component({
   selector: 'app-invoice-template',
@@ -15,6 +16,15 @@ export class InvoiceTemplateComponent implements OnInit {
   orderid: any;
   orderdata: any;
   currentdate: any;
+  owntemplate = false;
+  CompanyName = 'Suraj Xerox';
+  customer: any
+  NoPrint = true;
+
+  //constants
+  tableHeaders = [
+    'S.No.', 'Products', 'Materials', 'Size','Qty', 'Per Price', 'Total'
+    ];
 
   @ViewChild('table', { static: true }) table: ElementRef;
 
@@ -25,8 +35,11 @@ export class InvoiceTemplateComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.GetBill(this.orderid);
     this.orderdata = this.service.downloadOrder;
+    this.GetCustomerData();
+    console.log(this.orderdata);
     this.currentdate = new Date().toLocaleDateString();
   }
 
@@ -62,5 +75,13 @@ export class InvoiceTemplateComponent implements OnInit {
 
   CancelView(){
     this.router.navigateByUrl("Home/Sales/ManageInvoice")
+  }
+
+  GetCustomerData(){
+    this.customer = this.service.Allcustomers.find(x=> x.BillingPhone == this.orderdata.phonenumber);
+    // if(!this.customer){
+    //   this.customer =new Clients();
+    // }
+    // console.log(this.customer);
   }
 }

@@ -52,6 +52,7 @@ this.checkRoutes();
     if (this.isSideNavOpen) {
       this.openNav();
     }
+    this.GetAllCustomers();
   }
 
   ngAfterViewInit() {
@@ -134,6 +135,14 @@ this.checkRoutes();
         this.isEmployee = true
       } else {
         this.isEmployee = false
+      }
+    });
+  }
+
+  GetAllCustomers(){
+    this.service.GetAllClients('').subscribe(clients => {
+      if(clients.returncode == 200){
+      this.service.Allcustomers= clients.returndata;
       }
     });
   }

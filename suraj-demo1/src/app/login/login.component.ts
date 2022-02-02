@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   requestBody: loginModel;
   response: loginResponse;
   env = environment;
+  isdebug = false;
   constructor(
     private authService: AuthGuardService,
     private router: Router,
@@ -30,6 +31,10 @@ export class LoginComponent implements OnInit {
     if(!this.env.production){
     this.empId = 'raven@fgs.com';
     this.password = 'abc@123';
+    }
+
+    if(this.isdebug){
+      this.onLogin(1);
     }
   }
 

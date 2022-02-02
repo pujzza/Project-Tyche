@@ -52,6 +52,7 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
   // String Variables
   employeeId: string;
   errorText: string;
+  role: string;
 
   // Number Variabless
   screenH = 0;
@@ -102,6 +103,7 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
     private changeDetectorRef: ChangeDetectorRef,private route: Router
   ) {
     this.employeeId = localStorage.getItem('UserId').toString();
+    this.role = localStorage.getItem('UserRole').toString();
   }
 
   ngAfterViewInit(): void {
@@ -119,6 +121,7 @@ export class ManageSalesInvoiceComponent implements OnInit, AfterViewInit {
   GetOrders() {
     const billreq = {
       oauth: this.service.Oauth,
+      //eid: this.role.includes('Employee') ? this.employeeId: '',
       eid: this.employeeId,
     };
     this.service.GetOrders(billreq).subscribe((res) => {
