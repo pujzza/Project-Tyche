@@ -17,6 +17,7 @@ export class CommonService {
   screenH;
   downloadOrder:any;
   userRole = 2; // Employee
+  Allcustomers :any[];
 
   constructor(private http: HttpClient, private _snackBar: MatSnackBar) {
     this.screenH = window.screen.height - 100;
