@@ -13,7 +13,6 @@ Project Tyche is a POS Tool includes Invoice generating and managing web applica
 * Puja Shree
 * Rajarajeshwari
 * Roop Sagar
-* Vishaal
 * Kharan
 * Uthrakumar
 * Manohar
